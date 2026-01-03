@@ -112,6 +112,15 @@
             transform: translateX(0); /* move right into position */
         }
 
+        @keyframes flash-effect {
+            0%, 100% { opacity: 1; filter: brightness(1); }
+            50% { opacity: 0.5; filter: brightness(2); }
+        }
+
+        .flashing {
+        animation: flash-effect 0.5s ease-in-out 2;
+        }
+
         
         /* Staggered delays for child elements if needed */
         .delay-100 { transition-delay: 100ms; }
@@ -485,12 +494,26 @@
                     <h2 class="text-3xl font-bold mb-2">Let's build something great.</h2>
                     <p class="text-gray-400">Open for opportunities and collaborations.</p>
                 </div>
-                <div class="mt-6 md:mt-0">
-                    <a href="mailto:hello@ekomobong.dev" class="bg-accentBlue text-deepBlue px-8 py-3 rounded-md font-bold hover:bg-white transition-colors">
-                        Get in Touch
-                    </a>
-                </div>
+                <div id="contactBtn" class="mt-6 md:mt-0 bg-accentBlue text-deepBlue px-8 py-3 rounded-md font-bold hover:bg-white transition-colors">
+                    Get in Touch
+                </div>  <!--edit Im trying to change the innerHTML here but it's not working-->
             </div>
+
+            <form id="contactForm" class="hidden space-y-4 max-w-md mx-auto">
+                <input type="hidden" name="to" value="ekomzwatt@gmail.com">
+                <input type="text" placeholder="Your Name" class="w-full border border-input bg-background text-foreground placeholder:text-muted-foreground rounded-lg p-2" required="" name="name">
+                <input type="email" placeholder="Your Email" class="w-full border border-input bg-background text-foreground placeholder:text-muted-foreground rounded-lg p-2" required="" name="email">
+                <textarea name="message" placeholder="Your Message" class="w-full border border-input bg-background text-foreground placeholder:text-muted-foreground rounded-lg p-2" rows="5" required=""></textarea>
+                <button id="sendBtn" class="transition-transform transition-colors duration-300 ease-out cursor-pointer items-center ml-auto flex gap-2 bg-primary shadow-md rounded-full px-4 md:px-3 py-2 text-base text-primary-foreground  hover:bg-primary/90  hover:text-primary-foreground transition-colors" style="transform:translate(0, 0) scale(1)">
+                    Send Message<!-- --> 
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send" aria-hidden="true">
+                        <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
+                        </path>
+                        <path d="m21.854 2.147-10.94 10.939">
+                        </path>
+                    </svg>
+                </button>
+            </form>
             
             <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
                 <div class="flex space-x-6 mb-4 md:mb-0">
@@ -551,6 +574,23 @@
         document.querySelectorAll('.reveal, .reveal-right').forEach(el => {
             observer.observe(el);
         });
+
+        document.getElementById('contactBtn').addEventListener('click', () => {
+        document.getElementById('contactForm').classList.remove('hidden');
+        });
+
+        document.getElementById('sendBtn').addEventListener('click', () => {
+            document.getElementById('contactForm').classList.add('hidden');
+            // 1. Change text and add the flash class
+            document.getElementById('contactBtn').classList.innerHTML   = "Sent";
+            document.getElementById('contactBtn').classList.add('flashing');
+            // 2. Revert after 2 seconds
+            setTimeout(() => {
+                document.getElementById('contactBtn').classList.innerHTML  = "Get in Touch";
+                document.getElementById('contactBtn').classList.classList.remove('flashing');
+            }, 2000);
+        });
+
     </script>
 </body>
 </html>
