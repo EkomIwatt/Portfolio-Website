@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekomobong Iwatt - Software Engineer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deepBlue: '#213448',
+                        mutedBlue: '#547792',
+                        accentBlue: '#94B4C1',
+                        warmLight: '#EAE0CF',
+                        paperWhite: '#F9F7F2',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(33, 52, 72, 0.1)',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar to match theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #EAE0CF;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #547792;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #213448;
+        }
+        
+        /* Realistic Code Editor CSS */
+        .code-window {
+            background: #1E1E1E;
+            border-radius: 8px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        .window-header {
+            background: #252526;
+            padding: 8px 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .dot { width: 10px; height: 10px; border-radius: 50%; }
+        .dot-red { background: #FF5F56; }
+        .dot-yellow { background: #FFBD2E; }
+        .dot-green { background: #27C93F; }
+        
+        /* Animation for menu */
+        .mobile-menu {
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Scroll Reveal Right Animation */
+        /* Slide towards the right */
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(-40px); /* start slightly left */
+            transition: 
+                opacity 0.8s ease-out,
+                transform 0.8s ease-out;
+        }
+
+        .reveal-right.active {
+            opacity: 1;
+            transform: translateX(0); /* move right into position */
+        }
+
+        
+        /* Staggered delays for child elements if needed */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+    </style>
+</head>
+<body class="bg-warmLight text-deepBlue font-sans antialiased">
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-deepBlue/95 backdrop-blur-sm z-50 shadow-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span class="text-white text-xl font-bold tracking-tight">EI<span class="text-accentBlue">.</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Home</a>
+                    <a href="#projects" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Projects</a>
+                    <a href="#achievements" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Achievements</a>
+                    <a href="#education" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Education</a>
+                    <a href="#blog" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Blog</a>
+                    <a href="#contact" class="bg-accentBlue text-deepBlue px-5 py-2 rounded-md text-sm font-semibold hover:bg-white transition-all transform hover:-translate-y-0.5">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-white hover:text-accentBlue focus:outline-none p-2">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="fixed inset-0 bg-deepBlue z-40 transform translate-x-full mobile-menu md:hidden flex flex-col pt-20 px-6">
+            <button id="close-menu-btn" class="absolute top-5 right-6 text-white text-2xl hover:text-accentBlue">
+                <i class="fas fa-times"></i>
+            </button>
+            <a href="#home" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link">Home</a>
+            <a href="#projects" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link">Projects</a>
+            <a href="#achievements" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link">Achievements</a>
+            <a href="#education" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link">Education</a>
+            <a href="#blog" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link">Blog</a>
+            <a href="#contact" class="mt-8 bg-accentBlue text-deepBlue py-4 rounded-lg text-center font-bold text-xl mobile-link">Contact Me</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div id="background" class="relative bg-cover" style="background-image: url(./image1.jpg);">
+
+    <div class="absolute inset-0 z-0 bg-gray-800/20 "></div>
+    
+    <section id="home" class="relative z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+        
+        <!-- Hero Content -->
+        <div class="flex-1 text-center md:text-left animate-fade-in-up">
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-deepBlue mb-4">
+                Ekomobong Iwatt <br />
+                <span class="text-mutedBlue text-2xl md:text-4xl font-normal block mt-2">Software Engineer</span>
+            </h1>
+            <p class="mt-6 text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto md:mx-0">
+                Building scalable, impactful solutions with clean code and modern architecture. I bridge the gap between complex engineering and intuitive user experiences.
+            </p>
+            
+            <!-- Skills Badges -->
+            <div class="mt-8">
+                <p class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3">Core Technologies</p>
+                <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                    <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">Python</span>
+                    <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">JavaScript</span>
+                    <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">React</span>
+                    <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">AWS</span>
+                    <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">Docker</span>
+                    <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">PostgreSQL</span>
+                </div>
+            </div>
+
+            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <a href="#projects" class="border-2 border-deepBlue text-deepBlue px-8 py-3 rounded-md font-semibold hover:bg-deepBlue hover:text-white transition-colors">View Work</a>
+                <a href="#contact" class="text-deepBlue px-8 py-3 font-semibold hover:text-mutedBlue transition-colors flex items-center justify-center gap-2">
+                    Let's Talk <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Realistic Visual (CSS Code Window) -->
+        <div class="flex-1 w-full max-w-lg lg:translate-x-[50px]"> <!--edit-->
+            <div class="code-window transform hover:scale-[1.02] transition-transform duration-500">
+                <div class="window-header">
+                    <div class="dot dot-red"></div>
+                    <div class="dot dot-yellow"></div>
+                    <div class="dot dot-green"></div>
+                    <span class="ml-4 text-xs text-gray-500 font-mono">portfolio_controller.py</span>
+                </div>
+                <div class="p-6 font-mono text-sm">
+                    <div class="text-gray-400">class <span class="text-yellow-300">Engineer</span>:</div>
+                    <div class="pl-4 text-gray-300">def <span class="text-blue-300">__init__</span>(self):</div>
+                    <div class="pl-8 text-white">self.name = <span class="text-green-300">"Ekomobong"</span></div>
+                    <div class="pl-8 text-white">self.role = <span class="text-green-300">"Full Stack Dev"</span></div>
+                    <div class="pl-8 text-white">self.passion = <span class="text-green-300">"Solving Problems"</span></div>
+                    <br>
+                    <div class="pl-4 text-gray-300">def <span class="text-blue-300">build_future</span>(self):</div>
+                    <div class="pl-8 text-purple-400">return <span class="text-white">Solution.deploy()</span></div>
+                    <br>
+                    <div class="text-gray-500"># Ready to collaborate</div>
+                    <div class="mt-2 flex items-center gap-2">
+                         <span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="animate-pulse">_</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </div>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-deepBlue">Featured Projects</h2>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">A selection of technical projects demonstrating system architecture and frontend precision.</p>
+            </div>
+
+            <!-- Grid Layout -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project Card 1 -->
+                <div class="bg-paperWhite rounded-xl overflow-hidden shadow-soft group hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col reveal delay-100">
+                    <!-- Realistic "Browser" Header for Image placeholder -->
+                    <div class="bg-gray-200 h-6 flex items-center gap-1 px-3 border-b border-gray-300">
+                        <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+                        <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+                    </div>
+                    <!-- CSS Placeholder for Project Image -->
+                    <div class="h-48 bg-deepBlue flex items-center justify-center group-hover:bg-mutedBlue transition-colors relative overflow-hidden">
+                        <i class="fas fa-chart-line text-6xl text-white/20"></i>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white font-mono text-sm opacity-0 group-hover:opacity-100 transition-opacity">Dashboard_v2.0</div>
+                    </div>
+                    
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-deepBlue mb-2">FinTech Analytics Dashboard</h3>
+                        <p class="text-gray-600 text-sm mb-4 flex-1">Real-time financial data visualization platform processing high-volume transaction streams.</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">React</span>
+                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">D3.js</span>
+                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Python</span>
+                        </div>
+                        
+                        <a href="#" class="inline-flex items-center text-mutedBlue font-semibold hover:text-deepBlue text-sm transition-colors">
+                            View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="bg-paperWhite rounded-xl overflow-hidden shadow-soft group hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col reveal delay-200">
+                    <div class="bg-gray-200 h-6 flex items-center gap-1 px-3 border-b border-gray-300">
+                        <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+                        <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+                    </div>
+                    <div class="h-48 bg-gray-800 flex items-center justify-center group-hover:bg-gray-700 transition-colors relative">
+                        <i class="fas fa-server text-6xl text-white/20"></i>
+                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    </div>
+                    
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-deepBlue mb-2">Cloud Infrastructure API</h3>
+                        <p class="text-gray-600 text-sm mb-4 flex-1">Scalable RESTful API designed for microservices communication with 99.9% uptime.</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Django</span>
+                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Docker</span>
+                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">AWS EC2</span>
+                        </div>
+                        
+                        <a href="#" class="inline-flex items-center text-mutedBlue font-semibold hover:text-deepBlue text-sm transition-colors">
+                            View Repository <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="bg-paperWhite rounded-xl overflow-hidden shadow-soft group hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col reveal delay-300">
+                    <div class="bg-gray-200 h-6 flex items-center gap-1 px-3 border-b border-gray-300">
+                        <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+                        <div class="w-2 h-2 rounded-full bg-gray-400"></div>
+                    </div>
+                    <div class="h-48 bg-[#94B4C1] flex items-center justify-center group-hover:bg-[#83a2af] transition-colors relative">
+                        <i class="fas fa-mobile-alt text-6xl text-white/40"></i>
+                         <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
+                    
+                    <div class="p-6 flex-1 flex flex-col">
+                        <h3 class="text-xl font-bold text-deepBlue mb-2">HealthTrack Mobile App</h3>
+                        <p class="text-gray-600 text-sm mb-4 flex-1">Cross-platform application for tracking vital health metrics with local-first architecture.</p>
+                        
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">React Native</span>
+                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Firebase</span>
+                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Redux</span>
+                        </div>
+                        
+                        <a href="#" class="inline-flex items-center text-mutedBlue font-semibold hover:text-deepBlue text-sm transition-colors">
+                            View Project <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-deepBlue text-center mb-16 reveal">Milestones & Experience</h2>
+        
+        <div class="relative border-l-2 border-mutedBlue/30 ml-4 md:ml-6 space-y-12">
+            
+            <!-- Milestone 1 -->
+            <div class="relative pl-8 md:pl-12 reveal delay-100">
+                <div class="absolute -left-[9px] top-0 bg-warmLight border-2 border-mutedBlue rounded-full p-1 text-mutedBlue">
+                    <div class="w-2 h-2 bg-mutedBlue rounded-full"></div>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
+                    <h3 class="text-xl font-bold text-deepBlue">Senior Software Engineer</h3>
+                    <span class="text-sm font-medium text-accentBlue">TechCorp Solutions • 2023 - Present</span>
+                </div>
+                <p class="text-gray-600">Leading a team of 5 developers in re-architecting legacy backend systems. Improved API response times by 40% through aggressive caching strategies.</p>
+            </div>
+
+            <!-- Milestone 2 -->
+            <div class="relative pl-8 md:pl-12 reveal delay-200">
+                <div class="absolute -left-[9px] top-0 bg-warmLight border-2 border-mutedBlue rounded-full p-1 text-mutedBlue">
+                    <div class="w-2 h-2 bg-mutedBlue rounded-full"></div>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
+                    <h3 class="text-xl font-bold text-deepBlue">Hackathon Winner</h3>
+                    <span class="text-sm font-medium text-accentBlue">Global AI Hackathon • 2022</span>
+                </div>
+                <p class="text-gray-600">Awarded 1st place out of 500+ participants for building an accessibility tool using Computer Vision and Natural Language Processing.</p>
+            </div>
+
+             <!-- Milestone 3 -->
+             <div class="relative pl-8 md:pl-12 reveal delay-300">
+                <div class="absolute -left-[9px] top-0 bg-warmLight border-2 border-mutedBlue rounded-full p-1 text-mutedBlue">
+                    <div class="w-2 h-2 bg-mutedBlue rounded-full"></div>
+                </div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline gap-2 mb-2">
+                    <h3 class="text-xl font-bold text-deepBlue">Software Developer</h3>
+                    <span class="text-sm font-medium text-accentBlue">StartUp Inc • 2020 - 2023</span>
+                </div>
+                <p class="text-gray-600">Full-stack development for a high-growth SaaS product. Implemented payment gateways and user authentication flows.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-paperWhite border-y border-gray-100">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+             <h2 class="text-3xl md:text-4xl font-bold text-deepBlue text-center mb-16 reveal">Education</h2>
+             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Education Item 1 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow reveal delay-100">
+                    <div class="w-12 h-12 bg-warmLight rounded-full flex items-center justify-center text-deepBlue mb-4">
+                        <i class="fas fa-graduation-cap text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-deepBlue">B.Sc. Computer Science</h3>
+                    <p class="text-mutedBlue font-medium mt-1">University of Lagos</p>
+                    <div class="mt-4 inline-block bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-semibold">2016 - 2020</div>
+                </div>
+
+                <!-- Education Item 2 -->
+                <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow reveal delay-200">
+                    <div class="w-12 h-12 bg-warmLight rounded-full flex items-center justify-center text-deepBlue mb-4">
+                        <i class="fas fa-certificate text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-deepBlue">AWS Certified Solutions Architect</h3>
+                    <p class="text-mutedBlue font-medium mt-1">Amazon Web Services</p>
+                    <div class="mt-4 inline-block bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-semibold">Issued 2023</div>
+                </div>
+
+             </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="blog" class="py-20 bg-white/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12 reveal">
+                <div>
+                    <h2 class="text-3xl md:text-4xl font-bold text-deepBlue">Blog</h2>
+                    <p class="mt-4 text-gray-600">Thoughts on engineering, scalability, and developer experience.</p>
+                </div>
+                <a href="#" class="hidden md:inline-block text-mutedBlue font-semibold hover:text-deepBlue">View all articles</a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                
+                <!-- Blog Card 1 -->
+                <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 transition-colors group reveal-right delay-100">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">Architecture</span>
+                        <span class="text-xs text-gray-400">5 min read</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-deepBlue mb-3 group-hover:text-mutedBlue transition-colors">
+                        <a href="#">Optimizing PostgreSQL Queries for Scale</a>
+                    </h3>
+                    <p class="text-gray-600 mb-6">A deep dive into indexing strategies and query analysis to prevent bottlenecks as your dataset grows beyond millions of rows.</p>
+                    <a href="#" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors">Read More &rarr;</a>
+                </article>
+
+                <!-- Blog Card 2 -->
+                <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 transition-colors group reveal-right delay-200">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">DevOps</span>
+                        <span class="text-xs text-gray-400">7 min read</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-deepBlue mb-3 group-hover:text-mutedBlue transition-colors">
+                        <a href="#">Dockerizing Python Applications: Best Practices</a>
+                    </h3>
+                    <p class="text-gray-600 mb-6">Structuring your Dockerfiles for faster builds, smaller image sizes, and secure production environments.</p>
+                    <a href="#" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors">Read More &rarr;</a>
+                </article>
+
+                 <!-- Blog Card 3 -->
+                 <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 transition-colors group reveal-right delay-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">Frontend</span>
+                        <span class="text-xs text-gray-400">4 min read</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-deepBlue mb-3 group-hover:text-mutedBlue transition-colors">
+                        <a href="#">State Management in 2024</a>
+                    </h3>
+                    <p class="text-gray-600 mb-6">Comparing Redux Toolkit, Zustand, and React Context. When to use which tool for your next project.</p>
+                    <a href="#" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors">Read More &rarr;</a>
+                </article>
+
+                <!-- Blog Card 4 (Mobile only view all link usually, but here it's a 4th card) -->
+                 <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 transition-colors group reveal-right delay-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">Career</span>
+                        <span class="text-xs text-gray-400">6 min read</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-deepBlue mb-3 group-hover:text-mutedBlue transition-colors">
+                        <a href="#">From Junior to Senior Engineer</a>
+                    </h3>
+                    <p class="text-gray-600 mb-6">Soft skills, technical breadth vs depth, and the mindset shifts required to level up in your engineering career.</p>
+                    <a href="#" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors">Read More &rarr;</a>
+                </article>
+
+            </div>
+            
+            <div class="mt-8 text-center md:hidden">
+                <a href="#" class="text-mutedBlue font-semibold hover:text-deepBlue">View all articles</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer / Contact -->
+    <footer id="contact" class="bg-deepBlue text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 border-b border-gray-700 pb-12">
+                <div>
+                    <h2 class="text-3xl font-bold mb-2">Let's build something great.</h2>
+                    <p class="text-gray-400">Open for opportunities and collaborations.</p>
+                </div>
+                <div class="mt-6 md:mt-0">
+                    <a href="mailto:hello@ekomobong.dev" class="bg-accentBlue text-deepBlue px-8 py-3 rounded-md font-bold hover:bg-white transition-colors">
+                        Get in Touch
+                    </a>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+                <div class="flex space-x-6 mb-4 md:mb-0">
+                    <a href="#" class="hover:text-accentBlue transition-colors"><i class="fab fa-github text-xl"></i></a>
+                    <a href="#" class="hover:text-accentBlue transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
+                    <a href="#" class="hover:text-accentBlue transition-colors"><i class="fab fa-twitter text-xl"></i></a>
+                </div>
+                <p>&copy; 2024 Ekomobong Iwatt. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Logic
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        const closeBtn = document.getElementById('close-menu-btn');
+        const links = document.querySelectorAll('.mobile-link');
+
+        function toggleMenu() {
+            menu.classList.toggle('translate-x-full');
+            document.body.classList.toggle('overflow-hidden');
+        }
+
+        btn.addEventListener('click', toggleMenu);
+        closeBtn.addEventListener('click', toggleMenu);
+        
+        links.forEach(link => {
+            link.addEventListener('click', toggleMenu);
+        });
+
+        // Add shadow to nav on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    observer.unobserve(entry.target); // Only animate once
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .reveal-right').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
