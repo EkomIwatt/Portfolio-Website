@@ -119,11 +119,15 @@
 
         @keyframes flash-effect {
             0%, 100% { background-color: inherit; }
-            50% { background-color: white; }
+            50% { background-color: #F9F7F2; }
         }
 
         .flashing {
         animation: flash-effect 0.5s ease-in-out 2;
+        }
+
+        .btn-active {
+            background-color: #F9F7F2;
         }
 
         
@@ -151,7 +155,7 @@
                     <a href="#achievements" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Achievements</a>
                     <a href="#education" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Education</a>
                     <a href="#blog" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Blog</a>
-                    <a href="#contact" class="bg-accentBlue text-deepBlue px-5 py-2 rounded-md text-sm font-semibold hover:bg-warmLight transition-all transform hover:-translate-y-0.5">Contact</a>
+                    <a href="#contact" class="bg-accentBlue text-deepBlue px-5 py-2 rounded-md text-sm font-semibold hover:bg-paperWhite transition-all transform hover:-translate-y-0.5">Contact</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -173,7 +177,7 @@
             <a href="#achievements" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-85 hover:border-2 hover:border-white">Achievements</a>
             <a href="#education" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-80 hover:border-2 hover:border-white">Education</a>
             <a href="#blog" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-75 hover:border-2 hover:border-white">Blog</a>
-            <a href="#contact" class="mt-1 mx-1 bg-accentBlue text-deepBlue py-4 rounded-lg text-center font-bold text-xl mobile-link border-2 border-deepBlue hover:bg-warmLight transition-all transform hover:-translate-y-0.5">Contact Me</a>
+            <a href="#contact" class="mt-1 mx-1 bg-accentBlue text-deepBlue py-4 rounded-lg text-center font-bold text-xl mobile-link border-2 border-deepBlue hover:bg-paperWhite transition-all transform hover:-translate-y-0.5">Contact Me</a>
         </div>
     </nav>
     
@@ -500,17 +504,17 @@
                     <h2 class="text-3xl font-bold mb-2">Let's build something great.</h2>
                     <p class="text-gray-400">Open for opportunities and collaborations.</p>
                 </div>
-                <div id="contactBtn" class="mt-6 md:mt-0 bg-accentBlue text-deepBlue px-8 py-3 rounded-md font-bold hover:bg-white transition-colors">
+                <div id="contactBtn" class="mt-6 md:mt-0 bg-accentBlue text-deepBlue px-8 py-3 rounded-md font-bold hover:bg-paperWhite transition-colors">
                     Get in Touch
                 </div>
             </div>
 
-            <form id="contactForm" class="hidden space-y-4 max-w-md mx-auto">
+            <form id="contactForm" class="hidden space-y-4 max-w-md mx-auto p-4 border-2 border-paperWhite rounded-lg">
                 <input type="hidden" name="to" value="ekomzwatt@gmail.com">
-                <input type="text" placeholder="Your Name" class="w-full border border-input bg-background text-foreground placeholder:text-muted-foreground rounded-lg p-2" required="" name="name">
-                <input type="email" placeholder="Your Email" class="w-full border border-input bg-background text-foreground placeholder:text-muted-foreground rounded-lg p-2" required="" name="email">
-                <textarea name="message" placeholder="Your Message" class="w-full border border-input bg-background text-foreground placeholder:text-muted-foreground rounded-lg p-2" rows="5" required=""></textarea>
-                <button id="sendBtn" class="transition-transform transition-colors duration-300 ease-out cursor-pointer items-center ml-auto flex gap-2 bg-primary shadow-md rounded-full px-4 md:px-3 py-2 text-base text-primary-foreground  hover:bg-primary/90  hover:text-primary-foreground transition-colors" style="transform:translate(0, 0) scale(1)">
+                <input type="text" placeholder="Your Name" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2" required="" name="name">
+                <input type="email" placeholder="Your Email" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2" required="" name="email">
+                <textarea name="message" placeholder="Your Message" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2" rows="5" required=""></textarea>
+                <button id="sendBtn" class="transition-transform transition-colors duration-300 ease-out cursor-pointer items-center ml-auto flex gap-2 shadow-md rounded-full px-4 md:px-3 py-2 text-gray-300 hover:bg-paperWhite hover:text-deepBlue transition-colors border-2 border-gray-300" style="transform:translate(0, 0) scale(1)">
                     Send Message<!-- --> 
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send" aria-hidden="true">
                         <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
@@ -521,7 +525,7 @@
                 </button>
             </form>
             
-            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-400">
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
                 <div class="flex space-x-6 mb-4 md:mb-0">
                     <a href="#" class="hover:text-accentBlue transition-colors"><i class="fab fa-github text-xl"></i></a>
                     <a href="#" class="hover:text-accentBlue transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
