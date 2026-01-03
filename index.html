@@ -39,6 +39,11 @@
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-10px)' },
                         }
+                    },
+                    backgroundOpacity: {
+                        '85': '0.85',
+                        '75': '0.75',
+                        '65': '0.65',
                     }
                 }
             }
@@ -113,8 +118,8 @@
         }
 
         @keyframes flash-effect {
-            0%, 100% { opacity: 1; filter: brightness(1); }
-            50% { opacity: 0.5; filter: brightness(2); }
+            0%, 100% { background-color: inherit; }
+            50% { background-color: white; }
         }
 
         .flashing {
@@ -146,7 +151,7 @@
                     <a href="#achievements" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Achievements</a>
                     <a href="#education" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Education</a>
                     <a href="#blog" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Blog</a>
-                    <a href="#contact" class="bg-accentBlue text-deepBlue px-5 py-2 rounded-md text-sm font-semibold hover:bg-white transition-all transform hover:-translate-y-0.5">Contact</a>
+                    <a href="#contact" class="bg-accentBlue text-deepBlue px-5 py-2 rounded-md text-sm font-semibold hover:bg-warmLight transition-all transform hover:-translate-y-0.5">Contact</a>
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -159,25 +164,26 @@
         </div>
 
         <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed inset-0 bg-deepBlue z-40 transform translate-x-full mobile-menu md:hidden flex flex-col pt-20 px-6">
+        <div id="mobile-menu" class="fixed inset-0 bg-deepBlue z-40 transform translate-x-full mobile-menu md:hidden flex flex-col pt-20">
             <button id="close-menu-btn" class="absolute top-5 right-6 text-white text-2xl hover:text-accentBlue">
                 <i class="fas fa-times"></i>
             </button>
-            <a href="#home" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link">Home</a>
-            <a href="#projects" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link">Projects</a>
-            <a href="#achievements" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link">Achievements</a>
-            <a href="#education" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link">Education</a>
-            <a href="#blog" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link">Blog</a>
-            <a href="#contact" class="mt-8 bg-accentBlue text-deepBlue py-4 rounded-lg text-center font-bold text-xl mobile-link">Contact Me</a>
+            <a href="#home" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-95 hover:border-2 hover:border-white">Home</a>
+            <a href="#projects" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-90 hover:border-2 hover:border-white">Projects</a>
+            <a href="#achievements" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-85 hover:border-2 hover:border-white">Achievements</a>
+            <a href="#education" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-80 hover:border-2 hover:border-white">Education</a>
+            <a href="#blog" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-75 hover:border-2 hover:border-white">Blog</a>
+            <a href="#contact" class="mt-1 mx-1 bg-accentBlue text-deepBlue py-4 rounded-lg text-center font-bold text-xl mobile-link border-2 border-deepBlue hover:bg-warmLight transition-all transform hover:-translate-y-0.5">Contact Me</a>
         </div>
     </nav>
+    
 
     <!-- Hero Section -->
-    <div id="background" class="relative bg-cover" style="background-image: url(./image1.jpg);">
+    <div id="background" class="relative bg-cover min-h-screen flex" style="background-image: url(./image1.jpg);">
 
     <div class="absolute inset-0 z-0 bg-gray-800/20 "></div>
     
-    <section id="home" class="relative z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
+    <section id="home" class="relative z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
         
         <!-- Hero Content -->
         <div class="flex-1 text-center md:text-left animate-fade-in-up">
@@ -496,7 +502,7 @@
                 </div>
                 <div id="contactBtn" class="mt-6 md:mt-0 bg-accentBlue text-deepBlue px-8 py-3 rounded-md font-bold hover:bg-white transition-colors">
                     Get in Touch
-                </div>  <!--edit Im trying to change the innerHTML here but it's not working-->
+                </div>
             </div>
 
             <form id="contactForm" class="hidden space-y-4 max-w-md mx-auto">
@@ -582,13 +588,17 @@
         document.getElementById('sendBtn').addEventListener('click', () => {
             document.getElementById('contactForm').classList.add('hidden');
             // 1. Change text and add the flash class
-            document.getElementById('contactBtn').classList.innerHTML   = "Sent";
+            document.getElementById('contactBtn').innerHTML   = "Sent";
             document.getElementById('contactBtn').classList.add('flashing');
             // 2. Revert after 2 seconds
             setTimeout(() => {
-                document.getElementById('contactBtn').classList.innerHTML  = "Get in Touch";
+                document.getElementById('contactBtn').innerHTML  = "I'll be in Touch Soon";
                 document.getElementById('contactBtn').classList.classList.remove('flashing');
             }, 2000);
+
+            setTimeout(() => {
+                document.getElementById('contactBtn').innerHTML  = "Get in Touch";
+            }, 5000);
         });
 
     </script>
