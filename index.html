@@ -103,13 +103,17 @@
         }
 
         /* Scroll Reveal Right Animation */
-        /* Slide towards the right */
         .reveal-right {
             opacity: 0;
             transform: translateX(-40px); /* start slightly left */
+            
+            /* We list different speeds for different properties */
             transition: 
                 opacity 0.8s ease-out,
-                transform 0.8s ease-out;
+                transform 0.8s ease-out,
+                border-color 0.1s ease-in-out,
+                background-color 0.1s ease-in-out,
+                color 0.1s ease-in-out;
         }
 
         .reveal-right.active {
@@ -437,7 +441,7 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
                 <!-- Blog Card 1 -->
-                <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 transition-colors group reveal-right delay-100">
+                <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-100">
                     <div class="flex justify-between items-start mb-4">
                         <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">Architecture</span>
                         <span class="text-xs text-gray-400">5 min read</span>
@@ -450,7 +454,7 @@
                 </article>
 
                 <!-- Blog Card 2 -->
-                <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 transition-colors group reveal-right delay-200">
+                <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-200">
                     <div class="flex justify-between items-start mb-4">
                         <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">DevOps</span>
                         <span class="text-xs text-gray-400">7 min read</span>
@@ -463,7 +467,7 @@
                 </article>
 
                  <!-- Blog Card 3 -->
-                 <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 transition-colors group reveal-right delay-300">
+                 <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-300">
                     <div class="flex justify-between items-start mb-4">
                         <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">Frontend</span>
                         <span class="text-xs text-gray-400">4 min read</span>
@@ -476,7 +480,7 @@
                 </article>
 
                 <!-- Blog Card 4 (Mobile only view all link usually, but here it's a 4th card) -->
-                 <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 transition-colors group reveal-right delay-300">
+                 <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-300">
                     <div class="flex justify-between items-start mb-4">
                         <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">Career</span>
                         <span class="text-xs text-gray-400">6 min read</span>
