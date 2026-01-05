@@ -130,11 +130,40 @@
         animation: flash-effect 0.5s ease-in-out 2;
         }
 
+        @keyframes slideUpFade {
+            0% {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-up {
+            animation: slideUpFade 0.4s ease-out forwards;
+        }
+
+        @keyframes slideDownFade {
+            0% {
+        transform: translateY(0);
+        opacity: 1;
+            }
+            100% {
+                transform: translateY(50px); /* Move down */
+                opacity: 0;                 /* Fade out */
+            }
+        }
+
+        .slide-down {
+            animation: slideDownFade 0.3s ease-in forwards;
+        }
+
         .btn-active {
             background-color: #F9F7F2;
         }
 
-        
         /* Staggered delays for child elements if needed */
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
@@ -400,7 +429,8 @@
     <!-- Education Section -->
     <section id="education" class="py-20 bg-paperWhite border-y border-gray-100">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-             <h2 class="text-3xl md:text-4xl font-bold text-deepBlue text-center mb-16 reveal">Education</h2>
+             <h2 class="text-3xl md:text-4xl font-bold text-deepBlue text-center mb-4 reveal">Education</h2>
+             <h3 class="text-deepBlue text-center reveal mb-10">Click to view certificate</h3>
              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
                 <!-- Education Item 1 -->
@@ -410,7 +440,7 @@
                     </div>
                     <h3 class="text-xl font-bold text-deepBlue">B.Sc. Computer Science</h3>
                     <p class="text-mutedBlue font-medium mt-1">University of Lagos</p>
-                    <div class="mt-4 inline-block bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-semibold">2016 - 2020</div>
+                    <div class="mt-4 inline-block bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-semibold">2023 - 2028</div>
                 </div>
 
                 <!-- Education Item 2 -->
@@ -503,7 +533,7 @@
     <!-- Footer / Contact -->
     <footer id="contact" class="bg-deepBlue text-white pt-20 pb-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12 border-b border-gray-700 pb-12">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-gray-700 pb-12">
                 <div>
                     <h2 class="text-3xl font-bold mb-2">Let's build something great.</h2>
                     <p class="text-gray-400">Open for opportunities and collaborations.</p>
@@ -512,10 +542,27 @@
                     Get in Touch
                 </div>
             </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
+                <div class="flex space-x-6 mb-4 md:mb-0">
+                    <span class="p-2.5">Or reach me on:</span>
+                    <a href="https://github.com/EkomIwatt" class="hover:text-paperWhite transition-colors hover:border-2 hover:border-white p-1 rounded-md m-1"><i class="fab fa-github text-xl"></i><p class="">GitHub</p></a>
+                    <a href="https://linkedin.com/in/ekomiwatt" class="hover:text-paperWhite transition-colors"><i class="fab fa-linkedin text-xl hover:border-2 hover:border-white p-1 rounded-md m-1"></i></a>
+                    <a href="https://x.com/yr_Ekom" class="hover:text-paperWhite transition-colors"><i class="fab fa-twitter text-xl hover:border-2 hover:border-white p-1 rounded-md m-1"></i></a>
+                    <a href="https://wa.me/+2349122141156" class="hover:text-paperWhite transition-colors"><i class="fab fa-whatsapp text-xl hover:border-2 hover:border-white p-1 rounded-md m-1"></i></a>
+                </div>
+                <p>&copy; 2024 Ekomobong Iwatt. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-            <form id="contactForm" class="hidden space-y-4 max-w-md mx-auto p-4 border-2 border-paperWhite rounded-lg">
+    <!--edit  i need to fix the form receiving logic -->
+    <div id="popupOverlay" class="popup-overlay hidden fixed top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center z-50">
+        <div class="popup-content">
+            <form id="contactForm" class="hidden relative slide-up space-y-4 max-w-md mx-auto p-4 pt-8 border-2 border-paperWhite rounded-lg bg-deepBlue">
+                <span type="button" id="closePopup" class="close-btn absolute top-1 right-4 text-2xl cursor-pointer text-paperWhite">&times;</span>
                 <input type="hidden" name="to" value="ekomzwatt@gmail.com">
-                <input type="text" placeholder="Your Name" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2" required="" name="name">
+                <input type="text" placeholder="Your Name" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2 mt-20" required="" name="name">
                 <input type="email" placeholder="Your Email" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2" required="" name="email">
                 <textarea name="message" placeholder="Your Message" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2" rows="5" required=""></textarea>
                 <button id="sendBtn" class="transition-transform transition-colors duration-300 ease-out cursor-pointer items-center ml-auto flex gap-2 shadow-md rounded-full px-4 md:px-3 py-2 text-gray-300 hover:bg-paperWhite hover:text-deepBlue transition-colors border-2 border-gray-300" style="transform:translate(0, 0) scale(1)">
@@ -528,17 +575,10 @@
                     </svg>
                 </button>
             </form>
-            
-            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
-                <div class="flex space-x-6 mb-4 md:mb-0">
-                    <a href="#" class="hover:text-accentBlue transition-colors"><i class="fab fa-github text-xl"></i></a>
-                    <a href="#" class="hover:text-accentBlue transition-colors"><i class="fab fa-linkedin text-xl"></i></a>
-                    <a href="#" class="hover:text-accentBlue transition-colors"><i class="fab fa-twitter text-xl"></i></a>
-                </div>
-                <p>&copy; 2024 Ekomobong Iwatt. All rights reserved.</p>
-            </div>
         </div>
-    </footer>
+
+    </div>
+
 
     <script>
         // Mobile Menu Logic
@@ -589,25 +629,54 @@
             observer.observe(el);
         });
 
-        document.getElementById('contactBtn').addEventListener('click', () => {
-        document.getElementById('contactForm').classList.remove('hidden');
-        });
+        // 1. Cache DOM elements to improve performance
+        const contactBtn = document.getElementById('contactBtn');
+const contactForm = document.getElementById('contactForm');
+const sendBtn = document.getElementById('sendBtn');
+const popupOverlay = document.getElementById('popupOverlay');
+const closePopup = document.getElementById('closePopup');
 
-        document.getElementById('sendBtn').addEventListener('click', () => {
-            document.getElementById('contactForm').classList.add('hidden');
-            // 1. Change text and add the flash class
-            document.getElementById('contactBtn').innerHTML   = "Sent";
-            document.getElementById('contactBtn').classList.add('flashing');
-            // 2. Revert after 2 seconds
-            setTimeout(() => {
-                document.getElementById('contactBtn').innerHTML  = "I'll be in Touch Soon";
-                document.getElementById('contactBtn').classList.classList.remove('flashing');
-            }, 2000);
 
-            setTimeout(() => {
-                document.getElementById('contactBtn').innerHTML  = "Get in Touch";
-            }, 5000);
-        });
+// --- Helper Function: Handles the Smooth Closing Logic ---
+const closePopupSmoothly = () => {
+    contactForm.classList.add('slide-down');
+    setTimeout(() => {
+        contactForm.classList.add('hidden');
+        popupOverlay.classList.add('hidden');
+        contactForm.classList.remove('slide-down');
+    }, 300);
+};
+
+// --- Event Listeners ---
+contactBtn.addEventListener('click', () => {
+    contactForm.classList.remove('hidden');
+    popupOverlay.classList.remove('hidden');
+});
+
+closePopup.addEventListener('click', closePopupSmoothly);
+
+// Close Popup (Clicking Outside)
+popupOverlay.addEventListener('click', (e) => {
+    if (e.target === popupOverlay) {
+        closePopupSmoothly();
+    }
+});
+
+// Send Button (Close + Update Text)
+sendBtn.addEventListener('click', (e) => {
+    e.preventDefault(); // Stop the form from refreshing the page
+
+    closePopupSmoothly();
+    contactBtn.textContent = "Sent"; 
+    contactBtn.classList.add('flashing');
+    setTimeout(() => {
+        contactBtn.textContent = "I'll be in Touch Soon";
+        contactBtn.classList.remove('flashing');
+    }, 2000);
+    setTimeout(() => {
+        contactBtn.textContent = "Get in Touch";
+    }, 5000);
+});
 
     </script>
 </body>
