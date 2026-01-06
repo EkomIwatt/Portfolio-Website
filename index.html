@@ -28,7 +28,7 @@
                     },
                     animation: {
                         'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                        'float': 'float 6s ease-in-out infinite',
+                        'float': 'float 4s ease-in-out infinite',
                     },
                     keyframes: {
                         fadeInUp: {
@@ -164,6 +164,16 @@
             background-color: #F9F7F2;
         }
 
+        #background::before {
+            content: "";
+            background-image: url('./image1.jpg');
+            background-size: cover;
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0;
+            opacity: 0.8; 
+            z-index: -1;
+        }
+
         /* Staggered delays for child elements if needed */
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
@@ -216,70 +226,70 @@
     
 
     <!-- Hero Section -->
-    <div id="background" class="relative bg-cover min-h-screen flex" style="background-image: url(./image1.jpg);">
-
-    <div class="absolute inset-0 z-0 bg-gray-800/20 "></div>
-    
-    <section id="home" class="relative z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
-        
-        <!-- Hero Content -->
-        <div class="flex-1 text-center md:text-left animate-fade-in-up">
-            <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-deepBlue mb-4">
-                Ekomobong Iwatt <br />
-                <span class="text-mutedBlue text-2xl md:text-4xl font-normal block mt-2">Software Engineer</span>
-            </h1>
-            <p class="mt-6 text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto md:mx-0">
-                Building scalable, impactful solutions with clean code and modern architecture. I bridge the gap between complex engineering and intuitive user experiences.
-            </p>
+    <div id="background" class="relative bg-gray-800/20 bg-cover min-h-screen flex">
+        <!-- <div class="absolute inset-0 z-0"></div> -->
+        <section id="home" class="relative bg-transparent z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-4 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
             
-            <!-- Skills Badges -->
-            <div class="mt-8">
-                <p class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3">Core Technologies</p>
-                <div class="flex flex-wrap gap-2 justify-center md:justify-start">
-                    <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">Python</span>
-                    <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">JavaScript</span>
-                    <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">React</span>
-                    <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">AWS</span>
-                    <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">Docker</span>
-                    <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">PostgreSQL</span>
+            <!-- Hero Content -->
+            <div class="flex-1 text-center md:text-left animate-fade-in-up pr-8">
+                <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-deepBlue mb-4">
+                    Ekomobong Iwatt <br />
+                    <span class="text-mutedBlue text-2xl md:text-4xl font-normal block mt-2">Software Engineer</span>
+                </h1>
+                <p class="mt-6 text-lg text-deepBlue leading-relaxed max-w-2xl mx-auto md:mx-0">
+                    Building scalable, impactful solutions with clean code and modern architecture. I bridge the gap between complex engineering and intuitive user experiences.
+                </p>
+                
+                <!-- Skills Badges -->
+                <div class="mt-8">
+                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3">Core Technologies</p>
+                    <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">C++</span>
+                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">Python</span>
+                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">Rust</span>
+                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">JavaScript</span>
+                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">HTML/CSS</span>
+                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">React</span>
+                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">Embedded Systems</span>
+                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">AWS</span>
+                    </div>
+                </div>
+
+                <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#projects" class="border-2 border-deepBlue text-deepBlue px-8 py-3 rounded-md font-semibold hover:bg-deepBlue hover:text-white transition-colors">View Work</a>
+                    <a href="#contact" class="text-deepBlue px-8 py-3 font-semibold hover:text-mutedBlue transition-colors flex items-center justify-center gap-2">
+                        Let's Talk <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
 
-            <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <a href="#projects" class="border-2 border-deepBlue text-deepBlue px-8 py-3 rounded-md font-semibold hover:bg-deepBlue hover:text-white transition-colors">View Work</a>
-                <a href="#contact" class="text-deepBlue px-8 py-3 font-semibold hover:text-mutedBlue transition-colors flex items-center justify-center gap-2">
-                    Let's Talk <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-        </div>
-
-        <!-- Realistic Visual (CSS Code Window) -->
-        <div class="flex-1 w-full max-w-lg lg:translate-x-[50px]"> <!--edit-->
-            <div class="code-window transform hover:scale-[1.02] transition-transform duration-500">
-                <div class="window-header">
-                    <div class="dot dot-red"></div>
-                    <div class="dot dot-yellow"></div>
-                    <div class="dot dot-green"></div>
-                    <span class="ml-4 text-xs text-gray-500 font-mono">portfolio_controller.py</span>
-                </div>
-                <div class="p-6 font-mono text-sm">
-                    <div class="text-gray-400">class <span class="text-yellow-300">Engineer</span>:</div>
-                    <div class="pl-4 text-gray-300">def <span class="text-blue-300">__init__</span>(self):</div>
-                    <div class="pl-8 text-white">self.name = <span class="text-green-300">"Ekomobong"</span></div>
-                    <div class="pl-8 text-white">self.role = <span class="text-green-300">"Full Stack Dev"</span></div>
-                    <div class="pl-8 text-white">self.passion = <span class="text-green-300">"Solving Problems"</span></div>
-                    <br>
-                    <div class="pl-4 text-gray-300">def <span class="text-blue-300">build_future</span>(self):</div>
-                    <div class="pl-8 text-purple-400">return <span class="text-white">Solution.deploy()</span></div>
-                    <br>
-                    <div class="text-gray-500"># Ready to collaborate</div>
-                    <div class="mt-2 flex items-center gap-2">
-                         <span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="animate-pulse">_</span>
+            <!-- Realistic Visual (CSS Code Window) -->
+            <div class="flex-1 w-full max-w-[500px] md:max-w-[400px] mt-20 animate-float">
+                <div class="code-window transform hover:scale-[1.02] transition-transform duration-500">
+                    <div class="window-header">
+                        <div class="dot dot-red"></div>
+                        <div class="dot dot-yellow"></div>
+                        <div class="dot dot-green"></div>
+                        <span class="ml-4 text-xs text-gray-500 font-mono">portfolio_controller.py</span>
+                    </div>
+                    <div class="p-6 font-mono text-sm">
+                        <div class="text-gray-400">class <span class="text-yellow-300">Engineer</span>:</div>
+                        <div class="pl-4 text-gray-300">def <span class="text-blue-300">__init__</span>(self):</div>
+                        <div class="pl-8 text-white">self.name = <span class="text-green-300">"Ekomobong"</span></div>
+                        <div class="pl-8 text-white">self.role = <span class="text-green-300">"Full Stack Dev"</span></div>
+                        <div class="pl-8 text-white">self.passion = <span class="text-green-300">"Solving Problems"</span></div>
+                        <br>
+                        <div class="pl-4 text-gray-300">def <span class="text-blue-300">build_future</span>(self):</div>
+                        <div class="pl-8 text-purple-400">return <span class="text-white">Solution.deploy()</span></div>
+                        <br>
+                        <div class="text-gray-500"># Ready to collaborate</div>
+                        <div class="mt-2 flex items-center gap-2">
+                            <span class="text-green-400">➜</span> <span class="text-blue-400">~</span> <span class="animate-pulse">_</span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
     </div>
 
     <!-- Projects Section -->
@@ -545,13 +555,13 @@
             
             <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
                 <div class="flex space-x-6 mb-4 md:mb-0">
-                    <span class="p-2.5">Or reach me on:</span>
-                    <a href="https://github.com/EkomIwatt" class="hover:text-paperWhite transition-colors hover:border-2 hover:border-white p-1 rounded-md m-1"><i class="fab fa-github text-xl"></i><p class="">GitHub</p></a>
-                    <a href="https://linkedin.com/in/ekomiwatt" class="hover:text-paperWhite transition-colors"><i class="fab fa-linkedin text-xl hover:border-2 hover:border-white p-1 rounded-md m-1"></i></a>
-                    <a href="https://x.com/yr_Ekom" class="hover:text-paperWhite transition-colors"><i class="fab fa-twitter text-xl hover:border-2 hover:border-white p-1 rounded-md m-1"></i></a>
-                    <a href="https://wa.me/+2349122141156" class="hover:text-paperWhite transition-colors"><i class="fab fa-whatsapp text-xl hover:border-2 hover:border-white p-1 rounded-md m-1"></i></a>
+                    <span class="text-lg pt-12 mr-10">Or reach me on:</span>
+                    <a href="https://github.com/EkomIwatt" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-github text-xl p-1 rounded-md m-1"></i><p class="">GitHub</p></a>
+                    <a href="https://linkedin.com/in/ekomiwatt" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-linkedin text-xl p-1 rounded-md m-1"></i><p class="">LinkedIn</p></a>
+                    <a href="https://x.com/yr_Ekom" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-twitter text-xl p-1 rounded-md m-1"></i><p class="">Twitter</p></a>
+                    <a href="https://wa.me/+2349122141156" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-whatsapp text-xl p-1 rounded-md m-1"></i><p class="">WhatsApp</p></a>
                 </div>
-                <p>&copy; 2024 Ekomobong Iwatt. All rights reserved.</p>
+                <p class="pt-4">&copy; 2024 Ekomobong Iwatt. All rights reserved.</p>
             </div>
         </div>
     </footer>
