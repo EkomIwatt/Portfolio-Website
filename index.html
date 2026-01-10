@@ -181,34 +181,34 @@
        
 
         /* Tech Border / Glitch Effect */
-.tech-border {
-    position: relative;
-    z-index: 1;
-}
-.tech-border:after, .tech-border:before {
-    content: '';
-    width: calc(100% + 24px); 
-    height: calc(100% + 24px);
-    position: absolute;
-    top: -12px; left: -12px;
-    z-index: -1;
-    mix-blend-mode: hard-light; /* Makes the colors pop against the photo */
-    animation: glitch-anim 6s ease-in-out infinite;
-    border-radius: 5px;
-}
-.tech-border:after {
-    background-color: #94B4C1; /* Accent Blue */
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    animation-delay: -4s;
-}
-.tech-border:before {
-    background-color: #547792; /* Muted Blue */
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
-@keyframes glitch-anim {
-    0%, 100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-    50% { clip-path: polygon(10% 10%, 90% 0, 100% 90%, 0 100%); }
-}
+        .tech-border {
+            position: relative;
+            z-index: 1;
+        }
+        .tech-border:after, .tech-border:before {
+            content: '';
+            width: calc(100% + 24px); 
+            height: calc(100% + 24px);
+            position: absolute;
+            top: -12px; left: -12px;
+            z-index: -1;
+            mix-blend-mode: hard-light; /* Makes the colors pop against the photo */
+            animation: glitch-anim 6s ease-in-out infinite;
+            border-radius: 5px;
+        }
+        .tech-border:after {
+            background-color: #94B4C1; /* Accent Blue */
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+            animation-delay: -4s;
+        }
+        .tech-border:before {
+            background-color: #547792; /* Muted Blue */
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+        }
+        @keyframes glitch-anim {
+            0%, 100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
+            50% { clip-path: polygon(10% 10%, 90% 0, 100% 90%, 0 100%); }
+        }
 
 
         /* Staggered delays for child elements if needed */
