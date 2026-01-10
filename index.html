@@ -18,6 +18,8 @@
                         accentBlue: '#94B4C1',
                         warmLight: '#EAE0CF',
                         paperWhite: '#F9F7F2',
+                        imageWhite: '#EFF0EA',
+                        skyBlue: '#A3CEF1',
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
@@ -168,11 +170,15 @@
             content: "";
             background-image: url('./image1.jpg');
             background-size: cover;
-            position: absolute;
-            top: 0; right: 0; bottom: 0; left: 0;
-            opacity: 0.8; 
-            z-index: -1;
+            position: absolute;     
+            top: 0;
+            left: 100px;
+            right: 0;
+            bottom: 0;
+            /* opacity: 0.8;  */
+            z-index: 0;
         }
+       
 
         /* Staggered delays for child elements if needed */
         .delay-100 { transition-delay: 100ms; }
@@ -193,11 +199,26 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#home" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Home</a>
-                    <a href="#projects" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Projects</a>
-                    <a href="#achievements" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Achievements</a>
-                    <a href="#education" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Education</a>
-                    <a href="#blog" class="text-gray-300 hover:text-accentBlue transition-colors text-sm font-medium">Blog</a>
+                    <a href="#home" class="relative group py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                        Home
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accentBlue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center"></span>
+                    </a>
+                    <a href="#projects" class="relative group py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                        Home
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accentBlue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center"></span>
+                    </a>
+                    <a href="#achievements" class="relative group py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                        Achievements
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accentBlue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center"></span>
+                    </a>
+                    <a href="#education" class="relative group py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                        Education
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accentBlue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center"></span>
+                    </a>
+                    <a href="#blog" class="relative group py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                        Blog
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accentBlue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center"></span>
+                    </a>
                     <a href="#contact" class="bg-accentBlue text-deepBlue px-5 py-2 rounded-md text-sm font-semibold hover:bg-paperWhite transition-all transform hover:-translate-y-0.5">Contact</a>
                 </div>
 
@@ -226,24 +247,31 @@
     
 
     <!-- Hero Section -->
-    <div id="background" class="relative bg-gray-800/20 bg-cover min-h-screen flex">
-        <!-- <div class="absolute inset-0 z-0"></div> -->
-        <section id="home" class="relative bg-transparent z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-4 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
+    <div class="relative bg-imageWhite min-h-screen flex">
+        <div id="background" class="invisible md:visible"></div>
+        <section id="home" class="relative bg-transparent z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-24 w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
             
             <!-- Hero Content -->
-            <div class="flex-1 text-center md:text-left animate-fade-in-up pr-8">
+            <div class="flex-1 text-center md:text-left animate-fade-in-up pr-18 pl-2 mb-4">
                 <h1 class="text-4xl md:text-6xl font-bold tracking-tight text-deepBlue mb-4">
                     Ekomobong Iwatt <br />
                     <span class="text-mutedBlue text-2xl md:text-4xl font-normal block mt-2">Software Engineer</span>
+                    <hr class="w-16 border-t-4 border-deepBlue mt-6 mx-auto md:mx-0" />
                 </h1>
-                <p class="mt-6 text-lg text-deepBlue leading-relaxed max-w-2xl mx-auto md:mx-0">
+
+                <!--profile image-->
+                <div class="md:hidden border-2 min-h-80 border-deepBlue bg-cover after:bg-skyBlue/50" style="background-image: url(./image1.jpg);">
+
+                </div>
+
+                <p class="mt-6 text-lg text-deepBlue leading-relaxed max-w-xs lg:max-w-md mx-auto md:mx-0 md:text-justify">
                     Building scalable, impactful solutions with clean code and modern architecture. I bridge the gap between complex engineering and intuitive user experiences.
                 </p>
                 
                 <!-- Skills Badges -->
-                <div class="mt-8">
-                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3">Core Technologies</p>
-                    <div class="flex flex-wrap gap-2 justify-center md:justify-start">
+                <div class="mt-8 max-w-sm md:max-w-md">
+                    <p class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3 text-center">Core Technologies</p>
+                    <div class="flex flex-wrap gap-2 justify-center">
                         <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">C++</span>
                         <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">Python</span>
                         <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">Rust</span>
@@ -555,7 +583,7 @@
             
             <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
                 <div class="flex space-x-6 mb-4 md:mb-0">
-                    <span class="text-lg pt-12 mr-10">Or reach me on:</span>
+                    <span class="text-lg pt-6 mr-10">Or reach me on:</span>
                     <a href="https://github.com/EkomIwatt" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-github text-xl p-1 rounded-md m-1"></i><p class="">GitHub</p></a>
                     <a href="https://linkedin.com/in/ekomiwatt" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-linkedin text-xl p-1 rounded-md m-1"></i><p class="">LinkedIn</p></a>
                     <a href="https://x.com/yr_Ekom" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-twitter text-xl p-1 rounded-md m-1"></i><p class="">Twitter</p></a>
@@ -568,10 +596,17 @@
 
     <!--edit  i need to fix the form receiving logic -->
     <div id="popupOverlay" class="popup-overlay hidden fixed top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center z-50">
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+        <script type="text/javascript">
+        (function(){
+            emailjs.init("bVE4OU2OXh9_4SfCN");
+        })();
+        </script>
         <div class="popup-content">
             <form id="contactForm" class="hidden relative slide-up space-y-4 max-w-md mx-auto p-4 pt-8 border-2 border-paperWhite rounded-lg bg-deepBlue">
                 <span type="button" id="closePopup" class="close-btn absolute top-1 right-4 text-2xl cursor-pointer text-paperWhite">&times;</span>
                 <input type="hidden" name="to" value="ekomzwatt@gmail.com">
+                <input type="hidden" name="time" id="timeInput">
                 <input type="text" placeholder="Your Name" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2 mt-20" required="" name="name">
                 <input type="email" placeholder="Your Email" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2" required="" name="email">
                 <textarea name="message" placeholder="Your Message" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2" rows="5" required=""></textarea>
@@ -591,103 +626,161 @@
 
 
     <script>
-        // Mobile Menu Logic
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        const closeBtn = document.getElementById('close-menu-btn');
-        const links = document.querySelectorAll('.mobile-link');
+    // --- Mobile Menu Logic ---
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    const closeBtn = document.getElementById('close-menu-btn');
+    const links = document.querySelectorAll('.mobile-link');
 
-        function toggleMenu() {
-            menu.classList.toggle('translate-x-full');
-            document.body.classList.toggle('overflow-hidden');
+    function toggleMenu() {
+        menu.classList.toggle('translate-x-full');
+        document.body.classList.toggle('overflow-hidden');
+    }
+
+    if(btn) btn.addEventListener('click', toggleMenu);
+    if(closeBtn) closeBtn.addEventListener('click', toggleMenu);
+    
+    links.forEach(link => {
+        link.addEventListener('click', toggleMenu);
+    });
+
+    // --- Navbar Shadow Logic ---
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+            nav.classList.add('shadow-lg');
+        } else {
+            nav.classList.remove('shadow-lg');
         }
+    });
 
-        btn.addEventListener('click', toggleMenu);
-        closeBtn.addEventListener('click', toggleMenu);
-        
-        links.forEach(link => {
-            link.addEventListener('click', toggleMenu);
-        });
+    // --- Scroll Animations ---
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    };
 
-        // Add shadow to nav on scroll
-        const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 10) {
-                nav.classList.add('shadow-lg');
-            } else {
-                nav.classList.remove('shadow-lg');
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+                observer.unobserve(entry.target);
             }
         });
+    }, observerOptions);
 
-        // Intersection Observer for Scroll Animations
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+    document.querySelectorAll('.reveal, .reveal-right').forEach(el => {
+        observer.observe(el);
+    });
 
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    observer.unobserve(entry.target); // Only animate once
-                }
-            });
-        }, observerOptions);
+    // --- CONTACT FORM LOGIC ---
 
-        document.querySelectorAll('.reveal, .reveal-right').forEach(el => {
-            observer.observe(el);
+    // 1. Cache DOM elements
+    const contactBtn = document.getElementById('contactBtn');
+    const contactForm = document.getElementById('contactForm');
+    const sendBtn = document.getElementById('sendBtn');
+    const popupOverlay = document.getElementById('popupOverlay');
+    const closePopup = document.getElementById('closePopup');
+    
+    // 2. THIS WAS MISSING: Define timeInput
+    const timeInput = document.getElementById('timeInput'); 
+
+    // Helper: Close Popup Smoothly
+    const closePopupSmoothly = () => {
+        contactForm.classList.add('slide-down');
+        setTimeout(() => {
+            contactForm.classList.add('hidden');
+            popupOverlay.classList.add('hidden');
+            contactForm.classList.remove('slide-down');
+        }, 300);
+    };
+
+    // Event Listeners for Opening/Closing
+    if(contactBtn) {
+        contactBtn.addEventListener('click', () => {
+            contactForm.classList.remove('hidden');
+            popupOverlay.classList.remove('hidden');
         });
-
-        // 1. Cache DOM elements to improve performance
-        const contactBtn = document.getElementById('contactBtn');
-const contactForm = document.getElementById('contactForm');
-const sendBtn = document.getElementById('sendBtn');
-const popupOverlay = document.getElementById('popupOverlay');
-const closePopup = document.getElementById('closePopup');
-
-
-// --- Helper Function: Handles the Smooth Closing Logic ---
-const closePopupSmoothly = () => {
-    contactForm.classList.add('slide-down');
-    setTimeout(() => {
-        contactForm.classList.add('hidden');
-        popupOverlay.classList.add('hidden');
-        contactForm.classList.remove('slide-down');
-    }, 300);
-};
-
-// --- Event Listeners ---
-contactBtn.addEventListener('click', () => {
-    contactForm.classList.remove('hidden');
-    popupOverlay.classList.remove('hidden');
-});
-
-closePopup.addEventListener('click', closePopupSmoothly);
-
-// Close Popup (Clicking Outside)
-popupOverlay.addEventListener('click', (e) => {
-    if (e.target === popupOverlay) {
-        closePopupSmoothly();
     }
-});
 
-// Send Button (Close + Update Text)
-sendBtn.addEventListener('click', (e) => {
-    e.preventDefault(); // Stop the form from refreshing the page
+    if(closePopup) closePopup.addEventListener('click', closePopupSmoothly);
 
-    closePopupSmoothly();
-    contactBtn.textContent = "Sent"; 
-    contactBtn.classList.add('flashing');
-    setTimeout(() => {
-        contactBtn.textContent = "I'll be in Touch Soon";
-        contactBtn.classList.remove('flashing');
-    }, 2000);
-    setTimeout(() => {
-        contactBtn.textContent = "Get in Touch";
-    }, 5000);
-});
+    if(popupOverlay) {
+        popupOverlay.addEventListener('click', (e) => {
+            if (e.target === popupOverlay) {
+                closePopupSmoothly();
+            }
+        });
+    }
 
-    </script>
+    // --- THE SEND BUTTON LOGIC ---
+    if(sendBtn) {
+        sendBtn.addEventListener('click', (e) => {
+            e.preventDefault(); // Stop page reload
+            console.log("Send button clicked..."); // Debug 1
+
+            // 1. Capture Current Date & Time
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric', 
+                hour: '2-digit', 
+                minute: '2-digit' 
+            };
+            
+            // This line was crashing before because timeInput wasn't defined
+            if(timeInput) {
+                timeInput.value = now.toLocaleDateString('en-US', options);
+            }
+
+            // 2. Change Button Text (Feedback)
+            const originalBtnContent = sendBtn.innerHTML;
+            sendBtn.textContent = "Sending...";
+
+            // 3. Send via EmailJS
+            console.log("Attempting to send email..."); // Debug 2
+            
+            // NOTE: Ensure these IDs match your EmailJS Dashboard exactly
+            emailjs.sendForm('service_ah7qnm9', 'template_5droz1e', '#contactForm')
+                .then(() => {
+                    console.log("SUCCESS!"); // Debug 3
+                    
+                    // Success UI Updates
+                    closePopupSmoothly();
+                    contactForm.reset(); 
+
+                    // Update Main CTA Button
+                    if(contactBtn) {
+                        contactBtn.textContent = "Sent"; 
+                        contactBtn.classList.add('flashing');
+
+                        setTimeout(() => {
+                            contactBtn.textContent = "I'll be in Touch Soon";
+                            contactBtn.classList.remove('flashing');
+                        }, 2000);
+
+                        setTimeout(() => {
+                            contactBtn.textContent = "Get in Touch";
+                        }, 5000);
+                    }
+
+                    // Restore inner form button
+                    sendBtn.innerHTML = originalBtnContent;
+
+                }, (error) => {
+                    console.error("FAILED...", error); // Debug 4
+                    alert("Failed to send. Check console for details.");
+                    
+                    // Reset button text
+                    setTimeout(() => {
+                        sendBtn.innerHTML = originalBtnContent;
+                    }, 2000);
+                });
+        });
+    }
+</script>
 </body>
 </html>
