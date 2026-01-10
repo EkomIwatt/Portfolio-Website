@@ -179,59 +179,53 @@
             z-index: 0;
         }
 
-
         /* The rotating shimmering gradient */
-  .shimmer-bg {
-    background: linear-gradient(
-      to right, 
-      #fff 20%, 
-      #fff 40%, 
-      #94B4C1 50%, 
-      #547792 55%, 
-      #fff 70%, 
-      #fff 100%
-    );
-    background-size: 200% auto;
-    animation: shine-rotate 3s linear infinite;
-  }
+        .shimmer-bg {
+            background: linear-gradient(
+            to right, 
+            #fff 20%, 
+            #fff 40%, 
+            #94B4C1 50%, 
+            #547792 55%, 
+            #fff 70%, 
+            #fff 100%
+            );
+            background-size: 200% auto;
+            animation: shine-rotate 3s linear infinite;
+        }
 
-  @keyframes shine-rotate {
-    0% {
-      background-position: 200% center;
-      transform: rotate(0deg);
-    }
-    100% {
-      background-position: 0% center;
-      transform: rotate(360deg); /* Optional: Rotates the whole gradient */
-    }
-  }
+        @keyframes shine-rotate {
+            0% {
+            background-position: 200% center;
+            transform: rotate(0deg);
+            }
+            100% {
+            background-position: 0% center;
+            transform: rotate(360deg); /* Optional: Rotates the whole gradient */
+            }
+        }
        
-
-
-
         /* Staggered delays for child elements if needed */
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
     </style>
 </head>
+
+
 <body class="bg-warmLight text-deepBlue font-sans antialiased overflow-x-hidden">
 
     <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-deepBlue/95 backdrop-blur-sm z-50 shadow-md border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
+                <div class="flex-shrink-0 flex items-center ml-8">
                     <span class="text-white text-xl font-bold tracking-tight">EI<span class="text-accentBlue">.</span></span>
                 </div>
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#home" class="relative group py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
-                        Home
-                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accentBlue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center"></span>
-                    </a>
                     <a href="#projects" class="relative group py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
                         Home
                         <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accentBlue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center"></span>
@@ -253,7 +247,7 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="text-white hover:text-accentBlue focus:outline-none p-2">
+                    <button id="mobile-menu-btn" class="mr-8 text-white hover:text-accentBlue focus:outline-none p-2">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </div>
@@ -278,7 +272,7 @@
     <!-- Hero Section -->
     <div class="relative bg-imageWhite min-h-screen flex">
         <div id="background" class="invisible md:visible"></div>
-        <section id="home" class="relative bg-transparent z-10 pt-32 pb-20 px-4 sm:px-6 lg:px-24 w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
+        <section id="home" class="relative bg-transparent z-10 pt-24 md:pt-32 pb-20 px-4 sm:px-6 lg:px-24 w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
             
             <!-- Hero Content -->
             <div class="flex-1 text-center md:text-left group animate-fade-in-up pr-18 pl-2 mb-4">
@@ -634,7 +628,6 @@
         </div>
     </footer>
 
-    <!--edit  i need to fix the form receiving logic -->
     <div id="popupOverlay" class="popup-overlay hidden fixed top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center z-50">
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
         <script type="text/javascript">
