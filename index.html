@@ -180,37 +180,6 @@
         }
        
 
-        /* Tech Border / Glitch Effect */
-.tech-border {
-    position: relative;
-    z-index: 1;
-}
-.tech-border:after, .tech-border:before {
-    content: '';
-    width: calc(100% + 24px); 
-    height: calc(100% + 24px);
-    position: absolute;
-    top: -12px; left: -12px;
-    z-index: -1;
-    mix-blend-mode: hard-light; /* Makes the colors pop against the photo */
-    animation: glitch-anim 6s ease-in-out infinite;
-    border-radius: 5px;
-}
-.tech-border:after {
-    background-color: #94B4C1; /* Accent Blue */
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-    animation-delay: -4s;
-}
-.tech-border:before {
-    background-color: #547792; /* Muted Blue */
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
-@keyframes glitch-anim {
-    0%, 100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); }
-    50% { clip-path: polygon(10% 10%, 90% 0, 100% 90%, 0 100%); }
-}
-
-
         /* Staggered delays for child elements if needed */
         .delay-100 { transition-delay: 100ms; }
         .delay-200 { transition-delay: 200ms; }
@@ -291,11 +260,8 @@
                 </h1>
 
                 <!--profile image-->
-                <div class="md:hidden mt-8 mb-8 mx-auto w-64 h-72 relative tech-border group transform hover:scale-[1.02] transition-transform duration-500">
-                    <div class="w-full h-full bg-cover bg-center rounded-sm border-2 border-deepBlue relative z-10 transition-all duration-500 transform hover:scale-[1.02] transition-transform duration-500" 
-                        style="background-image: url('./image1.jpg');">
-                        <div class="absolute inset-0 bg-deepBlue/20 group-hover:bg-transparent transition-colors"></div>
-                    </div>
+                <div class="md:hidden border-2 min-h-80 border-deepBlue bg-cover after:bg-skyBlue/50" style="background-image: url(./image1.jpg);">
+
                 </div>
 
                 <p class="mt-6 text-lg text-deepBlue leading-relaxed max-w-xs lg:max-w-md mx-auto md:mx-0 md:text-justify">
