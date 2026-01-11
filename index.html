@@ -635,15 +635,15 @@
         })();
         </script>
         <div class="popup-content">
-            <form id="contactForm" class="hidden relative slide-up space-y-4 max-w-md mx-auto p-4 pt-8 border-2 border-paperWhite rounded-lg bg-deepBlue">
+            <form id="contactForm" class="hidden relative slide-up space-y-4 w-4/5 max-w-md mx-auto p-4 pt-8 border-2 border-paperWhite rounded-lg bg-deepBlue">
                 <span type="button" id="closePopup" class="close-btn absolute top-1 right-4 text-2xl cursor-pointer text-paperWhite">&times;</span>
                 <!-- <input type="hidden" name="to" value="ekomzwatt@gmail.com"> -->
                 <input type="hidden" name="time" id="timeInput">
-                <input type="text" placeholder="Your Name" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2 mt-20" required="" name="user_name">
-                <input type="email" placeholder="Your Email" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2" required="" name="user_email">
-                <textarea name="message" placeholder="Your Message" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-2" rows="5" required=""></textarea>
-                <button id="sendBtn" class="transition-transform transition-colors duration-300 ease-out cursor-pointer items-center ml-auto flex gap-2 shadow-md rounded-full px-4 md:px-3 py-2 text-gray-300 hover:bg-paperWhite hover:text-deepBlue transition-colors border-2 border-gray-300" style="transform:translate(0, 0) scale(1)">
-                    Send Message<!-- --> 
+                <input type="text" placeholder="Your Name" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-1.5 sm:p-2 mt-20" required="" name="user_name">
+                <input type="email" placeholder="Your Email" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-1.5 sm:p-2" required="" name="user_email">
+                <textarea name="message" placeholder="Your Message" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-1.5 sm:p-2" rows="5" required=""></textarea>
+                <button id="sendBtn" class="transition-transform transition-colors duration-300 ease-out cursor-pointer items-center ml-auto flex gap-2 shadow-md rounded-full px-3 py-1 text-gray-300 hover:bg-paperWhite hover:text-deepBlue transition-colors border-2 border-gray-300" style="transform:translate(0, 0) scale(1)">
+                    <p class="text-sm">Send</p> 
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send" aria-hidden="true">
                         <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
                         </path>
