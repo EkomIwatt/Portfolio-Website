@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#213448">
     <title>Ekomobong Iwatt - Software Engineer</title>
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+
     <script>
         tailwind.config = {
             theme: {
@@ -52,180 +57,17 @@
             }
         }
     </script>
-    <style>
-        /* Custom scrollbar to match theme */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #EAE0CF;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #547792;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #213448;
-        }
-        
-        /* Realistic Code Editor CSS */
-        .code-window {
-            background: #1E1E1E;
-            border-radius: 8px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
-            overflow: hidden;
-            border: 1px solid rgba(0,0,0,0.1);
-        }
-        .window-header {
-            background: #252526;
-            padding: 8px 12px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .dot { width: 10px; height: 10px; border-radius: 50%; }
-        .dot-red { background: #FF5F56; }
-        .dot-yellow { background: #FFBD2E; }
-        .dot-green { background: #27C93F; }
-        
-        /* Animation for menu */
-        .mobile-menu {
-            transition: transform 0.3s ease-in-out;
-        }
-
-        /* Scroll Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-        }
-        
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Scroll Reveal Right Animation */
-        .reveal-right {
-            opacity: 0;
-            transform: translateX(-40px); /* start slightly left */
-            
-            /* We list different speeds for different properties */
-            transition: 
-                opacity 0.8s ease-out,
-                transform 0.8s ease-out,
-                border-color 0.1s ease-in-out,
-                background-color 0.1s ease-in-out,
-                color 0.1s ease-in-out;
-        }
-
-        .reveal-right.active {
-            opacity: 1;
-            transform: translateX(0); /* move right into position */
-        }
-
-        @keyframes flash-effect {
-            0%, 100% { background-color: inherit; }
-            50% { background-color: #F9F7F2; }
-        }
-
-        .flashing {
-        animation: flash-effect 0.5s ease-in-out 2;
-        }
-
-        @keyframes slideUpFade {
-            0% {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .slide-up {
-            animation: slideUpFade 0.4s ease-out forwards;
-        }
-
-        @keyframes slideDownFade {
-            0% {
-        transform: translateY(0);
-        opacity: 1;
-            }
-            100% {
-                transform: translateY(50px); /* Move down */
-                opacity: 0;                 /* Fade out */
-            }
-        }
-
-        .slide-down {
-            animation: slideDownFade 0.3s ease-in forwards;
-        }
-
-        .btn-active {
-            background-color: #F9F7F2;
-        }
-
-        #background::before {
-            content: "";
-            background-image: url('./image1.jpg');
-            background-size: cover;
-            position: absolute;     
-            top: 0;
-            left: 100px;
-            right: 0;
-            bottom: 0;
-            /* opacity: 0.8;  */
-            z-index: 0;
-        }
-
-        /* The rotating shimmering gradient */
-        .shimmer-bg {
-            background: linear-gradient(
-            to right, 
-            #fff 20%, 
-            #fff 40%, 
-            #94B4C1 50%, 
-            #547792 55%, 
-            #fff 70%, 
-            #fff 100%
-            );
-            background-size: 200% auto;
-            animation: shine-rotate 3s linear infinite;
-        }
-
-        @keyframes shine-rotate {
-            0% {
-            background-position: 200% center;
-            transform: rotate(0deg);
-            }
-            100% {
-            background-position: 0% center;
-            transform: rotate(360deg); /* Optional: Rotates the whole gradient */
-            }
-        }
-       
-        /* Staggered delays for child elements if needed */
-        .delay-100 { transition-delay: 100ms; }
-        .delay-200 { transition-delay: 200ms; }
-        .delay-300 { transition-delay: 300ms; }
-    </style>
 </head>
-
 
 <body class="bg-warmLight text-deepBlue font-sans antialiased overflow-x-hidden">
 
-    <!-- Navigation -->
     <nav class="fixed top-0 w-full bg-deepBlue/95 backdrop-blur-sm z-50 shadow-md border-b border-white/10">
         <div class="mx-auto md:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
-                <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center ml-8">
                     <span class="text-white text-xl font-bold tracking-tight">EI<span class="text-accentBlue">.</span></span>
                 </div>
 
-                <!-- Desktop Menu -->
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="#projects" class="relative group py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
                         Home
@@ -246,7 +88,6 @@
                     <a href="#contact" class="bg-accentBlue text-deepBlue px-5 py-2 rounded-md text-sm font-semibold hover:bg-paperWhite transition-all transform hover:-translate-y-0.5">Contact</a>
                 </div>
 
-                <!-- Mobile Menu Button -->
                 <div class="md:hidden flex items-center">
                     <button id="mobile-menu-btn" class="mr-8 text-white hover:text-accentBlue focus:outline-none p-2">
                         <i class="fas fa-bars text-xl"></i>
@@ -255,8 +96,7 @@
             </div>
         </div>
 
-        <!-- Mobile Menu Overlay -->
-        <div id="mobile-menu" class="fixed inset-0 bg-deepBlue z-40 transform translate-x-full mobile-menu md:hidden flex flex-col pt-20">
+        <div id="mobile-menu" class="fixed inset-0 bg-deepBlue z-40 transform translate-x-full md:hidden flex flex-col pt-20 transition-transform duration-300 ease-in-out">
             <button id="close-menu-btn" class="absolute top-5 right-6 text-white text-2xl hover:text-accentBlue">
                 <i class="fas fa-times"></i>
             </button>
@@ -265,17 +105,14 @@
             <a href="#achievements" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-85 hover:border-2 hover:border-white">Achievements</a>
             <a href="#education" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-80 hover:border-2 hover:border-white">Education</a>
             <a href="#blog" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-75 hover:border-2 hover:border-white">Blog</a>
-            <a href="#contact" class="mt-   1 mx-1 bg-accentBlue text-deepBlue py-4 rounded-lg text-center font-bold text-xl mobile-link border-2 border-deepBlue hover:bg-paperWhite transition-all transform hover:-translate-y-0.5">Contact Me</a>
+            <a href="#contact" class="mt-1 mx-1 bg-accentBlue text-deepBlue py-4 rounded-lg text-center font-bold text-xl mobile-link border-2 border-deepBlue hover:bg-paperWhite transition-all transform hover:-translate-y-0.5">Contact Me</a>
         </div>
     </nav>
     
-
-    <!-- Hero Section -->
     <div class="relative bg-imageWhite min-h-screen flex">
         <div id="background" class="invisible md:visible"></div>
         <section id="home" class="relative bg-transparent z-10 pt-24 md:pt-32 pb-20 px-4 sm:px-6 lg:px-24 w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
             
-            <!-- Hero Content -->
             <div class="flex-1 text-center md:text-left group animate-fade-in-up pr-18 pl-2 mb-4">
                 <div class="flex flex-row relative items-center shrink-0">
                     <h1 class="z-10 w-3/5 relative text-4xl md:text-6xl font-bold tracking-tight text-deepBlue mt-5">
@@ -287,15 +124,11 @@
                             </div>
                     </h1>
 
-                    <!--profile image-->
                     <div class="absolute z-0 right-1.5 md:hidden w-7/12 h-44 rounded-l-full overflow-hidden shadow-lg">
-                        
                         <div class="shimmer-bg absolute -top-[50%] -left-[50%] w-[200%] h-[200%] z-0"></div>
-
                         <div class="absolute inset-[4px] border-r-0 rounded-l-full bg-cover z-10" 
-                            style="background-image: url(./image1.jpg);">
+                            style="background-image: url(assets/image1.jpg);">
                         </div>
-
                     </div>
                 </div>
 
@@ -303,7 +136,6 @@
                     Building scalable, impactful solutions with clean code and modern architecture. I bridge the gap between complex engineering and intuitive user experiences.
                 </p>
                 
-                <!-- Skills Badges -->
                 <div class="mt-8 max-w-sm md:max-w-md">
                     <p class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3 text-center">Core Technologies</p>
                     <div class="flex flex-wrap gap-2 justify-center">
@@ -326,13 +158,13 @@
                 </div>
             </div>
 
-            <!-- Realistic Visual (CSS Code Window) -->
             <div class="flex-1 w-full max-w-[500px] md:max-w-[400px] mt-20 animate-float">
-                <div class="code-window transform hover:scale-[1.02] transition-transform duration-500">
-                    <div class="window-header">
-                        <div class="dot dot-red"></div>
-                        <div class="dot dot-yellow"></div>
-                        <div class="dot dot-green"></div>
+                <div class="bg-[#1E1E1E] rounded-lg shadow-2xl overflow-hidden border border-white/10 transform hover:scale-[1.02] transition-transform duration-500">
+                    
+                    <div class="bg-[#252526] px-3 py-2 flex items-center gap-1.5">
+                        <div class="w-2.5 h-2.5 rounded-full bg-[#FF5F56]"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]"></div>
+                        <div class="w-2.5 h-2.5 rounded-full bg-[#27C93F]"></div>
                         <span class="ml-4 text-xs text-gray-500 font-mono">portfolio_controller.py</span>
                     </div>
                     <div class="p-6 font-mono text-sm">
@@ -355,7 +187,6 @@
         </section>
     </div>
 
-    <!-- Projects Section -->
     <section id="projects" class="py-20 bg-white/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16 reveal">
@@ -363,17 +194,13 @@
                 <p class="mt-4 text-gray-600 max-w-2xl mx-auto">A selection of technical projects demonstrating system architecture and frontend precision.</p>
             </div>
 
-            <!-- Grid Layout -->
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 
-                <!-- Project Card 1 -->
                 <div class="bg-paperWhite rounded-xl overflow-hidden shadow-soft group hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col reveal delay-100">
-                    <!-- Realistic "Browser" Header for Image placeholder -->
                     <div class="bg-gray-200 h-6 flex items-center gap-1 px-3 border-b border-gray-300">
                         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
                         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
                     </div>
-                    <!-- CSS Placeholder for Project Image -->
                     <div class="h-48 bg-deepBlue flex items-center justify-center group-hover:bg-mutedBlue transition-colors relative overflow-hidden">
                         <i class="fas fa-chart-line text-6xl text-white/20"></i>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -383,20 +210,17 @@
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-bold text-deepBlue mb-2">FinTech Analytics Dashboard</h3>
                         <p class="text-gray-600 text-sm mb-4 flex-1">Real-time financial data visualization platform processing high-volume transaction streams.</p>
-                        
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">React</span>
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">D3.js</span>
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Python</span>
                         </div>
-                        
                         <a href="#" class="inline-flex items-center text-mutedBlue font-semibold hover:text-deepBlue text-sm transition-colors">
                             View Case Study <i class="fas fa-arrow-right ml-2 text-xs"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Project Card 2 -->
                 <div class="bg-paperWhite rounded-xl overflow-hidden shadow-soft group hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col reveal delay-200">
                     <div class="bg-gray-200 h-6 flex items-center gap-1 px-3 border-b border-gray-300">
                         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
@@ -406,24 +230,20 @@
                         <i class="fas fa-server text-6xl text-white/20"></i>
                          <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                     </div>
-                    
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-bold text-deepBlue mb-2">Cloud Infrastructure API</h3>
                         <p class="text-gray-600 text-sm mb-4 flex-1">Scalable RESTful API designed for microservices communication with 99.9% uptime.</p>
-                        
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Django</span>
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Docker</span>
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">AWS EC2</span>
                         </div>
-                        
                         <a href="#" class="inline-flex items-center text-mutedBlue font-semibold hover:text-deepBlue text-sm transition-colors">
                             View Repository <i class="fas fa-arrow-right ml-2 text-xs"></i>
                         </a>
                     </div>
                 </div>
 
-                <!-- Project Card 3 -->
                 <div class="bg-paperWhite rounded-xl overflow-hidden shadow-soft group hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col reveal delay-300">
                     <div class="bg-gray-200 h-6 flex items-center gap-1 px-3 border-b border-gray-300">
                         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
@@ -433,17 +253,14 @@
                         <i class="fas fa-mobile-alt text-6xl text-white/40"></i>
                          <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                     </div>
-                    
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-bold text-deepBlue mb-2">HealthTrack Mobile App</h3>
                         <p class="text-gray-600 text-sm mb-4 flex-1">Cross-platform application for tracking vital health metrics with local-first architecture.</p>
-                        
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">React Native</span>
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Firebase</span>
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Redux</span>
                         </div>
-                        
                         <a href="#" class="inline-flex items-center text-mutedBlue font-semibold hover:text-deepBlue text-sm transition-colors">
                             View Project <i class="fas fa-arrow-right ml-2 text-xs"></i>
                         </a>
@@ -454,13 +271,10 @@
         </div>
     </section>
 
-    <!-- Achievements Section -->
     <section id="achievements" class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 class="text-3xl md:text-4xl font-bold text-deepBlue text-center mb-16 reveal">Milestones & Experience</h2>
-        
         <div class="relative border-l-2 border-mutedBlue/30 ml-4 md:ml-6 space-y-12">
             
-            <!-- Milestone 1 -->
             <div class="relative pl-8 md:pl-12 reveal delay-100">
                 <div class="absolute -left-[9px] top-0 bg-warmLight border-2 border-mutedBlue rounded-full p-1 text-mutedBlue">
                     <div class="w-2 h-2 bg-mutedBlue rounded-full"></div>
@@ -472,7 +286,6 @@
                 <p class="text-gray-600">Leading a team of 5 developers in re-architecting legacy backend systems. Improved API response times by 40% through aggressive caching strategies.</p>
             </div>
 
-            <!-- Milestone 2 -->
             <div class="relative pl-8 md:pl-12 reveal delay-200">
                 <div class="absolute -left-[9px] top-0 bg-warmLight border-2 border-mutedBlue rounded-full p-1 text-mutedBlue">
                     <div class="w-2 h-2 bg-mutedBlue rounded-full"></div>
@@ -484,7 +297,6 @@
                 <p class="text-gray-600">Awarded 1st place out of 500+ participants for building an accessibility tool using Computer Vision and Natural Language Processing.</p>
             </div>
 
-             <!-- Milestone 3 -->
              <div class="relative pl-8 md:pl-12 reveal delay-300">
                 <div class="absolute -left-[9px] top-0 bg-warmLight border-2 border-mutedBlue rounded-full p-1 text-mutedBlue">
                     <div class="w-2 h-2 bg-mutedBlue rounded-full"></div>
@@ -499,14 +311,12 @@
         </div>
     </section>
 
-    <!-- Education Section -->
     <section id="education" class="py-20 bg-paperWhite border-y border-gray-100">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
              <h2 class="text-3xl md:text-4xl font-bold text-deepBlue text-center mb-4 reveal">Education</h2>
              <h3 class="text-deepBlue text-center reveal mb-10">Click to view certificate</h3>
              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 
-                <!-- Education Item 1 -->
                 <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow reveal delay-100">
                     <div class="w-12 h-12 bg-warmLight rounded-full flex items-center justify-center text-deepBlue mb-4">
                         <i class="fas fa-graduation-cap text-xl"></i>
@@ -516,7 +326,6 @@
                     <div class="mt-4 inline-block bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-semibold">2023 - 2028</div>
                 </div>
 
-                <!-- Education Item 2 -->
                 <div class="bg-white p-8 rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition-shadow reveal delay-200">
                     <div class="w-12 h-12 bg-warmLight rounded-full flex items-center justify-center text-deepBlue mb-4">
                         <i class="fas fa-certificate text-xl"></i>
@@ -530,7 +339,6 @@
         </div>
     </section>
 
-    <!-- Blog Section -->
     <section id="blog" class="py-20 bg-white/50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-end mb-12 reveal">
@@ -543,7 +351,6 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 
-                <!-- Blog Card 1 -->
                 <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-100">
                     <div class="flex justify-between items-start mb-4">
                         <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">Architecture</span>
@@ -556,7 +363,6 @@
                     <a href="#" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors">Read More &rarr;</a>
                 </article>
 
-                <!-- Blog Card 2 -->
                 <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-200">
                     <div class="flex justify-between items-start mb-4">
                         <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">DevOps</span>
@@ -569,7 +375,6 @@
                     <a href="#" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors">Read More &rarr;</a>
                 </article>
 
-                 <!-- Blog Card 3 -->
                  <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-300">
                     <div class="flex justify-between items-start mb-4">
                         <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">Frontend</span>
@@ -582,8 +387,7 @@
                     <a href="#" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors">Read More &rarr;</a>
                 </article>
 
-                <!-- Blog Card 4 (Mobile only view all link usually, but here it's a 4th card) -->
-                 <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-300">
+                <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-300">
                     <div class="flex justify-between items-start mb-4">
                         <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">Career</span>
                         <span class="text-xs text-gray-400">6 min read</span>
@@ -603,7 +407,6 @@
         </div>
     </section>
 
-    <!-- Footer / Contact -->
     <footer id="contact" class="bg-deepBlue text-white pt-20 pb-10">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-gray-700 pb-12">
@@ -629,191 +432,24 @@
     </footer>
 
     <div id="popupOverlay" class="popup-overlay hidden fixed top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center z-50">
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-        <script type="text/javascript">
-        (function(){
-            emailjs.init("bVE4OU2OXh9_4SfCN");
-        })();
-        </script>
         <div class="popup-content">
             <form id="contactForm" class="hidden relative slide-up space-y-4 w-4/5 max-w-md mx-auto p-4 pt-8 border-2 border-paperWhite rounded-lg bg-deepBlue">
                 <span type="button" id="closePopup" class="close-btn absolute top-1 right-4 text-2xl cursor-pointer text-paperWhite">&times;</span>
-                <!-- <input type="hidden" name="to" value="ekomzwatt@gmail.com"> -->
                 <input type="hidden" name="time" id="timeInput">
                 <input type="text" placeholder="Your Name" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-1.5 sm:p-2 mt-20" required="" name="user_name">
                 <input type="email" placeholder="Your Email" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-1.5 sm:p-2" required="" name="user_email">
                 <textarea name="message" placeholder="Your Message" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-1.5 sm:p-2" rows="5" required=""></textarea>
-                <button id="sendBtn" class="transition-transform transition-colors duration-300 ease-out cursor-pointer items-center ml-auto flex gap-2 shadow-md rounded-full px-3 py-1 text-gray-300 hover:bg-paperWhite hover:text-deepBlue transition-colors border-2 border-gray-300" style="transform:translate(0, 0) scale(1)">
+                <button id="sendBtn" class="transition-transform transition-colors duration-300 ease-out cursor-pointer items-center ml-auto flex gap-2 shadow-md rounded-full px-3 py-1 text-gray-300 hover:bg-paperWhite hover:text-deepBlue transition-colors border-2 border-gray-300">
                     <p class="text-sm">Send</p> 
                     <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send" aria-hidden="true">
-                        <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z">
-                        </path>
-                        <path d="m21.854 2.147-10.94 10.939">
-                        </path>
+                        <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
+                        <path d="m21.854 2.147-10.94 10.939"></path>
                     </svg>
                 </button>
             </form>
         </div>
-
     </div>
-
-
-    <script>
-    // --- Mobile Menu Logic ---
-    const btn = document.getElementById('mobile-menu-btn');
-    const menu = document.getElementById('mobile-menu');
-    const closeBtn = document.getElementById('close-menu-btn');
-    const links = document.querySelectorAll('.mobile-link');
-
-    function toggleMenu() {
-        menu.classList.toggle('translate-x-full');
-        document.body.classList.toggle('overflow-hidden');
-    }
-
-    if(btn) btn.addEventListener('click', toggleMenu);
-    if(closeBtn) closeBtn.addEventListener('click', toggleMenu);
     
-    links.forEach(link => {
-        link.addEventListener('click', toggleMenu);
-    });
-
-    // --- Navbar Shadow Logic ---
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 10) {
-            nav.classList.add('shadow-lg');
-        } else {
-            nav.classList.remove('shadow-lg');
-        }
-    });
-
-    // --- Scroll Animations ---
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('active');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal, .reveal-right').forEach(el => {
-        observer.observe(el);
-    });
-
-    // --- CONTACT FORM LOGIC ---
-
-    // 1. Cache DOM elements
-    const contactBtn = document.getElementById('contactBtn');
-    const contactForm = document.getElementById('contactForm');
-    const sendBtn = document.getElementById('sendBtn');
-    const popupOverlay = document.getElementById('popupOverlay');
-    const closePopup = document.getElementById('closePopup');
-    
-    // 2. THIS WAS MISSING: Define timeInput
-    const timeInput = document.getElementById('timeInput'); 
-
-    // Helper: Close Popup Smoothly
-    const closePopupSmoothly = () => {
-        contactForm.classList.add('slide-down');
-        setTimeout(() => {
-            contactForm.classList.add('hidden');
-            popupOverlay.classList.add('hidden');
-            contactForm.classList.remove('slide-down');
-        }, 300);
-    };
-
-    // Event Listeners for Opening/Closing
-    if(contactBtn) {
-        contactBtn.addEventListener('click', () => {
-            contactForm.classList.remove('hidden');
-            popupOverlay.classList.remove('hidden');
-        });
-    }
-
-    if(closePopup) closePopup.addEventListener('click', closePopupSmoothly);
-
-    if(popupOverlay) {
-        popupOverlay.addEventListener('click', (e) => {
-            if (e.target === popupOverlay) {
-                closePopupSmoothly();
-            }
-        });
-    }
-
-    // --- THE SEND BUTTON LOGIC ---
-    if(sendBtn) {
-        sendBtn.addEventListener('click', (e) => {
-            e.preventDefault(); // Stop page reload
-            console.log("Send button clicked..."); // Debug 1
-
-            // 1. Capture Current Date & Time
-            const now = new Date();
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric', 
-                hour: '2-digit', 
-                minute: '2-digit' 
-            };
-            
-            // This line was crashing before because timeInput wasn't defined
-            if(timeInput) {
-                timeInput.value = now.toLocaleDateString('en-US', options);
-            }
-
-            // 2. Change Button Text (Feedback)
-            const originalBtnContent = sendBtn.innerHTML;
-            sendBtn.textContent = "Sending...";
-
-            // 3. Send via EmailJS
-            console.log("Attempting to send email..."); // Debug 2
-            
-            // NOTE: Ensure these IDs match your EmailJS Dashboard exactly
-            emailjs.sendForm('service_ah7qnm9', 'template_5droz1e', '#contactForm')
-                .then(() => {
-                    console.log("SUCCESS!"); // Debug 3
-                    
-                    // Success UI Updates
-                    closePopupSmoothly();
-                    contactForm.reset(); 
-
-                    // Update Main CTA Button
-                    if(contactBtn) {
-                        contactBtn.textContent = "Sent"; 
-                        contactBtn.classList.add('flashing');
-
-                        setTimeout(() => {
-                            contactBtn.textContent = "I'll be in Touch Soon";
-                            contactBtn.classList.remove('flashing');
-                        }, 2000);
-
-                        setTimeout(() => {
-                            contactBtn.textContent = "Get in Touch";
-                        }, 5000);
-                    }
-
-                    // Restore inner form button
-                    sendBtn.innerHTML = originalBtnContent;
-
-                }, (error) => {
-                    console.error("FAILED...", error); // Debug 4
-                    alert("Failed to send. Check console for details.");
-                    
-                    // Reset button text
-                    setTimeout(() => {
-                        sendBtn.innerHTML = originalBtnContent;
-                    }, 2000);
-                });
-        });
-    }
-</script>
+    <script src="js/script.js" defer></script>
 </body>
 </html>

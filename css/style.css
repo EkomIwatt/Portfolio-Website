@@ -1,0 +1,131 @@
+/* Custom scrollbar to match theme */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #EAE0CF;
+}
+::-webkit-scrollbar-thumb {
+    background: #547792;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #213448;
+}
+
+/* Scroll Reveal Animation */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Scroll Reveal Right Animation */
+.reveal-right {
+    opacity: 0;
+    transform: translateX(-40px); /* start slightly left */
+    
+    /* We list different speeds for different properties */
+    transition: 
+        opacity 0.8s ease-out,
+        transform 0.8s ease-out,
+        border-color 0.1s ease-in-out,
+        background-color 0.1s ease-in-out,
+        color 0.1s ease-in-out;
+}
+
+.reveal-right.active {
+    opacity: 1;
+    transform: translateX(0); /* move right into position */
+}
+
+@keyframes flash-effect {
+    0%, 100% { background-color: inherit; }
+    50% { background-color: #F9F7F2; }
+}
+
+.flashing {
+    animation: flash-effect 0.5s ease-in-out 2;
+}
+
+@keyframes slideUpFade {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.slide-up {
+    animation: slideUpFade 0.4s ease-out forwards;
+}
+
+@keyframes slideDownFade {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(50px); /* Move down */
+        opacity: 0;                 /* Fade out */
+    }
+}
+
+.slide-down {
+    animation: slideDownFade 0.3s ease-in forwards;
+}
+
+.btn-active {
+    background-color: #F9F7F2;
+}
+
+#background::before {
+    content: "";
+    background-image: url('../assets/image1.jpg'); /* Updated path for assets folder */
+    background-size: cover;
+    position: absolute;     
+    top: 0;
+    left: 100px;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+}
+
+/* The rotating shimmering gradient */
+.shimmer-bg {
+    background: linear-gradient(
+    to right, 
+    #fff 20%, 
+    #fff 40%, 
+    #94B4C1 50%, 
+    #547792 55%, 
+    #fff 70%, 
+    #fff 100%
+    );
+    background-size: 200% auto;
+    animation: shine-rotate 3s linear infinite;
+}
+
+@keyframes shine-rotate {
+    0% {
+    background-position: 200% center;
+    transform: rotate(0deg);
+    }
+    100% {
+    background-position: 0% center;
+    transform: rotate(360deg); 
+    }
+}
+
+/* Staggered delays for child elements if needed */
+.delay-100 { transition-delay: 100ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
