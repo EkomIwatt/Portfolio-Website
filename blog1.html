@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building in Public: My Portfolio Journey</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deepBlue: '#213448',
+                        mutedBlue: '#547792',
+                        accentBlue: '#94B4C1',
+                        warmLight: '#EAE0CF',
+                        paperWhite: '#F9F7F2',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code { font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+
+<body class="bg-warmLight/40 text-deepBlue leading-relaxed selection:bg-accentBlue selection:text-paperWhite">
+
+    <nav class="w-full py-6 px-4 md:px-12 flex justify-between items-center bg-deepBlue text-warmLight">
+        <div class="font-bold text-xl tracking-wider">Ekom's Blog</div>
+        <a href="index.html" class="hover:text-accentBlue transition-colors duration-300">← Back to Home</a>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-6 py-12 md:py-20">
+        
+        <header class="mb-12 border-b-2 border-warmLight pb-8">
+            <span class="bg-mutedBlue text-paperWhite text-xs font-mono px-2 py-1 rounded mb-4 inline-block">Blue, Cream, and Code</span>
+            <h1 class="text-3xl md:text-5xl font-bold mb-4 text-deepBlue">Hello, World !</h1>
+            <div class="flex items-center gap-2 text-sm text-gray-600 font-mono">
+                <span>January 23, 2026</span> • <span>5 min read</span>
+            </div>
+        </header>
+
+        <article class="prose prose-lg prose-blue max-w-none text-deepBlue/90">
+            
+            <p class="text-xl font-medium mb-8">
+                Welcome to my corner of the internet 😇
+            </p>
+
+            <p class="mb-6">
+                As a third-year Computer Engineering student at Unilag, I spend a lot of time thinking about code, circuits, and systems. But recently, I’ve been thinking about something else: <strong>identity</strong>. How do I represent who I am and what I can do?
+            </p>
+
+            <p class="mb-6">
+                I set a goal for myself to build a CV I’m proud of by the end of 2026. But a CV felt like only a polite handshake. I needed something dynamic; a living, breathing place that could grow alongside my skills.
+            </p>
+
+            <blockquote class="border-l-4 border-mutedBlue pl-4 italic my-8 bg-warmLight/30 py-4 pr-4 rounded-r">
+                "So, on the 2nd of January, I set a strict personal deadline: <strong>January 15, 2026</strong>. I had to design, build, and deploy a portfolio website."
+            </blockquote>
+
+            <p class="mb-12">Here is the story of how it came together.</p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">1. The Conception: "Techy, but Warm"</h2>
+            <p class="mb-6">
+                I didn't want a website that looked like a generic template. I wanted it to feel approachable yet professional—a site that says “hire me” without sounding like a corporate robot.
+            </p>
+            <p class="mb-6">
+                I settled on a specific design philosophy: <strong>Simple, tech-oriented, yet warm.</strong> Instead of the standard stark black and white, I visited <a href="https://colorhunt.co/" class="text-mutedBlue underline hover:text-deepBlue">Color Hunt</a> and found a palette that I really liked for its calmness:
+            </p>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-2 my-8 font-mono text-xs text-center font-bold">
+                <div class="p-4 rounded shadow-sm text-white" style="background-color: #213448;">#213448<br>Deep Blue</div>
+                <div class="p-4 rounded shadow-sm text-white" style="background-color: #547792;">#547792<br>Muted Blue</div>
+                <div class="p-4 rounded shadow-sm text-deepBlue" style="background-color: #94B4C1;">#94B4C1<br>Accent Blue</div>
+                <div class="p-4 rounded shadow-sm text-deepBlue" style="background-color: #EAE0CF;">#EAE0CF<br>Warm Light</div>
+                <div class="p-4 rounded shadow-sm text-deepBlue border border-gray-200" style="background-color: #F9F7F2;">#F9F7F2<br>Paper White</div>
+            </div>
+
+            <p class="mb-6">
+                Then I began building and implementing ideas because I wasn't even certain what exactly I wanted to do.
+            </p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">2. The Stack</h2>
+            <p class="mb-4">
+                I wanted the user experience to be clean, so I decided to stick to the fundamentals to ensure I had full control over the performance and layout.
+            </p>
+            <ul class="list-disc list-inside mb-6 space-y-2 ml-4">
+                <li><strong>HTML5 & CSS3:</strong> For the structure and styling.</li>
+                <li><strong>JavaScript:</strong> To bring the interactivity to life.</li>
+            </ul>
+            <p class="mb-6">
+                Then I actually stumbled upon <strong>Tailwind CSS</strong> for the first time. I know I've seen it in code a couple of times, but I never realised it was literally CSS in HTML. Anyway, I fell in love with it in a day. It really sped up my styling process and helped maintain consistency and responsiveness.
+            </p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">3. The Challenges (It wasn't all smooth sailing)</h2>
+            <p class="mb-6">No project is complete without a few headaches. Two specific challenges stood out during the build:</p>
+            
+            <div class="space-y-6">
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-red-400">
+                    <h3 class="font-bold text-lg mb-2">The Mobile Background</h3>
+                    <p>I spent a significant amount of time wrestling with the hero section. On a desktop, the background image looked great. On mobile? Not so much. It clashed with the text and made things unreadable. I eventually had to pivot, stripping the background image on smaller screens and using a placeholder for the image—kinda like a profile picture. It was a lesson in "function over form."</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-yellow-400">
+                    <h3 class="font-bold text-lg mb-2">The Contact Form</h3>
+                    <p>I wanted people to be able to reach me directly without opening their email client. Integrating <strong>EmailJS</strong> seemed straightforward at first, but that wasn't the case when I got into it. I had to style, then debug the form receiving logic. Honestly, it took more coffee than I’d like to admit. Getting that first successful test email was a massive relief.</p>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">4. What’s Next?</h2>
+            <p class="mb-6">This website is just the container; now I need to fill it.</p>
+            <p class="mb-6">
+                Overall, I learnt a lot in the process. From GitHub to Tailwind to EmailJS, I now have a ton of new knowledge and discovered tools. Previously, all I did was learn and learn—my siblings say I study too much. But with this journey, I fully realised that I need to stop 'learning' and start 'doing'.
+            </p>
+            <p class="mb-6">
+                Over the coming months (and years), I’ll be documenting my journey here; from my experiments with <strong>Arduino and embedded systems</strong> to my deep dives into <strong>C++ and Rust</strong>. And beyond code and tech, I'll write about just about anything that comes to mind on my Blog, so stay tuned!
+            </p>
+            <p class="mb-12 font-medium">
+                If you’re reading this, thanks for stopping by. The site is live, the code is shipped, and I'll keep making adjustments and additions. I’m ready for the next bug!
+            </p>
+
+        </article>
+
+        <hr class="border-warmLight my-12">
+        
+        <div class="bg-warmLight/20 p-8 rounded-xl flex flex-col md:flex-row items-center md:items-start gap-6">
+            <div class="w-20 h-20 bg-deepBlue rounded-full flex items-center justify-center text-warmLight text-2xl font-bold shrink-0">
+                ME
+            </div>
+            
+            <div>
+                <h3 class="font-bold text-xl text-deepBlue mb-2">About the Author</h3>
+                <p class="text-sm leading-relaxed mb-4">
+                    I'm a 3rd-year Computer Engineering student at Unilag and the Financial Secretary of SEES, Unilag. I bridge the gap between hardware and software, specializing in <strong>C++</strong>, <strong>Embedded Systems</strong>, and Web Development.
+                </p>
+                <p class="text-sm leading-relaxed mb-4">
+                    Currently, I'm diving into <strong>Rust</strong> and cloud computing while trying to build a CV I'm proud of by the end of 2026. 
+                </p>
+                <p class="text-md font-bold leading-relaxed">
+                    Thanks for stopping by 🩶
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="bg-deepBlue text-warmLight py-8 text-center text-sm font-mono">
+        <p>&copy; 2026. Built with HTML, Tailwind & Coffee.</p>
+    </footer>
+
+</body>
+</html>
