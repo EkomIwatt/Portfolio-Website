@@ -38,8 +38,8 @@
 <body class="bg-warmLight/40 text-deepBlue leading-relaxed selection:bg-accentBlue selection:text-paperWhite">
 
     <nav class="w-full py-6 px-4 md:px-12 flex justify-between items-center bg-deepBlue text-warmLight">
-        <div class="font-bold text-xl tracking-wider">Ekom's Blog</div>
-        <a href="index.html" class="hover:text-accentBlue transition-colors duration-300">← Back to Home</a>
+        <div class="font-bold text-xl tracking-wider md:text-2xl ml-12">Ekom's Blog</div>
+        <a href="index.html" class="hover:text-accentBlue transition-colors duration-300 text-sm md:text-lg">← Back to Home</a>
     </nav>
 
     <main class="max-w-3xl mx-auto px-6 py-12 md:py-20">
@@ -156,8 +156,13 @@
 
     </main>
 
-    <footer class="bg-deepBlue text-warmLight py-8 text-center text-sm font-mono">
-        <p>&copy; 2026. Built with HTML, Tailwind & Coffee.</p>
+    <footer class="flex flex-wrap justify-around items-center bg-deepBlue text-warmLight py-8 text-center text-sm font-mono">
+        <p clas>&copy; 2026. Built with HTML, Tailwind & Coffee.</p>
+        <a href="index.html#contact" class="">
+            <div id="contactBtn" class="float-right mt-8 md:mt-0 bg-accentBlue text-deepBlue px-4 md:px-8 py-2 md:py-3 mx-auto sm:mx-0 rounded-md font-bold hover:bg-paperWhite transition-colors float-right">
+                    Get in Touch
+                </div>
+        </a>
     </footer>
 
 </body>
