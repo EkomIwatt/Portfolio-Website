@@ -65,9 +65,10 @@
         <div class="mx-auto md:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex-shrink-0 flex items-center ml-8">
-                    <span class="text-white text-xl font-bold tracking-tight">EI<span class="text-accentBlue">.</span></span>
-                    
-
+                    <span class="relative text-white text-xl font-bold tracking-tight">
+                        <canvas id="logo-dot" class="absolute pointer-events-none" style="top: -4px; left: -8px;" width="80" height="46"></canvas>
+                        <span class="relative z-10">E I</span>
+                    </span>
                 </div>
 
                 <div class="hidden md:flex space-x-8 items-center">
@@ -87,7 +88,7 @@
                         Blog
                         <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accentBlue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center"></span>
                     </a>
-                    <a href="#contact" class="bg-accentBlue text-deepBlue px-5 py-2 rounded-md text-sm font-semibold hover:bg-paperWhite transition-all transform hover:-translate-y-0.5">Contact</a>
+                    <a href="#contact" class="bg-accentBlue text-deepBlue px-5 py-2 rounded-md text-sm font-semibold hover:bg-paperWhite transition-all transform hover:-translate-y-0.5">Hire Me</a>
                 </div>
 
                 <div class="md:hidden flex items-center">
@@ -107,7 +108,7 @@
             <a href="#achievements" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-85 hover:border-2 hover:border-white">Achievements</a>
             <a href="#education" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-80 hover:border-2 hover:border-white">Education</a>
             <a href="#blog" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-75 hover:border-2 hover:border-white">Blog</a>
-            <a href="#contact" class="mt-1 mx-1 bg-accentBlue text-deepBlue py-4 rounded-lg text-center font-bold text-xl mobile-link border-2 border-deepBlue hover:bg-paperWhite transition-all transform hover:-translate-y-0.5">Contact Me</a>
+            <a href="#contact" class="mt-1 mx-1 bg-accentBlue text-deepBlue py-4 rounded-lg text-center font-bold text-xl mobile-link border-2 border-deepBlue hover:bg-paperWhite transition-all transform hover:-translate-y-0.5">Hire Me</a>
         </div>
     </nav>
     
@@ -116,6 +117,15 @@
         <section id="home" class="relative bg-transparent z-10 pt-24 md:pt-32 pb-20 px-4 sm:px-6 lg:px-24 w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
             
             <div class="flex-1 text-center md:text-left group animate-fade-in-up pr-18 pl-2 mb-4">
+                <!-- <div class="flex justify-center md:justify-start mb-4">
+                    <span class="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-1.5 rounded-full text-sm font-medium border border-green-200">
+                        <span class="relative flex h-2.5 w-2.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                        </span>
+                        Open to Work
+                    </span>
+                </div> -->
                 <div class="flex flex-row relative items-center shrink-0">
                     <h1 class="z-10 w-3/5 relative text-2xl  sm:text-4xl md:text-6xl font-bold tracking-tight text-deepBlue mt-5">
                         Ekomobong Iwatt <br />
@@ -163,6 +173,7 @@
             </div>
 
             <div class="flex-1 w-full max-w-[500px] md:max-w-[400px] mt-20 animate-float">
+                
                 <div class="bg-[#1E1E1E] rounded-lg shadow-2xl overflow-hidden border border-white/10 transform hover:scale-[1.02] transition-transform duration-500">
                     
                     <div class="bg-[#252526] px-3 py-2 flex items-center gap-1.5">
@@ -583,15 +594,115 @@
         </div>
     </section>
 
-    <footer id="contact" class="bg-deepBlue text-white pt-20 pb-10">
+    <!-- What I've Been Building Section -->
+    <section id="experience" class="py-20 pb-16 bg-paperWhite">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-3xl md:text-4xl font-bold text-deepBlue">What I've Been Building</h2>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">No corporate badge yet, but that means fresh perspective, zero bad habits, and the hunger to prove myself.</p>
+            </div>
+
+            <div class="space-y-8">
+
+                <!-- Experience Item 1 -->
+                <div class="bg-white rounded-xl p-6 md:p-8 border border-gray-100 hover:border-accentBlue/50 transition-all duration-300 shadow-soft reveal-right delay-100">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-deepBlue">Frontend Projects & Self-Directed Learning</h3>
+                            <p class="text-sm text-mutedBlue font-mono mt-1">Independent • 2023 - Present</p>
+                        </div>
+                        <span class="mt-2 sm:mt-0 inline-flex items-center bg-accentBlue/10 text-mutedBlue px-3 py-1 rounded-full text-xs font-semibold">Ongoing</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Built and shipped multiple web projects from scratch, including this portfolio !  Each project pushed me to learn something new: responsive layouts, scroll animations, API integrations, and deployment pipelines. I treat every project like production code.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-gray-100 text-deepBlue px-2.5 py-1 rounded-md font-medium">React</span>
+                        <span class="text-xs bg-gray-100 text-deepBlue px-2.5 py-1 rounded-md font-medium">Tailwind CSS</span>
+                        <span class="text-xs bg-gray-100 text-deepBlue px-2.5 py-1 rounded-md font-medium">JavaScript</span>
+                        <span class="text-xs bg-gray-100 text-deepBlue px-2.5 py-1 rounded-md font-medium">Git & GitHub</span>
+                    </div>
+                </div>
+
+                <!-- Experience Item 2 -->
+                <div class="bg-white rounded-xl p-6 md:p-8 border border-gray-100 hover:border-accentBlue/50 transition-all duration-300 shadow-soft reveal-right delay-200">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-deepBlue">Embedded Systems & Hardware Projects</h3>
+                            <p class="text-sm text-mutedBlue font-mono mt-1">University of Lagos • 2023 - Present</p>
+                        </div>
+                        <span class="mt-2 sm:mt-0 inline-flex items-center bg-accentBlue/10 text-mutedBlue px-3 py-1 rounded-full text-xs font-semibold">Academic</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Hands-on work with AVR microcontrollers, circuit design, and low-level C++ programming. This is where I learned to think about performance, memory, and constraints; skills that make me a better frontend developer too.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-gray-100 text-deepBlue px-2.5 py-1 rounded-md font-medium">C++</span>
+                        <span class="text-xs bg-gray-100 text-deepBlue px-2.5 py-1 rounded-md font-medium">AVR</span>
+                        <span class="text-xs bg-gray-100 text-deepBlue px-2.5 py-1 rounded-md font-medium">MATLAB</span>
+                        <span class="text-xs bg-gray-100 text-deepBlue px-2.5 py-1 rounded-md font-medium">Circuit Design</span>
+                    </div>
+                </div>
+
+                <!-- Experience Item 3 -->
+                <div class="bg-white rounded-xl p-6 md:p-8 border border-gray-100 hover:border-accentBlue/50 transition-all duration-300 shadow-soft reveal-right delay-300">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-deepBlue">Open Source & Community</h3>
+                            <p class="text-sm text-mutedBlue font-mono mt-1">GitHub & IEEE • 2024 - Present</p>
+                        </div>
+                        <span class="mt-2 sm:mt-0 inline-flex items-center bg-accentBlue/10 text-mutedBlue px-3 py-1 rounded-full text-xs font-semibold">Community</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        Contributing to open source, attending technical workshops through IEEE, and constantly learning from the developer community. I document my journey through my blog because I believe sharing knowledge is part of growing.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="text-xs bg-gray-100 text-deepBlue px-2.5 py-1 rounded-md font-medium">Open Source</span>
+                        <span class="text-xs bg-gray-100 text-deepBlue px-2.5 py-1 rounded-md font-medium">Technical Writing</span>
+                        <span class="text-xs bg-gray-100 text-deepBlue px-2.5 py-1 rounded-md font-medium">IEEE</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Why Work With Me -->
+            <div class="mt-16 bg-deepBlue rounded-xl p-8 md:p-10 text-white reveal">
+                <h3 class="text-2xl font-bold mb-6">Why work with me?</h3>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div>
+                        <div class="text-accentBlue text-2xl mb-2"><i class="fas fa-bolt"></i></div>
+                        <h4 class="font-semibold mb-1">Fast Learner</h4>
+                        <p class="text-gray-300 text-sm">I pick up new tools and frameworks quickly — and I actually enjoy the process.</p>
+                    </div>
+                    <div>
+                        <div class="text-accentBlue text-2xl mb-2"><i class="fas fa-code"></i></div>
+                        <h4 class="font-semibold mb-1">Clean Code</h4>
+                        <p class="text-gray-300 text-sm">I write readable, well-structured code because I know someone else will read it.</p>
+                    </div>
+                    <div>
+                        <div class="text-accentBlue text-2xl mb-2"><i class="fas fa-comments"></i></div>
+                        <h4 class="font-semibold mb-1">Great Communicator</h4>
+                        <p class="text-gray-300 text-sm">I ask good questions, give clear updates, and I'm not afraid to say "I don't know yet."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-deepBlue text-white pt-20 pb-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-6 border-b border-gray-700 pb-12">
                 <div class="mx-auto sm:mx-0">
-                    <h2 class="text-2xl sm:text-3xl font-bold mb-2">Let's build something great.</h2>
-                    <p class="text-gray-400 text-sm sm:text-lg">Open for opportunities and collaborations.</p>
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-2">Looking for a frontend developer?</h2>
+                    <p class="text-gray-400 text-sm sm:text-lg">I've been building on my own, and I'm ready to build for you.</p>
                 </div>
-                <div id="contactBtn" class="mt-8 md:mt-0 bg-accentBlue text-deepBlue px-4 md:px-8 py-2 md:py-3 mx-auto sm:mx-0 rounded-md font-bold hover:bg-paperWhite transition-colors">
-                    Get in Touch
+                <div class="mt-8 md:mt-0 flex flex-col sm:flex-row gap-3 mx-auto sm:mx-0">
+                    <div id="contactBtn" class="bg-accentBlue text-deepBlue px-4 md:px-8 py-2 md:py-3 rounded-md font-bold hover:bg-paperWhite transition-colors cursor-pointer text-center">
+                        Get in Touch
+                    </div>
+                    <a href="cv.html" class="border-2 border-gray-500 text-gray-300 px-4 md:px-8 py-2 md:py-3 rounded-md font-bold hover:border-white hover:text-white transition-colors text-center">
+                        View Resume
+                    </a>
                 </div>
             </div>
             
@@ -602,7 +713,7 @@
                     <a href="https://x.com/yr_Ekom" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-twitter text-xl p-1 rounded-md m-1"></i><p class="">Twitter</p></a>
                     <a href="https://wa.me/+2349122141156" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-whatsapp text-xl p-1 rounded-md m-1"></i><p class="">WhatsApp</p></a>
                 </div>
-                <p class="pt-4">&copy; 2024 Ekomobong Iwatt. All rights reserved.</p>
+                <p class="pt-4">&copy; 2025 Ekomobong Iwatt. All rights reserved.</p>
             </div>
         </div>
     </footer>

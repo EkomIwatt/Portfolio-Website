@@ -166,4 +166,92 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
         });
     }
+
+    // --- Logo Dot Animation ---
+    const logoCanvas = document.getElementById('logo-dot');
+    if (logoCanvas) {
+        const logoCtx = logoCanvas.getContext('2d');
+
+        const dotR = 3;
+        const left = 4;
+        const right = 34;
+        const top_ = 5;
+        const bottom_ = 30;
+        const groundY = bottom_;
+
+        const upDur = 500;
+        const acrossDur = 800;
+        const fallDur = 300;
+        const bounceDur = 1000;
+        const pauseDur = 700;
+        const rollBackDur = 1000;
+        const totalDur = upDur + acrossDur + fallDur + bounceDur + pauseDur + rollBackDur;
+
+        function easeInOut(t) { return t < 0.5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2; }
+        function easeIn(t) { return t * t; }
+        function easeOut(t) { return 1 - (1-t)*(1-t); }
+
+        function bounce(t) {
+            const segs = [
+                { dur: 0.38, h: 14 },
+                { dur: 0.32, h: 7 },
+                { dur: 0.20, h: 3 },
+                { dur: 0.10, h: 1 }
+            ];
+            let c = 0;
+            for (let i = 0; i < segs.length; i++) {
+                if (t < c + segs[i].dur) {
+                    const bt = (t - c) / segs[i].dur;
+                    return segs[i].h * 4 * bt * (1 - bt);
+                }
+                c += segs[i].dur;
+            }
+            return 0;
+        }
+
+        let logoStartTime = null;
+
+        function drawLogoDot(timestamp) {
+            if (!logoStartTime) logoStartTime = timestamp;
+            const elapsed = (timestamp - logoStartTime) % totalDur;
+
+            logoCtx.clearRect(0, 0, logoCanvas.width, logoCanvas.height);
+            logoCtx.fillStyle = '#94B4C1';
+
+            let x, y;
+
+            if (elapsed < upDur) {
+                const t = easeInOut(elapsed / upDur);
+                x = left;
+                y = bottom_ + (top_ - bottom_) * t;
+            } else if (elapsed < upDur + acrossDur) {
+                const t = easeInOut((elapsed - upDur) / acrossDur);
+                x = left + (right - left) * t;
+                y = top_;
+            } else if (elapsed < upDur + acrossDur + fallDur) {
+                const t = easeIn((elapsed - upDur - acrossDur) / fallDur);
+                x = right;
+                y = top_ + (bottom_ - top_) * t;
+            } else if (elapsed < upDur + acrossDur + fallDur + bounceDur) {
+                const t = (elapsed - upDur - acrossDur - fallDur) / bounceDur;
+                x = right + easeOut(t) * 28;
+                y = groundY - bounce(t);
+            } else if (elapsed < upDur + acrossDur + fallDur + bounceDur + pauseDur) {
+                x = right + 28;
+                y = groundY;
+            } else {
+                const t = easeInOut((elapsed - upDur - acrossDur - fallDur - bounceDur - pauseDur) / rollBackDur);
+                x = (right + 28) + (left - (right + 28)) * t;
+                y = groundY;
+            }
+
+            logoCtx.beginPath();
+            logoCtx.arc(x, y, dotR, 0, Math.PI * 2);
+            logoCtx.fill();
+
+            requestAnimationFrame(drawLogoDot);
+        }
+
+        requestAnimationFrame(drawLogoDot);
+    }
 });
