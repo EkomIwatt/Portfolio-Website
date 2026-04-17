@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pit Wall: Surviving the IES Buildathon</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        deepBlue: '#213448',
+                        mutedBlue: '#547792',
+                        accentBlue: '#94B4C1',
+                        warmLight: '#EAE0CF',
+                        paperWhite: '#F9F7F2',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        code { font-family: 'Fira Code', monospace; }
+        pre code {
+            display: block;
+            background-color: #213448;
+            color: #EAE0CF;
+            padding: 1rem 1.25rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        p code, li code {
+            background-color: rgba(84, 119, 146, 0.15);
+            color: #213448;
+            padding: 0.1rem 0.4rem;
+            border-radius: 0.25rem;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+
+<body class="bg-warmLight/40 text-deepBlue leading-relaxed selection:bg-accentBlue selection:text-paperWhite">
+
+    <nav class="w-full py-6 px-4 md:px-12 flex justify-between items-center bg-deepBlue text-warmLight">
+        <div class="font-bold text-xl tracking-wider md:text-2xl ml-12">Ekom's Blog</div>
+        <a href="index.html" class="hover:text-accentBlue transition-colors duration-300 text-sm md:text-lg">← Back to Home</a>
+    </nav>
+
+    <main class="max-w-3xl mx-auto px-6 py-12 md:py-20">
+        
+        <header class="mb-12 border-b-2 border-warmLight pb-8">
+            <span class="bg-mutedBlue text-paperWhite text-xs font-mono px-2 py-1 rounded mb-4 inline-block">Solder, Sparks, and Sockets</span>
+            <h1 class="text-3xl md:text-5xl font-bold mb-4 text-deepBlue">The IES Buildathon</h1>
+            <div class="flex items-center gap-2 text-sm text-gray-600 font-mono">
+                <span>April 17, 2026</span> • <span>15 min read</span>
+            </div>
+        </header>
+
+        <article class="prose prose-lg prose-blue max-w-none text-deepBlue/90">
+            
+            <p class="text-xl font-medium mb-8">
+                24 hours. One ESP32. Two teammates. A motor driver that betrayed us halfway through. 🏎️💨
+            </p>
+
+            <p class="mb-6">
+                From the 13th to the 14th of April, I participated in the IEEE IES (Industrial Electronics Society) Buildathon at Unilag with my team — <strong>Jubril Dokun</strong>, <strong>Abdullah</strong>, and myself — competing as <strong>Team Rodney</strong>. 10am to 10am. No theme, no prompt, just <em>build something</em>.
+            </p>
+
+            <p class="mb-6">
+                What we ended up shipping was <strong>Pit Wall</strong>: a phone-controlled dragster where players connect their smartphones to an ESP32's Wi-Fi network, compete in browser-based minigames (Simon, Reaction Tug-of-War, and Wordle), and their digital victories translate directly into the physical movement of a 2-wheel-drive robotic car. The finish line is detected autonomously by an IR sensor, and the whole thing runs on a single microcontroller with no internet required.
+            </p>
+
+            <blockquote class="border-l-4 border-mutedBlue pl-4 italic my-8 bg-warmLight/30 py-4 pr-4 rounded-r">
+                "What started as two cars and two dedicated controllers became one car and two phones — and honestly, the constraint made it better."
+            </blockquote>
+
+            <p class="mb-12">Here's the story of how it came together, everything we broke along the way, and what I learned leading my first hackathon team.</p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">1. The Original Plan (That Didn't Survive Contact With Reality)</h2>
+            <p class="mb-6">
+                Our initial vision was ambitious: <strong>two 3D-printed dragsters</strong>, each with its own dedicated ESP32 microcontroller, racing head-to-head on a straight track. Two more ESP32s would act as dedicated physical controllers — think tiny handheld game pads with buttons. It would feel like a proper arcade drag race.
+            </p>
+            <p class="mb-6">That vision died quickly.</p>
+            <p class="mb-6">
+                Hardware availability at a student hackathon is a brutal constraint. We could only get our hands on <strong>two ESP32 dev boards</strong> total, not the four our original architecture demanded. And then, after some initial testing, I discovered that one of those two boards wasn't working properly — I suspect the USB input port was bad, because it refused to stay in a stable flash state no matter what I tried. That left us with exactly <strong>one functional ESP32</strong>.
+            </p>
+            <p class="mb-6">
+                One microcontroller. One car. So what do we do about the controllers?
+            </p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">2. The Pivot: Phones as Controllers</h2>
+            <p class="mb-6">
+                Instead of burning more time hunting for hardware, we flipped the architecture. What if the ESP32 itself became the server, and everyone's <strong>smartphone</strong> became the controller?
+            </p>
+            <p class="mb-6">
+                It sounded almost too convenient, but the ESP32 is genuinely capable of this. In <strong>SoftAP mode</strong>, it hosts its own Wi-Fi access point. With the <strong>ESPAsyncWebServer</strong> library, it can serve a full HTML/CSS/JS web app from its flash memory. And with WebSockets, multiple phones can maintain persistent, real-time connections to it simultaneously — no internet, no router, no cloud anything.
+            </p>
+            <p class="mb-4">The moment we committed to this, the whole project got better:</p>
+            <ul class="list-disc list-inside mb-6 space-y-2 ml-4">
+                <li><strong>No hardware limit on players.</strong> Any phone with a browser can join.</li>
+                <li><strong>Infinite UI flexibility.</strong> We could design game interfaces in HTML/CSS rather than wire up LED matrices or tiny OLEDs.</li>
+                <li><strong>Easier demos.</strong> Judges could just pull out their own phones, scan the network, and play.</li>
+                <li><strong>Scalable game modes.</strong> Adding a new minigame became a matter of writing HTML and a WebSocket handler, not soldering new components.</li>
+            </ul>
+            <p class="mb-6">
+                Constraints forcing better design is a recurring theme in engineering, and this was my clearest taste of it yet.
+            </p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">3. The Stack</h2>
+            <p class="mb-6">
+                Since we were leaning hard into the "embedded system as a web server" pattern, the stack had to support real-time, non-blocking, multi-client behavior on a $5 chip.
+            </p>
+            <ul class="list-disc list-inside mb-6 space-y-2 ml-4">
+                <li><strong>ESP32 Dev Module</strong> running the Arduino framework via <strong>PlatformIO</strong> in VS Code.</li>
+                <li><strong>SoftAP mode</strong> broadcasting the <code>DRAGSTERS</code> SSID.</li>
+                <li><strong>ESPAsyncWebServer + AsyncTCP</strong> for the HTTP + WebSocket layer.</li>
+                <li><strong>SPIFFS</strong> to store the HTML/CSS/JS frontend on the ESP32's flash, served directly to connected phones.</li>
+                <li><strong>L298N dual H-bridge motor driver</strong> controlling two yellow DC gear motors.</li>
+                <li><strong>TCRT5000 IR obstacle sensor</strong> mounted under the chassis for finish line detection.</li>
+                <li><strong>7.4V LiPo battery</strong> powering everything through the L298N's onboard 5V regulator.</li>
+            </ul>
+            <p class="mb-6">
+                One decision I'm particularly proud of was choosing <strong>WebSockets over HTTP polling</strong>. For a game where one player's mistake needs to instantly lock the other player's screen and fire the motors, polling would have added 100–500ms of latency depending on the interval. WebSockets keep a persistent TCP connection open, so the server can push state changes to every connected client the millisecond they happen. In a reaction-based game, that difference isn't cosmetic — it's the game.
+            </p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">4. The Game Modes</h2>
+            <p class="mb-6">
+                We ended up building three distinct game modes, all served from the same lobby screen.
+            </p>
+
+            <h3 class="font-bold text-xl mb-2 mt-6 text-deepBlue">Simon Says</h3>
+            <p class="mb-6">
+                The classic. The ESP32 generates a random color sequence, both phones play it back, and whoever successfully repeats it gets a motor burst pushing the car toward their side. Round length scales up as the game progresses. Satisfying, visual, and the failure condition is binary — you either got it or you didn't.
+            </p>
+
+            <h3 class="font-bold text-xl mb-2 mt-6 text-deepBlue">Reaction Tug-of-War</h3>
+            <p class="mb-6">
+                A random color lights up after a random delay, and the first phone to tap it wins that round. Because the ESP32 is the single source of truth for who tapped first, network jitter between the two phones gets equalized — both messages travel the same short Wi-Fi hop. First to 5 wins.
+            </p>
+
+            <h3 class="font-bold text-xl mb-2 mt-6 text-deepBlue">Wordle (The Pivot-Within-The-Pivot)</h3>
+            <p class="mb-6">
+                This one took a redesign. Our first implementation inched the car forward for every correct letter, thinking more feedback would feel better. In practice it felt like <strong>parallel parking, not a drag race</strong> — the car crept along in tiny twitches and the tension was completely gone. We rewrote the logic so the car stays perfectly still while the player guesses, and the moment the full 5-letter word is cracked, it unleashes a single dramatic motor burst. Completely different energy.
+            </p>
+            <p class="mb-6">
+                We also moved the target word <strong>server-side</strong>. Originally it was hardcoded in the HTML, which meant anyone with DevTools could peek. The ESP32 now picks from a list and only ever sends the result of each guess back to the phone, not the answer itself.
+            </p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">5. The Downs (Where Things Got Painful)</h2>
+            <p class="mb-6">No hardware hackathon is ever smooth. Here are the gremlins that tried to eat us alive.</p>
+            
+            <div class="space-y-6 mb-8">
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-red-400">
+                    <h3 class="font-bold text-lg mb-2">The L298N Meltdown</h3>
+                    <p class="mb-3">Mid-build, after the wiring was done and the code was compiling cleanly, I hit the test button and... nothing. The car just sat there. Both motors locked. No movement, no sound, no smoke — just silent refusal.</p>
+                    <p class="mb-3">I broke out the multimeter. The readings were strange: the voltage between <strong>OUT1 and OUT2 was 0V</strong>, but between <strong>OUT1 and Ground, it was 7.8V</strong>. Normally, an H-bridge applies differential voltage across the motor — one output high, the other low, the difference drives the motor. A 0V differential with 7.8V on both outputs meant the internal H-bridge had <strong>failed closed</strong>, dumping raw battery voltage to both terminals simultaneously. The chip was dead.</p>
+                    <p>Swapping in a replacement L298N got us moving again, but it cost us real debugging time we hadn't budgeted for.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-orange-400">
+                    <h3 class="font-bold text-lg mb-2">The "Identical" Motor Lie</h3>
+                    <p class="mb-3">Once the car was moving, it refused to drive straight. It veered hard to one side, no matter what I did. I knew this was coming in theory — cheap yellow gear motors <em>never</em> spin at identical RPMs because of manufacturing tolerances and internal friction — but seeing it in practice was still jarring.</p>
+                    <p>I tried fixing it in software with differential <strong>PWM</strong>, reducing the duty cycle on the faster motor to balance the speeds. It didn't work. The car kept veering.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-yellow-400">
+                    <h3 class="font-bold text-lg mb-2">The Stall Torque Trap</h3>
+                    <p class="mb-3">I nearly went down a rabbit hole rewriting the PWM logic before I realized the real culprit: the LiPo battery was running low. The L298N has a notorious <strong>~1.5V voltage drop</strong> across its older BJT output transistors. On a low battery (already down to ~6V), the motors were getting barely 4.4V — right at the edge of the <strong>stall torque threshold</strong>, where internal friction nearly equals the motor's output force.</p>
+                    <p class="mb-3">At that voltage, the weaker motor physically <em>couldn't</em> overcome its own friction, and no amount of software trim would fix that. I was trying to tune a knob that wasn't connected to anything. Once we swapped in a fully charged pack, the PWM trim worked beautifully on the first try.</p>
+                    <p class="font-medium">Lesson: <strong>check your power before you debug your code.</strong></p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-blue-400">
+                    <h3 class="font-bold text-lg mb-2">The PlatformIO Library Maze</h3>
+                    <p class="mb-3">PlatformIO's dependency resolver is powerful but occasionally malicious. When I first tried to build the firmware, the compiler threw pages of errors — references to <code>CYW43439</code> Wi-Fi chips, <code>RASPBERRY_PI_PICO_W</code> board requirements, missing headers. None of which should have been anywhere near an ESP32 project.</p>
+                    <p class="mb-3">The issue was that I'd listed my dependencies with generic names — <code>"ESP Async WebServer"</code> and <code>"AsyncTCP"</code> — and PlatformIO had obligingly pulled in a library called <code>AsyncTCP_RP2040W</code>, which is designed for the Raspberry Pi Pico W, a completely different microcontroller. It matched the name well enough that the resolver grabbed it.</p>
+                    <p class="mb-3">The first fix attempt was to pin the libraries to author-prefixed names. That failed too — the registry naming had changed and the new names wouldn't resolve. The <strong>nuclear option</strong> that finally worked was pointing <code>platformio.ini</code> directly at GitHub:</p>
+                    <pre><code>lib_deps =
+    https://github.com/me-no-dev/AsyncTCP.git
+    https://github.com/me-no-dev/ESPAsyncWebServer.git</code></pre>
+                    <p class="mt-3">No registry lookup, no name ambiguity, just raw source. Worked on the first build.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-purple-400">
+                    <h3 class="font-bold text-lg mb-2">The SPIFFS Silent Trap</h3>
+                    <p class="mb-3">During the frantic final hours, I updated the HTML to include the new Wordle UI, hit "Upload," waited for the success message... and nothing changed on the phone. The same old interface loaded.</p>
+                    <p class="mb-3">It took a minute of genuine head-scratching to remember: flashing <code>main.cpp</code> only updates the firmware. The HTML/CSS/JS files live in <strong>SPIFFS</strong> (the ESP32's separate filesystem partition), and SPIFFS has to be built and uploaded <strong>as a completely separate step</strong>:</p>
+                    <pre><code>pio run -t buildfs
+pio run -t uploadfs</code></pre>
+                    <p class="mt-3">In a calm environment this is obvious. At 4am with judges circling, it's the kind of thing that can cost you 20 minutes of "why isn't my code working" before the lightbulb goes off.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-lg shadow-sm border-l-4 border-gray-400">
+                    <h3 class="font-bold text-lg mb-2">The Disappearing COM Port</h3>
+                    <p class="mb-3">At one point the ESP32 just... vanished from my machine. COM port gone, device manager showing nothing. I was pretty sure the board was dead. Turned out a background serial monitor process was hogging the port, and the USB connection needed a hard reset — unplug, kill the stuck processes, hold the BOOT button, re-plug. Back to life.</p>
+                    <p>Related tip I learned the hard way: always <strong>disconnect the LiPo while flashing over USB</strong>. Two simultaneous power sources feeding the same ESP32 is a great way to fry either the board, the regulator, or your laptop's USB port.</p>
+                </div>
+            </div>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">6. The Ups (Where the Architecture Paid Off)</h2>
+            <p class="mb-6">
+                Every hardware down had a corresponding software up, and they all traced back to decisions we made early.
+            </p>
+
+            <h3 class="font-bold text-xl mb-2 mt-6 text-deepBlue">Non-Blocking Everything</h3>
+            <p class="mb-6">
+                From the first line of firmware, I refused to use <code>delay()</code>. Every timing-dependent operation — motor bursts, countdowns, game timers, sensor polling — ran off <code>millis()</code> heartbeats in an asynchronous state machine.
+            </p>
+            <p class="mb-6">
+                This mattered enormously. With <code>delay()</code>, the WebSocket server would stall for the duration of any delay call. Connected phones would experience dropped frames, missed inputs, or full disconnection. With <code>millis()</code>, the main loop runs thousands of times per second, and the ESP32 cheerfully services WebSocket traffic, reads the IR sensor, updates motor PWM, and runs game logic all in parallel.
+            </p>
+
+            <h3 class="font-bold text-xl mb-2 mt-6 text-deepBlue">Adding Wordle in 20 Minutes</h3>
+            <p class="mb-6">
+                Because the WebSocket message handler was already cleanly scoped — every message got parsed as JSON, routed by a <code>type</code> field, and dispatched to the right game mode — adding Wordle as a third game mode took <strong>under 20 minutes</strong> of backend work. The ESP32 didn't need any architectural change; it just needed to listen for <code>wordleGuess</code> messages and emit <code>wordleResult</code> messages back. Motor bursts were triggered by the same <code>pulseMotor()</code> function the other modes used.
+            </p>
+            <p class="mb-6">
+                This is the part of embedded engineering I find deeply satisfying — when the abstractions hold up under pressure and you can extend the system without rewriting it.
+            </p>
+
+            <h3 class="font-bold text-xl mb-2 mt-6 text-deepBlue">The Autonomous Finish Line</h3>
+            <p class="mb-6">
+                Our "wow" feature, and the one I'm proudest of: a <strong>TCRT5000 IR obstacle sensor</strong> mounted under the chassis, constantly polling for a strip of black electrical tape across the track.
+            </p>
+            <p class="mb-6">
+                Originally we were going to use a software timer — assume the race ends after N seconds. But in a competitive setup, network jitter and battery drift would make that hopelessly inaccurate. The IR sensor was our <strong>ground truth</strong>. The moment it detected the black line, it fired a hardware interrupt that immediately killed the motors, set a <code>raceFinished</code> flag, and broadcast a <code>FINISH LINE CROSSED</code> WebSocket message to both phones with the winner's identity.
+            </p>
+            <p class="mb-6">
+                It transformed the project from a "remote-controlled toy" into something that felt like a proper <strong>edge-computing system</strong> — one that makes autonomous decisions in real time, without round-tripping through a server.
+            </p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">7. Leading a Team for the First Time</h2>
+            <p class="mb-6">
+                This was my first time actually leading a hackathon team, and it's a different skill from just coding.
+            </p>
+            <p class="mb-6">
+                A lot of it was context management — making sure Jubril and Abdullah always knew what the current state of the system was, what was blocking progress, and what the next concrete task was. When the L298N blew, the instinct was for all three of us to crowd around the multimeter. I had to make sure we stayed parallelized: one person on hardware replacement, one on the web UI, one on firmware. Divide and conquer is easy to say and weirdly hard to actually do.
+            </p>
+            <p class="mb-6">
+                I also learned to be louder about uncertainty. When I wasn't sure whether a problem was software or hardware (the stall torque fiasco being the prime example), saying <em>"I don't know yet, let me isolate it"</em> out loud turned out to be way more useful than pretending to have a plan. My team could help me isolate it faster than I could alone.
+            </p>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">8. Takeaways</h2>
+            <p class="mb-6">A few things I'll carry forward from this build:</p>
+            <ul class="list-disc list-inside mb-6 space-y-3 ml-4">
+                <li><strong>Hardware constraints force better architecture.</strong> The forced pivot from two-cars-two-controllers to one-car-two-phones produced a system that was more versatile, more scalable, and easier to demo than our original plan. I keep learning this lesson and I suspect I'll keep needing to.</li>
+                <li><strong>Check power before you check code.</strong> Half the "software bugs" I chased were battery voltage issues. A multimeter is the single most useful debugging tool in embedded work, and I didn't reach for it fast enough.</li>
+                <li><strong>Non-blocking architecture isn't optional.</strong> The moment you're doing real-time networking <em>and</em> physical actuation on the same chip, <code>delay()</code> becomes your enemy. <code>millis()</code> state machines scale. <code>delay()</code> doesn't.</li>
+                <li><strong>The ESP32 is absurdly capable.</strong> A single $5 chip running a Wi-Fi AP, an async web server, a WebSocket broker for multiple clients, three game modes, PWM motor control, and interrupt-driven sensor polling — all at once, without breaking a sweat.</li>
+                <li><strong>Lead by isolating bottlenecks, not by doing everything yourself.</strong> When I hoarded tasks, the team slowed down. When I parallelized clearly, we moved fast.</li>
+            </ul>
+
+            <h2 class="text-2xl font-bold mt-12 mb-4 text-deepBlue">9. What's Next?</h2>
+            <p class="mb-6">
+                Winners haven't been announced yet — that'll happen at the upcoming <strong>IES Conference</strong>. Regardless of the outcome, Pit Wall is the project I'm proudest of so far in my degree, and I want to keep pushing it:
+            </p>
+            <ul class="list-disc list-inside mb-6 space-y-2 ml-4">
+                <li><strong>More game modes.</strong> A typing-speed race and a math-reflex game are both trivial to add given the current architecture.</li>
+                <li><strong>Dual-car rematch.</strong> Now that I understand the ESP-NOW protocol, a two-car synchronized launch (with one car as the master broadcasting start signals to the other) is the obvious next evolution. I have the theory; I just need the second working board.</li>
+                <li><strong>A real PCB.</strong> The breadboard-and-jumper-wire version works, but a custom PCB would make the whole thing demo-ready in any environment.</li>
+            </ul>
+            <p class="mb-6">
+                Shipping a working hardware prototype in 24 hours — across smoke, stall torque, and stubborn library resolvers — was genuinely one of the most satisfying things I've done as an engineer. And it was a reminder that the gap between <em>code that compiles</em> and <em>hardware that works</em> is where the real learning happens.
+            </p>
+            <p class="mb-6">
+                Thanks to <strong>Jubril</strong> and <strong>Abdullah</strong> for being incredible teammates, to IEEE IES Unilag for organizing the Buildathon, and to the L298N that gave its life for our education.
+            </p>
+            <p class="mb-12 font-medium">
+                On to the next one.
+            </p>
+
+        </article>
+
+        <hr class="border-warmLight my-12">
+        
+        <div class="bg-warmLight/20 p-8 rounded-xl flex flex-col md:flex-row items-center md:items-start gap-6">
+            <div class="w-20 h-20 bg-deepBlue rounded-full flex items-center justify-center text-warmLight text-2xl font-bold shrink-0 relative ring ring-mutedBlue">
+               <div class="absolute inset-[3.5px] border-r-0 rounded-l-full rounded-r-full bg-cover z-10" 
+                            style="background-image: url(assets/profile_img.jpg);">
+                        </div>
+            </div>
+            
+            <div>
+                <h3 class="font-bold text-xl text-deepBlue mb-2">About the Author</h3>
+                <p class="text-sm leading-relaxed mb-4">
+                    I'm a 3rd-year Computer Engineering student at Unilag and the Financial Secretary of SEES, Unilag. I bridge the gap between hardware and software, specializing in <strong>C++</strong>, <strong>Embedded Systems</strong>, and <strong>Web Development</strong>.
+                </p>
+                <p class="text-sm leading-relaxed mb-4">
+                    Currently, I'm diving into <strong>Rust</strong> and <strong> Cloud Computing </strong> while trying to build a CV I'm proud of by the end of 2026. 
+                </p>
+                <p class="text-md font-bold leading-relaxed">
+                    Thanks for stopping by 🩶
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <footer class="flex flex-wrap justify-around items-center bg-deepBlue text-warmLight py-8 text-center text-sm font-mono">
+        <p clas>&copy; 2026. Built with HTML, Tailwind & Coffee.</p>
+        <a href="index.html#contact" class="">
+            <div id="contactBtn" class="float-right mt-8 md:mt-0 bg-accentBlue text-deepBlue px-4 md:px-8 py-2 md:py-3 mx-auto sm:mx-0 rounded-md font-bold hover:bg-paperWhite transition-colors float-right">
+                    Get in Touch
+                </div>
+        </a>
+    </footer>
+
+</body>
+</html>
