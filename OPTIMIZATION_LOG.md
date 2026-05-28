@@ -89,7 +89,7 @@ External dependencies (all via CDN):
 
 - [x] **Stage 0** — Branch + log + baseline
 - [x] **Stage 1** — Bug fixes & dead code cleanup
-- [ ] **Stage 2** — SEO & metadata
+- [x] **Stage 2** — SEO & metadata
 - [ ] **Stage 3** — Accessibility pass
 - [ ] **Stage 4** — Performance & assets (image compression is the headline)
 - [ ] **Stage 5** — Maintainability refactor (extract shared head/nav/footer)
@@ -163,5 +163,39 @@ All restorations are one-line operations — markup is preserved verbatim inside
 - Did not remove the original `delay-100/200/300` reveal classes — the stagger still works.
 
 **Commit:** `cf4cbb0`
+
+### 2026-05-29 — Stage 2: SEO & metadata
+
+**Files touched:** `index.html`, `cv.html`, `blog1.html`, `robots.txt` (new), `sitemap.xml` (new).
+
+**Added on every page**
+- `<meta name="description">`, `<meta name="author">`
+- `<link rel="canonical">` pointing at the GitHub Pages URL
+- Full Open Graph block (`og:type`, `og:title`, `og:description`, `og:url`, `og:image`, `og:site_name`, `og:locale`)
+- Twitter Card block (`summary_large_image` on home + blog, `summary` on cv)
+- Sharper page titles ("Ekomobong Iwatt — Software Engineer & Computer Engineering Student", "Resume — Ekomobong Iwatt", "Hello, World! — Building My Portfolio in Public")
+
+**JSON-LD structured data**
+- `index.html` — `Person` schema with `jobTitle`, `alumniOf` (UNILAG), `knowsAbout` (the core-tech list), and `sameAs` links to GitHub / LinkedIn / X.
+- `blog1.html` — `BlogPosting` schema with `headline`, `datePublished`, `dateModified`, `author`, `mainEntityOfPage`.
+
+**Semantic dates**
+- Replaced bare year strings with `<time datetime="…">` in the Milestones & Experience timeline (index.html) and in the Experience & Leadership section (cv.html).
+- `blog1.html` — wrapped "January 23, 2026" in `<time datetime="2026-01-23">`.
+
+**New files**
+- `robots.txt` — `Allow: /`, points at sitemap.
+- `sitemap.xml` — four URLs (`/`, `/cv.html`, `/blog1.html`, `/blog2.html`) with `lastmod`, `changefreq`, `priority`. blog2's `lastmod` was inferred from its last main-branch commit (2026-04-18).
+
+**Bonus cleanup**
+- Two giant `https://www.google.com/search?…` URLs in the Milestones section (SEES Unilag and IEEE Unilag affiliations) were carrying ~600 chars of session/tracking params each. Trimmed to `?q=<term>` only — same destination, vastly less HTML noise.
+
+**Decisions**
+- `og:image` and `twitter:image` point at `assets/profile_img.jpg` as a stopgap. A proper 1200×630 social card is a Stage 6 deliverable; flagging here so it doesn't get forgotten.
+- Did **not** add a separate `Resume` schema on `cv.html` — the page renders the same person already described by the `Person` schema on the home page, and the `og:type=profile` + canonical handle social previews. Adding a duplicate `Person` block would split the entity in Google's eyes.
+- Twitter handle `@yr_Ekom` taken from the footer link on `index.html`. If it's wrong, it's a one-line fix in three places.
+- `blog2.html` still **not touched** — OneDrive cloud-file provider still erroring. The page is in `sitemap.xml` so search engines can still discover it, but it's missing all the meta tags and JSON-LD until it can be opened. Right-click → "Always keep on this device" in Explorer to fix.
+
+**Commit:** _(filled in after `git commit`)_
 
 <!-- Append new entries above this comment. -->
