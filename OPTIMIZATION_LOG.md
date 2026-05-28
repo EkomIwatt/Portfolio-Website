@@ -196,6 +196,6 @@ All restorations are one-line operations — markup is preserved verbatim inside
 - Twitter handle `@yr_Ekom` taken from the footer link on `index.html`. If it's wrong, it's a one-line fix in three places.
 - `blog2.html` still **not touched** — OneDrive cloud-file provider still erroring. The page is in `sitemap.xml` so search engines can still discover it, but it's missing all the meta tags and JSON-LD until it can be opened. Right-click → "Always keep on this device" in Explorer to fix.
 
-**Commit:** _(filled in after `git commit`)_
+**Commit:** `4a5eebc`
 
 <!-- Append new entries above this comment. -->
