@@ -87,8 +87,8 @@ External dependencies (all via CDN):
 
 ## The plan
 
-- [x] **Stage 0** — Branch + log + baseline (this commit)
-- [ ] **Stage 1** — Bug fixes & dead code cleanup
+- [x] **Stage 0** — Branch + log + baseline
+- [x] **Stage 1** — Bug fixes & dead code cleanup
 - [ ] **Stage 2** — SEO & metadata
 - [ ] **Stage 3** — Accessibility pass
 - [ ] **Stage 4** — Performance & assets (image compression is the headline)
@@ -105,5 +105,39 @@ Each stage lands as its own commit (or small commit series) so any one of them c
 - New branch `optimize-improvements` off `main` (`789bae8`).
 - Added `OPTIMIZATION_LOG.md` (this file) with baseline snapshot, issue catalogue, and staged plan.
 - No source files touched yet.
+
+### 2026-05-28 — Stage 1: bug fixes, dead-code cleanup, favicon
+
+**Files touched:** `index.html`, `cv.html`, `blog1.html`, `assets/favicon.svg` (new), `ls` (deleted).
+
+**Fixes**
+- `index.html` — `t ext-deepBlue` → `text-deepBlue` on the hero blurb (typo was breaking the intended color class).
+- `index.html` — `pr-18` → `pr-16` on the hero wrapper (`pr-18` isn't a default Tailwind class; was silently ignored).
+- `index.html` — desktop nav now includes a `#projects` link; mobile nav `#education` (broken link, no such section) → `#certificates` to mirror desktop. Desktop and mobile menus now point at the same set of real section IDs: Home, Projects, Achievements, Qualifications, Blog, Hire Me.
+- `index.html` — blog cards on the home page: outer `<p>` wrapping two inner `<p>` elements was invalid HTML. Changed the wrapper to `<div>` so the inner paragraphs are legal. Also moved the stray `</article>` close for the IES Buildathon card inside a proper wrapper.
+- `blog1.html` — `<p clas>` → `<p>` (typo).
+- `blog1.html` — footer "Get in Touch" was a `<div id="contactBtn">` nested inside an `<a>`, which (a) duplicated the index.html ID and (b) used `float-right` twice. Collapsed to a single `<a>` with the styling. Cleaner, no duplicate ID, no nested interactive element.
+
+**Hidden (HTML-commented, not deleted)**
+- `index.html` — the two placeholder "Cool Project" cards in the Featured Projects grid.
+- `index.html` — the three "Coming Soon..." certificate cards (4–6). Two of them linked to the same C++ Udemy credential as card #3, which was misleading visitors.
+- `index.html` — the two "Cool Topic" Lorem Ipsum blog cards.
+
+All restorations are one-line operations — markup is preserved verbatim inside the comments with a note pointing at this log.
+
+**Added**
+- `assets/favicon.svg` — small 64×64 rounded-square mark with "EI" initials in the site palette plus an accent dot (matches the logo-dot canvas animation in the navbar).
+- `<link rel="icon">` references in `index.html`, `cv.html`, `blog1.html`.
+- `<meta name="theme-color">` added to `cv.html` and `blog1.html` (already present on `index.html`).
+
+**Removed**
+- Stray empty `ls` file at repo root.
+
+**Decisions**
+- Placeholders were *commented out* rather than deleted. They represent real intent (more projects, more credentials, more posts coming) and reproducing the visual treatment from scratch later would be wasted work. The HTML comments include a note pointing at this log so the next person editing the file knows where the context lives.
+- `blog2.html` was **not touched this stage** — OneDrive's cloud-file provider errored on every read/copy attempt (process running, but file marked offline-only). Once it syncs, it needs the same favicon + theme-color additions and the same audit pass blog1 just got. Tracked as a follow-up under Stage 2/3.
+- Did not delete the duplicate `id="contactBtn"` references entirely — the one on `index.html` is functional (drives the EmailJS popup), only the blog1 duplicate was problematic.
+
+**Commit:** _(filled in after `git commit`)_
 
 <!-- Append new entries above this comment. -->

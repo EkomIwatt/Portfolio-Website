@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#213448">
     <title>Ekomobong Iwatt - Software Engineer</title>
-    
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="alternate icon" href="assets/favicon.svg">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -76,12 +79,16 @@
                         Home
                         <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accentBlue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center"></span>
                     </a>
+                    <a href="#projects" class="relative group py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
+                        Projects
+                        <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accentBlue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center"></span>
+                    </a>
                     <a href="#achievements" class="relative group py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
                         Achievements
                         <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accentBlue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center"></span>
                     </a>
                     <a href="#certificates" class="relative group py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
-                        Qualifications  
+                        Qualifications
                         <span class="absolute bottom-0 left-0 w-full h-0.5 bg-accentBlue transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-center"></span>
                     </a>
                     <a href="#blog" class="relative group py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors">
@@ -106,7 +113,7 @@
             <a href="#home" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-95 hover:border-2 hover:border-white">Home</a>
             <a href="#projects" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-90 hover:border-2 hover:border-white">Projects</a>
             <a href="#achievements" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-85 hover:border-2 hover:border-white">Achievements</a>
-            <a href="#education" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-80 hover:border-2 hover:border-white">Education</a>
+            <a href="#certificates" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-80 hover:border-2 hover:border-white">Qualifications</a>
             <a href="#blog" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-75 hover:border-2 hover:border-white">Blog</a>
             <a href="#contact" class="mt-1 mx-1 bg-accentBlue text-deepBlue py-4 rounded-lg text-center font-bold text-xl mobile-link border-2 border-deepBlue hover:bg-paperWhite transition-all transform hover:-translate-y-0.5">Hire Me</a>
         </div>
@@ -116,7 +123,7 @@
         <div id="background" class="invisible md:visible"></div>
         <section id="home" class="relative bg-transparent z-10 pt-24 md:pt-32 pb-20 px-4 sm:px-6 lg:px-24 w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
             
-            <div class="flex-1 text-center md:text-left group animate-fade-in-up pr-18 pl-2 mb-4">
+            <div class="flex-1 text-center md:text-left group animate-fade-in-up pr-16 pl-2 mb-4">
                 <!-- <div class="flex justify-center md:justify-start mb-4">
                     <span class="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-1.5 rounded-full text-sm font-medium border border-green-200">
                         <span class="relative flex h-2.5 w-2.5">
@@ -144,7 +151,7 @@
                     </div>
                 </div>
 
-                <p class="mt-6 text-sm md:text-lg t ext-deepBlue leading-relaxed max-w-xs lg:max-w-md mx-auto md:mx-0 md:text-justify">
+                <p class="mt-6 text-sm md:text-lg text-deepBlue leading-relaxed max-w-xs lg:max-w-md mx-auto md:mx-0 md:text-justify">
                     Computer Engineering student building at the intersection of software and hardware.
                     With hands-on experience in software development and embedded systems, I turn curiosity into projects, and document the journey as I grow into a well-rounded engineer.
                 </p>
@@ -237,6 +244,12 @@
                     </div>
                 </div>
 
+                <!--
+                    PLACEHOLDER PROJECT CARDS (hidden until real content exists).
+                    Restore by un-commenting; markup is preserved verbatim from the
+                    original design. Replace title, description, tags, and href before
+                    making visible. See OPTIMIZATION_LOG.md Stage 1 for context.
+
                 <div class="bg-paperWhite rounded-xl overflow-hidden shadow-soft group hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col reveal delay-200 hover:border-deepBlue/40">
                     <div class="bg-gray-200 h-6 flex items-center gap-1 px-3 border-b border-gray-300">
                         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
@@ -248,7 +261,7 @@
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-bold text-deepBlue mb-2">Cool Project</h3>
-                        <p class="text-gray-600 text-sm mb-4 flex-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
+                        <p class="text-gray-600 text-sm mb-4 flex-1">Project description.</p>
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Django</span>
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Docker</span>
@@ -271,7 +284,7 @@
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
                         <h3 class="text-xl font-bold text-deepBlue mb-2">Cool Project</h3>
-                        <p class="text-gray-600 text-sm mb-4 flex-1">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
+                        <p class="text-gray-600 text-sm mb-4 flex-1">Project description.</p>
                         <div class="flex flex-wrap gap-2 mb-6">
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">React Native</span>
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Firebase</span>
@@ -282,6 +295,8 @@
                         </a>
                     </div>
                 </div>
+
+                -->
 
             </div>
         </div>
@@ -432,88 +447,58 @@
                 </div>
             </div>
 
-            <!-- Certificate Card 4 -->
-             <div class="bg-white rounded-xl shadow-sm border border-warmLight hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col group">
+            <!--
+                PLACEHOLDER CERTIFICATE CARDS 4–6 (hidden).
+                These previously said "Coming Soon..." but linked to the same C++
+                Udemy credential as Card 3, which was misleading. Restore once
+                real credentials exist — replace title, issuer, description, href.
+
+            <div class="bg-white rounded-xl shadow-sm border border-warmLight hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col group">
                 <div class="h-2 bg-accentBlue w-full rounded-t-xl"></div>
-                
                 <div class="p-6 flex flex-col flex-grow">
                     <div class="w-12 h-12 bg-warmLight/30 rounded-lg flex items-center justify-center text-deepBlue mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-
                     <h3 class="font-bold text-lg text-deepBlue mb-1">Coming Soon...</h3>
                     <p class="text-sm text-mutedBlue font-mono mb-4">[Issuer] • [Date]</p>
-                    
-                    <p class="text-gray-600 text-sm mb-6 flex-grow">
-                        Core Ideas !
-                    </p>
-
-                    <a href="https://www.udemy.com/certificate/UC-385df29e-18b7-4ea4-9db9-e8fc3af13bd4/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-bold text-accentBlue hover:text-deepBlue transition-colors mt-auto">
-                        View Certificate
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                    </a>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">Core Ideas !</p>
+                    <a href="#" class="inline-flex items-center text-sm font-bold text-accentBlue hover:text-deepBlue transition-colors mt-auto">View Certificate</a>
                 </div>
             </div>
 
-            <!-- Certificate Card 5 -->
             <div class="bg-white rounded-xl shadow-sm border border-warmLight hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col group">
                 <div class="h-2 bg-deepBlue w-full rounded-t-xl group-hover:bg-accentBlue transition-colors"></div>
-                
                 <div class="p-6 flex flex-col flex-grow">
                     <div class="w-12 h-12 bg-warmLight/30 rounded-lg flex items-center justify-center text-deepBlue mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                         </svg>
                     </div>
-
                     <h3 class="font-bold text-lg text-deepBlue mb-1">Coming Soon...</h3>
                     <p class="text-sm text-mutedBlue font-mono mb-4">[Issuer] • [Date]</p>
-                    
-                    <p class="text-gray-600 text-sm mb-6 flex-grow">
-                        Core Ideas !
-                    </p>
-
-                    <a href="#" class="inline-flex items-center text-sm font-bold text-accentBlue hover:text-deepBlue transition-colors mt-auto">
-                        View Credential 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                    </a>
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">Core Ideas !</p>
+                    <a href="#" class="inline-flex items-center text-sm font-bold text-accentBlue hover:text-deepBlue transition-colors mt-auto">View Credential</a>
                 </div>
             </div>
 
-            <!-- Certificate Card 6 -->
             <div class="bg-white rounded-xl shadow-sm border border-warmLight hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col group">
                 <div class="h-2 bg-mutedBlue w-full rounded-t-xl group-hover:bg-accentBlue transition-colors"></div>
-                
                 <div class="p-6 flex flex-col flex-grow">
                     <div class="w-12 h-12 bg-warmLight/30 rounded-lg flex items-center justify-center text-deepBlue mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-
                     <h3 class="font-bold text-lg text-deepBlue mb-1">Coming Soon...</h3>
                     <p class="text-sm text-mutedBlue font-mono mb-4">[Issuer] • [Date]</p>
-                    
-                    <p class="text-gray-600 text-sm mb-6 flex-grow">
-                        Core Ideas !
-                    </p>
-
-                    <a href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-bold text-accentBlue hover:text-deepBlue transition-colors mt-auto">
-                        View Credential 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                        </svg>
-                    </a> 
+                    <p class="text-gray-600 text-sm mb-6 flex-grow">Core Ideas !</p>
+                    <a href="#" class="inline-flex items-center text-sm font-bold text-accentBlue hover:text-deepBlue transition-colors mt-auto">View Credential</a>
                 </div>
             </div>
 
-            <!--end-->
+            -->
         </div>
     </div>
 </section>
@@ -538,15 +523,14 @@
                     <h3 class="text-2xl font-bold text-deepBlue mb-3 group-hover:text-mutedBlue transition-colors">
                         <a href="blog1.html">Hello, World !</a>
                     </h3>
-                    <p class="text-gray-600 mb-4">
+                    <div class="text-gray-600 mb-4">
                         <p class="text-lg font-medium mb-4">
                             Welcome to my corner of the internet 😇
                         </p>
-
                         <p class="mb-2">
                             As a third-year Computer Engineering student at Unilag, I spend a lot of time thinking about code, circuits, and systems. But recently, I’ve been thinking about something else: <strong>identity</strong>. How do I represent who I am and what I can do?
                         </p>
-                    </p>
+                    </div>
                     <a href="blog1.html" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors mt-auto w-max">Read More &rarr;</a>
                 </article>
 
@@ -558,17 +542,22 @@
                     <h3 class="text-2xl font-bold text-deepBlue mb-3 group-hover:text-mutedBlue transition-colors">
                         <a href="blog2.html">The IES Buildathon</a>
                     </h3>
-                    <p class="text-gray-600 mb-6">
+                    <div class="text-gray-600 mb-6">
                         <p class="text-lg font-medium mb-4">
                             24 hours. One ESP32. Two teammates. A motor driver that betrayed us halfway through. 🏎️💨
                         </p>
                         <p class="mb-2">
                             What started as two cars and two dedicated controllers became one car and two phones- and honestly, the constraint made it better
                         </p>
+                    </div>
                     <a href="blog2.html" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors mt-auto w-max">Read More &rarr;</a>
                 </article>
 
-                 <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-300 flex flex-col h-full">
+                <!--
+                    PLACEHOLDER BLOG CARDS (hidden until real posts exist).
+                    Restore by un-commenting; replace title, blurb, and href.
+
+                <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-300 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-4">
                         <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">Subject</span>
                         <span class="text-xs text-gray-400">- min read</span>
@@ -576,7 +565,7 @@
                     <h3 class="text-2xl font-bold text-deepBlue mb-3 group-hover:text-mutedBlue transition-colors">
                         <a href="#">Cool Topic</a>
                     </h3>
-                    <p class="text-gray-600 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Curabitur ac ex sit amet lorem semper interdum. In hac habitasse platea dictumst. Quisque iaculis, ex at sodales pretium, nisl nunc efficitur tellus, ac facilisis enim ex nec ipsum</p>
+                    <p class="text-gray-600 mb-6">Post excerpt.</p>
                     <a href="#" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors mt-auto w-max">Read More &rarr;</a>
                 </article>
 
@@ -588,9 +577,11 @@
                     <h3 class="text-2xl font-bold text-deepBlue mb-3 group-hover:text-mutedBlue transition-colors">
                         <a href="#">Cool Topic</a>
                     </h3>
-                    <p class="text-gray-600 mb-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum. Cras venenatis euismod malesuada. Curabitur ac ex sit amet lorem semper interdum. In hac habitasse platea dictumst. Quisque iaculis, ex at sodales pretium, nisl nunc efficitur tellus, ac facilisis enim ex nec ipsum</p>
+                    <p class="text-gray-600 mb-6">Post excerpt.</p>
                     <a href="#" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors mt-auto w-max">Read More &rarr;</a>
                 </article>
+
+                -->
 
             </div>
             
