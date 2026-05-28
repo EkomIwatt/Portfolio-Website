@@ -140,4 +140,28 @@ All restorations are one-line operations — markup is preserved verbatim inside
 
 **Commit:** `74caa6e`
 
+### 2026-05-28 — Stage 1b: restore placeholders with honest WIP styling
+
+**Trigger:** browser check after Stage 1 showed the Featured Projects section looking blank (1 card in a 3-col grid) and the Certificates/Blog sections looking sparse. User picked "Restore placeholders, mark as 'In Progress'" for all three.
+
+**Files touched:** `index.html`.
+
+**Changes**
+- Un-commented the 2 project, 3 certificate, and 2 blog placeholder cards.
+- Re-styled every restored card with a consistent honest-WIP treatment:
+  - `border-2 border-dashed border-gray-300` (dashed outline instead of solid)
+  - Background and image area lightened with `/60–/70` opacity
+  - Title color softened to `text-deepBlue/70`
+  - Amber pill badge in the corner: **In Progress** on project + certificate cards, **Drafting** on blog cards
+  - All footer CTAs replaced with a non-link `Coming Soon` label (gray, no `href`) so visitors can't click a dead link
+  - Lorem Ipsum copy replaced with one-line honest blurbs ("Currently building…", "Working through the coursework now…", "Notes are scattered, the outline is forming…")
+- Tech-stack chips kept (Django/Docker/AWS, React Native/Firebase/Redux) but muted to `text-gray-500` so they read as *intent*, not *delivered*.
+
+**Decisions**
+- Three different verbs felt right ("In Progress" for code, "Currently Studying" for credentials, "Drafting" for posts) but all share the same amber badge color and dashed border so the WIP language reads as one visual system.
+- Removed `group-hover:` lift effects on these cards — they were inviting clicks on cards that don't go anywhere.
+- Did not remove the original `delay-100/200/300` reveal classes — the stagger still works.
+
+**Commit:** _(filled in after `git commit`)_
+
 <!-- Append new entries above this comment. -->

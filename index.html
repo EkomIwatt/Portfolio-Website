@@ -244,59 +244,57 @@
                     </div>
                 </div>
 
-                <!--
-                    PLACEHOLDER PROJECT CARDS (hidden until real content exists).
-                    Restore by un-commenting; markup is preserved verbatim from the
-                    original design. Replace title, description, tags, and href before
-                    making visible. See OPTIMIZATION_LOG.md Stage 1 for context.
-
-                <div class="bg-paperWhite rounded-xl overflow-hidden shadow-soft group hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col reveal delay-200 hover:border-deepBlue/40">
-                    <div class="bg-gray-200 h-6 flex items-center gap-1 px-3 border-b border-gray-300">
+                <!-- In-progress project card (backend / cloud) -->
+                <div class="bg-paperWhite/60 rounded-xl overflow-hidden border-2 border-dashed border-gray-300 flex flex-col reveal delay-200">
+                    <div class="bg-gray-200/70 h-6 flex items-center gap-1 px-3 border-b border-gray-300">
                         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
                         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
                     </div>
-                    <div class="h-48 bg-gray-800 flex items-center justify-center group-hover:bg-gray-700 transition-colors relative rounded-md">
+                    <div class="h-48 bg-gray-700/60 flex items-center justify-center relative rounded-md">
                         <i class="fas fa-server text-6xl text-white/20"></i>
-                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
-                        <h3 class="text-xl font-bold text-deepBlue mb-2">Cool Project</h3>
-                        <p class="text-gray-600 text-sm mb-4 flex-1">Project description.</p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Django</span>
-                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Docker</span>
-                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">AWS EC2</span>
+                        <div class="flex items-center gap-2 mb-2 flex-wrap">
+                            <h3 class="text-xl font-bold text-deepBlue/70">Backend Service</h3>
+                            <span class="text-[10px] uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">In Progress</span>
                         </div>
-                        <a href="#" class="inline-flex items-center text-mutedBlue font-semibold hover:text-deepBlue text-sm transition-colors">
-                            View Repository <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                        </a>
+                        <p class="text-gray-500 text-sm mb-4 flex-1">Currently building. The full write-up and repo link land here once it ships.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">Django</span>
+                            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">Docker</span>
+                            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">AWS EC2</span>
+                        </div>
+                        <span class="inline-flex items-center text-gray-400 font-semibold text-sm mt-auto">
+                            Coming Soon <i class="fas fa-clock ml-2 text-xs"></i>
+                        </span>
                     </div>
                 </div>
 
-                <div class="bg-paperWhite rounded-xl overflow-hidden shadow-soft group hover:shadow-lg transition-all duration-300 border border-gray-100 flex flex-col reveal delay-300 hover:border-deepBlue/40">
-                    <div class="bg-gray-200 h-6 flex items-center gap-1 px-3 border-b border-gray-300">
+                <!-- In-progress project card (mobile) -->
+                <div class="bg-paperWhite/60 rounded-xl overflow-hidden border-2 border-dashed border-gray-300 flex flex-col reveal delay-300">
+                    <div class="bg-gray-200/70 h-6 flex items-center gap-1 px-3 border-b border-gray-300">
                         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
                         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
                     </div>
-                    <div class="h-48 bg-[#94B4C1] flex items-center justify-center group-hover:bg-[#83a2af] transition-colors relative rounded-md">
+                    <div class="h-48 bg-accentBlue/40 flex items-center justify-center relative rounded-md">
                         <i class="fas fa-mobile-alt text-6xl text-white/40"></i>
-                         <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
-                        <h3 class="text-xl font-bold text-deepBlue mb-2">Cool Project</h3>
-                        <p class="text-gray-600 text-sm mb-4 flex-1">Project description.</p>
-                        <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">React Native</span>
-                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Firebase</span>
-                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Redux</span>
+                        <div class="flex items-center gap-2 mb-2 flex-wrap">
+                            <h3 class="text-xl font-bold text-deepBlue/70">Mobile App</h3>
+                            <span class="text-[10px] uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">In Progress</span>
                         </div>
-                        <a href="#" class="inline-flex items-center text-mutedBlue font-semibold hover:text-deepBlue text-sm transition-colors">
-                            View Project <i class="fas fa-arrow-right ml-2 text-xs"></i>
-                        </a>
+                        <p class="text-gray-500 text-sm mb-4 flex-1">Currently building. The full write-up and demo link land here once it ships.</p>
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">React Native</span>
+                            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">Firebase</span>
+                            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">Redux</span>
+                        </div>
+                        <span class="inline-flex items-center text-gray-400 font-semibold text-sm mt-auto">
+                            Coming Soon <i class="fas fa-clock ml-2 text-xs"></i>
+                        </span>
                     </div>
                 </div>
-
-                -->
 
             </div>
         </div>
@@ -447,58 +445,59 @@
                 </div>
             </div>
 
-            <!--
-                PLACEHOLDER CERTIFICATE CARDS 4–6 (hidden).
-                These previously said "Coming Soon..." but linked to the same C++
-                Udemy credential as Card 3, which was misleading. Restore once
-                real credentials exist — replace title, issuer, description, href.
-
-            <div class="bg-white rounded-xl shadow-sm border border-warmLight hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                <div class="h-2 bg-accentBlue w-full rounded-t-xl"></div>
+            <!-- In-progress certificate card 4 -->
+            <div class="bg-white/70 rounded-xl border-2 border-dashed border-gray-300 flex flex-col">
+                <div class="h-2 bg-gray-300 w-full rounded-t-xl"></div>
                 <div class="p-6 flex flex-col flex-grow">
-                    <div class="w-12 h-12 bg-warmLight/30 rounded-lg flex items-center justify-center text-deepBlue mb-4">
+                    <div class="w-12 h-12 bg-warmLight/20 rounded-lg flex items-center justify-center text-gray-400 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 class="font-bold text-lg text-deepBlue mb-1">Coming Soon...</h3>
-                    <p class="text-sm text-mutedBlue font-mono mb-4">[Issuer] • [Date]</p>
-                    <p class="text-gray-600 text-sm mb-6 flex-grow">Core Ideas !</p>
-                    <a href="#" class="inline-flex items-center text-sm font-bold text-accentBlue hover:text-deepBlue transition-colors mt-auto">View Certificate</a>
+                    <div class="flex items-center gap-2 mb-1 flex-wrap">
+                        <h3 class="font-bold text-lg text-deepBlue/70">Currently Studying</h3>
+                        <span class="text-[10px] uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">In Progress</span>
+                    </div>
+                    <p class="text-sm text-gray-400 font-mono mb-4">Credential pending</p>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow">Working through the coursework now — the credential link goes here once earned.</p>
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border border-warmLight hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                <div class="h-2 bg-deepBlue w-full rounded-t-xl group-hover:bg-accentBlue transition-colors"></div>
+            <!-- In-progress certificate card 5 -->
+            <div class="bg-white/70 rounded-xl border-2 border-dashed border-gray-300 flex flex-col">
+                <div class="h-2 bg-gray-300 w-full rounded-t-xl"></div>
                 <div class="p-6 flex flex-col flex-grow">
-                    <div class="w-12 h-12 bg-warmLight/30 rounded-lg flex items-center justify-center text-deepBlue mb-4">
+                    <div class="w-12 h-12 bg-warmLight/20 rounded-lg flex items-center justify-center text-gray-400 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                         </svg>
                     </div>
-                    <h3 class="font-bold text-lg text-deepBlue mb-1">Coming Soon...</h3>
-                    <p class="text-sm text-mutedBlue font-mono mb-4">[Issuer] • [Date]</p>
-                    <p class="text-gray-600 text-sm mb-6 flex-grow">Core Ideas !</p>
-                    <a href="#" class="inline-flex items-center text-sm font-bold text-accentBlue hover:text-deepBlue transition-colors mt-auto">View Credential</a>
+                    <div class="flex items-center gap-2 mb-1 flex-wrap">
+                        <h3 class="font-bold text-lg text-deepBlue/70">Currently Studying</h3>
+                        <span class="text-[10px] uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">In Progress</span>
+                    </div>
+                    <p class="text-sm text-gray-400 font-mono mb-4">Credential pending</p>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow">Working through the coursework now — the credential link goes here once earned.</p>
                 </div>
             </div>
 
-            <div class="bg-white rounded-xl shadow-sm border border-warmLight hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col group">
-                <div class="h-2 bg-mutedBlue w-full rounded-t-xl group-hover:bg-accentBlue transition-colors"></div>
+            <!-- In-progress certificate card 6 -->
+            <div class="bg-white/70 rounded-xl border-2 border-dashed border-gray-300 flex flex-col">
+                <div class="h-2 bg-gray-300 w-full rounded-t-xl"></div>
                 <div class="p-6 flex flex-col flex-grow">
-                    <div class="w-12 h-12 bg-warmLight/30 rounded-lg flex items-center justify-center text-deepBlue mb-4">
+                    <div class="w-12 h-12 bg-warmLight/20 rounded-lg flex items-center justify-center text-gray-400 mb-4">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 class="font-bold text-lg text-deepBlue mb-1">Coming Soon...</h3>
-                    <p class="text-sm text-mutedBlue font-mono mb-4">[Issuer] • [Date]</p>
-                    <p class="text-gray-600 text-sm mb-6 flex-grow">Core Ideas !</p>
-                    <a href="#" class="inline-flex items-center text-sm font-bold text-accentBlue hover:text-deepBlue transition-colors mt-auto">View Credential</a>
+                    <div class="flex items-center gap-2 mb-1 flex-wrap">
+                        <h3 class="font-bold text-lg text-deepBlue/70">Currently Studying</h3>
+                        <span class="text-[10px] uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">In Progress</span>
+                    </div>
+                    <p class="text-sm text-gray-400 font-mono mb-4">Credential pending</p>
+                    <p class="text-gray-500 text-sm mb-6 flex-grow">Working through the coursework now — the credential link goes here once earned.</p>
                 </div>
             </div>
-
-            -->
         </div>
     </div>
 </section>
@@ -553,35 +552,27 @@
                     <a href="blog2.html" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors mt-auto w-max">Read More &rarr;</a>
                 </article>
 
-                <!--
-                    PLACEHOLDER BLOG CARDS (hidden until real posts exist).
-                    Restore by un-commenting; replace title, blurb, and href.
-
-                <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-300 flex flex-col h-full">
+                <!-- In-progress blog draft -->
+                <article class="bg-paperWhite/60 p-6 rounded-xl border-2 border-dashed border-gray-300 reveal-right delay-300 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">Subject</span>
-                        <span class="text-xs text-gray-400">- min read</span>
+                        <span class="text-xs font-semibold tracking-wide uppercase text-gray-400">Up next</span>
+                        <span class="text-[10px] uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">Drafting</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-deepBlue mb-3 group-hover:text-mutedBlue transition-colors">
-                        <a href="#">Cool Topic</a>
-                    </h3>
-                    <p class="text-gray-600 mb-6">Post excerpt.</p>
-                    <a href="#" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors mt-auto w-max">Read More &rarr;</a>
+                    <h3 class="text-2xl font-bold text-deepBlue/70 mb-3">A post is being written</h3>
+                    <p class="text-gray-500 mb-6">Notes are scattered, the outline is forming. New writing lands here as soon as it's ready to read.</p>
+                    <span class="text-sm font-bold text-gray-400 mt-auto w-max">Coming Soon</span>
                 </article>
 
-                <article class="bg-paperWhite p-6 rounded-xl border border-gray-100 hover:border-accentBlue/50 group reveal-right delay-300 flex flex-col h-full">
+                <!-- In-progress blog draft -->
+                <article class="bg-paperWhite/60 p-6 rounded-xl border-2 border-dashed border-gray-300 reveal-right delay-300 flex flex-col h-full">
                     <div class="flex justify-between items-start mb-4">
-                        <span class="text-xs font-semibold tracking-wide uppercase text-accentBlue">Subject</span>
-                        <span class="text-xs text-gray-400">- min read</span>
+                        <span class="text-xs font-semibold tracking-wide uppercase text-gray-400">Up next</span>
+                        <span class="text-[10px] uppercase tracking-wider bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-bold">Drafting</span>
                     </div>
-                    <h3 class="text-2xl font-bold text-deepBlue mb-3 group-hover:text-mutedBlue transition-colors">
-                        <a href="#">Cool Topic</a>
-                    </h3>
-                    <p class="text-gray-600 mb-6">Post excerpt.</p>
-                    <a href="#" class="text-sm font-bold text-deepBlue hover:text-accentBlue transition-colors mt-auto w-max">Read More &rarr;</a>
+                    <h3 class="text-2xl font-bold text-deepBlue/70 mb-3">A post is being written</h3>
+                    <p class="text-gray-500 mb-6">Notes are scattered, the outline is forming. New writing lands here as soon as it's ready to read.</p>
+                    <span class="text-sm font-bold text-gray-400 mt-auto w-max">Coming Soon</span>
                 </article>
-
-                -->
 
             </div>
             
