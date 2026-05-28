@@ -162,6 +162,6 @@ All restorations are one-line operations — markup is preserved verbatim inside
 - Removed `group-hover:` lift effects on these cards — they were inviting clicks on cards that don't go anywhere.
 - Did not remove the original `delay-100/200/300` reveal classes — the stagger still works.
 
-**Commit:** _(filled in after `git commit`)_
+**Commit:** `cf4cbb0`
 
 <!-- Append new entries above this comment. -->
