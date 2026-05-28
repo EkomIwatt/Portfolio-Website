@@ -138,6 +138,6 @@ All restorations are one-line operations — markup is preserved verbatim inside
 - `blog2.html` was **not touched this stage** — OneDrive's cloud-file provider errored on every read/copy attempt (process running, but file marked offline-only). Once it syncs, it needs the same favicon + theme-color additions and the same audit pass blog1 just got. Tracked as a follow-up under Stage 2/3.
 - Did not delete the duplicate `id="contactBtn"` references entirely — the one on `index.html` is functional (drives the EmailJS popup), only the blog1 duplicate was problematic.
 
-**Commit:** _(filled in after `git commit`)_
+**Commit:** `74caa6e`
 
 <!-- Append new entries above this comment. -->
