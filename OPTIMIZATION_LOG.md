@@ -91,7 +91,7 @@ External dependencies (all via CDN):
 - [x] **Stage 1** — Bug fixes & dead code cleanup
 - [x] **Stage 2** — SEO & metadata
 - [x] **Stage 3** — Accessibility pass
-- [ ] **Stage 4** — Performance & assets (image compression is the headline)
+- [x] **Stage 4** — Performance & assets (image compression is the headline)
 - [ ] **Stage 5** — Maintainability refactor (extract shared head/nav/footer)
 - [ ] **Stage 6** — Polish & extras (404 page, scroll-to-top, OG image)
 
@@ -257,5 +257,54 @@ All restorations are one-line operations — markup is preserved verbatim inside
 - Did **not** touch `blog2.html` — still OneDrive cloud-only. Skip-link + style.css link + main id + portrait aria need to be applied next session.
 
 **Commit:** `e20f80a`
+
+### 2026-05-29 — Stage 4: performance & assets
+
+**Files touched:** `scripts/optimize_images.py` (new), `assets/*.{webp,jpg}` (new), `css/style.css`, `index.html`, `cv.html`, `blog1.html`, `js/script.js`.
+
+**Image compression (user chose "keep originals, add compressed siblings")**
+- New `scripts/optimize_images.py` — Pillow-based, reads `SOURCES` table, writes JPEG + WebP at two widths each. Re-runnable; outputs are deterministic.
+- Source `assets/image1.jpg` (3868×4544, 2,729 KB) → four siblings:
+  - `image1-w1600.webp` 38 KB
+  - `image1-w1600.jpg` 89 KB
+  - `image1-w800.webp` 13 KB
+  - `image1-w800.jpg` 27 KB
+- Source `assets/project1.png` (1914×840, 878 KB) → four siblings:
+  - `project1-w1200.webp` 66 KB, `-w1200.jpg` 106 KB
+  - `project1-w768.webp` 31 KB, `-w768.jpg` 47 KB
+- Originals untouched.
+
+**CSS rewiring**
+- `#background::before`, `.hero-portrait-mobile` (new class), `.proj-preview-portfolio` (new class) all use `image-set()` with a `url()` fallback declaration above, plus a `-webkit-image-set` line for Safari. WebP-capable browsers pick the small file; everyone else gets the JPEG.
+- Hero portrait CSS class layered with the existing rounded-pill / shimmer treatment — visual result is unchanged.
+
+**HTML rewiring**
+- `index.html` mobile portrait pill: inline `style="background-image: url(assets/image1.jpg)"` → class `.hero-portrait-mobile`.
+- `index.html` Portfolio project card: inline `style="background-image: url(./assets/project1.png)"` → class `.proj-preview-portfolio` on a dedicated layer; the gradient overlay is now a separate sibling div (cleaner z-stacking, both `aria-hidden`).
+
+**Critical-path optimisations**
+- Added `<link rel="preconnect">` for `cdn.tailwindcss.com`, `cdnjs.cloudflare.com`, `fonts.googleapis.com`, `fonts.gstatic.com` on `index.html` and `cv.html`. `blog1.html` gets only Tailwind + fonts (no Font Awesome on that page).
+- Added `<link rel="preload" as="image">` on `index.html` for the hero portrait, gated by `media` so mobile downloads only `image1-w800.webp` and desktop only `image1-w1600.webp`.
+- Removed the eager `<script src="…emailjs…">` from `index.html` head.
+
+**Lazy-loading EmailJS** (`js/script.js`)
+- New `loadEmailJS()` memoised promise — injects the 50 KB SDK on demand and `emailjs.init()`s it.
+- First call happens when the user clicks "Get in Touch" (so the SDK is already in flight while they're typing).
+- The send handler awaits the loader before calling `sendForm`; if the SDK never loaded, `sendForm` won't run and the failure path surfaces a normal alert.
+
+**Page-weight impact for index.html (first load)**
+- Before: hero JPEG 2,729 KB + project PNG 878 KB + EmailJS ~50 KB ≈ **3,657 KB**.
+- After, modern browser on desktop: hero WebP 38 KB + project WebP 31 KB + EmailJS deferred = **69 KB**.
+- After, mobile: 13 KB + 31 KB = **44 KB**.
+- ~50× reduction on the three biggest payloads.
+
+**Decisions**
+- Used `image-set()` rather than restructuring to `<picture>` + `<source>` so the existing background-based design (rounded pill shape, hover overlays, gradient) keeps working unchanged. `<picture>` would have meant rewriting the cards.
+- Two widths per source rather than three — covers mobile vs. desktop comfortably for these specific render sizes; adding more would mean more bytes to commit for diminishing returns.
+- Kept the EmailJS public key in `js/script.js`. It is *public* by design (any visitor's browser sees it), so checking it in is fine; restricting domains in the EmailJS dashboard is the real security control.
+- Did **not** address the Tailwind CDN dev build (it still ships ~3 MB uncached). Moving to a built `dist/tailwind.css` requires a Node build step that didn't exist on this project; that's a Stage 5 (maintainability) candidate or a future call.
+- `blog2.html` still untouched — OneDrive cloud-only. When it syncs, it needs preconnect tags and (if it uses image1/project1) the same class swap.
+
+**Commit:** _(filled in after `git commit`)_
 
 <!-- Append new entries above this comment. -->

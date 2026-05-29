@@ -149,16 +149,58 @@ footer :focus-visible {
     background-color: #F9F7F2;
 }
 
+/* Hero portrait backgrounds use image-set() so WebP-capable browsers download the smaller asset
+   (assets/image1-w1600.webp ≈ 38 KB) while the rest get a JPEG fallback (≈ 89 KB).
+   The original 2.7 MB image1.jpg stays in the repo as the source for scripts/optimize_images.py. */
+
 #background::before {
     content: "";
-    background-image: url('../assets/image1.jpg'); /* Updated path for assets folder */
+    background-image: url('../assets/image1-w1600.jpg');
+    background-image: -webkit-image-set(
+        url('../assets/image1-w1600.webp') type('image/webp') 1x,
+        url('../assets/image1-w1600.jpg') type('image/jpeg') 1x
+    );
+    background-image: image-set(
+        url('../assets/image1-w1600.webp') type('image/webp') 1x,
+        url('../assets/image1-w1600.jpg') type('image/jpeg') 1x
+    );
     background-size: cover;
-    position: absolute;     
+    position: absolute;
     top: 0;
     left: 100px;
     right: 0;
     bottom: 0;
     z-index: 0;
+}
+
+/* Mobile portrait pill in the hero — smaller asset since it renders ≤ ~250 px wide. */
+.hero-portrait-mobile {
+    background-image: url('../assets/image1-w800.jpg');
+    background-image: -webkit-image-set(
+        url('../assets/image1-w800.webp') type('image/webp') 1x,
+        url('../assets/image1-w800.jpg') type('image/jpeg') 1x
+    );
+    background-image: image-set(
+        url('../assets/image1-w800.webp') type('image/webp') 1x,
+        url('../assets/image1-w800.jpg') type('image/jpeg') 1x
+    );
+    background-size: cover;
+    background-position: center;
+}
+
+/* Project card preview (Portfolio Website thumbnail). */
+.proj-preview-portfolio {
+    background-image: url('../assets/project1-w768.jpg');
+    background-image: -webkit-image-set(
+        url('../assets/project1-w768.webp') type('image/webp') 1x,
+        url('../assets/project1-w768.jpg') type('image/jpeg') 1x
+    );
+    background-image: image-set(
+        url('../assets/project1-w768.webp') type('image/webp') 1x,
+        url('../assets/project1-w768.jpg') type('image/jpeg') 1x
+    );
+    background-size: cover;
+    background-position: center;
 }
 
 /* The rotating shimmering gradient */

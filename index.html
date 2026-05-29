@@ -53,11 +53,24 @@
     }
     </script>
 
+    <!-- Preconnect to the CDN origins we'll need so the TCP+TLS handshakes
+         start in parallel with the HTML parse, not serially after. -->
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+    <!-- EmailJS is loaded on demand when the user clicks Get in Touch (see js/script.js).
+         That keeps ~50 KB off the critical-path load for visitors who never open the form. -->
+
+    <!-- Preload the hero portrait so the browser starts the download before
+         CSS is parsed. Media query keeps the mobile file off desktop and vice versa. -->
+    <link rel="preload" as="image" href="assets/image1-w1600.webp" type="image/webp" media="(min-width: 768px)">
+    <link rel="preload" as="image" href="assets/image1-w800.webp" type="image/webp" media="(max-width: 767px)">
 
     <link rel="stylesheet" href="css/style.css">
 
@@ -193,9 +206,7 @@
 
                     <div role="img" aria-label="Portrait of Ekomobong Iwatt" class="absolute z-0 right-1.5 md:hidden w-7/12 h-44 rounded-l-full rounded-r-full overflow-hidden shadow-lg">
                         <div aria-hidden="true" class="shimmer-bg absolute -top-[50%] -left-[50%] w-[200%] h-[200%] z-0"></div>
-                        <div aria-hidden="true" class="absolute inset-[4px] border-r-0 rounded-l-full rounded-r-full bg-cover z-10"
-                            style="background-image: url(assets/image1.jpg);">
-                        </div>
+                        <div aria-hidden="true" class="hero-portrait-mobile absolute inset-[4px] border-r-0 rounded-l-full rounded-r-full z-10"></div>
                     </div>
                 </div>
 
@@ -273,7 +284,8 @@
                     </div>
                     <div class="h-48 flex items-center justify-center transition-colors relative overflow-hidden">
                         <i class="fas fa-chart-line text-6xl text-white/20" aria-hidden="true"></i>
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent bg-cover rounded-md" style="background-image: url(./assets/project1.png);"></div>
+                        <div class="proj-preview-portfolio absolute inset-0 rounded-md" aria-hidden="true"></div>
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent rounded-md" aria-hidden="true"></div>
                         <div class="absolute bottom-4 left-4 text-white font-mono text-sm opacity-0 group-hover:opacity-100 transition-opacity">Hello World !</div>
                     </div>
                     

@@ -1,10 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
-    
-    // --- Initialize EmailJS ---
-    // Make sure your User ID is correct here
-    (function(){
-        emailjs.init("bVE4OU2OXh9_4SfCN");
-    })();
+
+    // --- EmailJS lazy loader ---
+    // The SDK is ~50 KB; only ~5% of visitors will use the contact form, so we
+    // defer the network request until the user actually opens it. Returns a
+    // promise that resolves once `emailjs` is on window and initialized.
+    const EMAILJS_PUBLIC_KEY = 'bVE4OU2OXh9_4SfCN';
+    const EMAILJS_SDK_URL = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js';
+    let emailjsLoader = null; // memoised promise
+    function loadEmailJS() {
+        if (emailjsLoader) return emailjsLoader;
+        emailjsLoader = new Promise((resolve, reject) => {
+            if (window.emailjs) { resolve(window.emailjs); return; }
+            const s = document.createElement('script');
+            s.src = EMAILJS_SDK_URL;
+            s.async = true;
+            s.onload = () => {
+                try { window.emailjs.init(EMAILJS_PUBLIC_KEY); resolve(window.emailjs); }
+                catch (e) { reject(e); }
+            };
+            s.onerror = () => reject(new Error('Failed to load EmailJS SDK'));
+            document.head.appendChild(s);
+        });
+        return emailjsLoader;
+    }
 
     // --- Mobile Menu Logic ---
     const btn = document.getElementById('mobile-menu-btn');
@@ -95,6 +113,10 @@ document.addEventListener('DOMContentLoaded', () => {
         contactBtn.addEventListener('click', () => {
             contactForm.classList.remove('hidden');
             popupOverlay.classList.remove('hidden');
+            // Kick off the SDK fetch as soon as the popup opens so it's ready
+            // by the time the user finishes typing. Fails silently — the send
+            // handler will retry if needed.
+            loadEmailJS().catch(err => console.warn('EmailJS preload failed:', err));
         });
     }
 
@@ -133,11 +155,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const originalBtnContent = sendBtn.innerHTML;
             sendBtn.textContent = "Sending...";
 
-            // 3. Send via EmailJS
+            // 3. Send via EmailJS (ensuring the SDK has loaded first)
             console.log("Attempting to send email...");
-            
+
             // NOTE: Ensure these IDs match your EmailJS Dashboard exactly
-            emailjs.sendForm('service_ah7qnm9', 'template_5droz1e', '#contactForm')
+            loadEmailJS()
+                .then(ej => ej.sendForm('service_ah7qnm9', 'template_5droz1e', '#contactForm'))
                 .then(() => {
                     console.log("SUCCESS!");
                     
