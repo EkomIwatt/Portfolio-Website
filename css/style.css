@@ -271,3 +271,40 @@ footer :focus-visible {
     border-radius: 0.25rem;
     font-size: 0.75rem;
 }
+
+/* ---------- Scroll-to-top button ---------- */
+/* Injected by js/scroll-to-top.js and shown after ~400 px of scroll.
+   Loaded on index, blog1, blog2 — not on cv (print-oriented, short). */
+.scroll-to-top {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #213448; /* deepBlue */
+    color: #EAE0CF;            /* warmLight */
+    border: 2px solid #547792; /* mutedBlue */
+    border-radius: 9999px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(33, 52, 72, 0.25);
+    /* Start hidden: invisible + 8 px lower + zero pointer-events so it
+       doesn't block clicks on whatever's underneath. */
+    opacity: 0;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out,
+                background-color 0.15s ease-out, color 0.15s ease-out;
+    z-index: 40;
+}
+.scroll-to-top.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+.scroll-to-top:hover {
+    background-color: #547792; /* mutedBlue */
+    color: #F9F7F2;            /* paperWhite */
+}

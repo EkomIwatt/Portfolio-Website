@@ -93,7 +93,7 @@ External dependencies (all via CDN):
 - [x] **Stage 3** — Accessibility pass
 - [x] **Stage 4** — Performance & assets (image compression is the headline)
 - [x] **Stage 5** — Maintainability refactor (Tailwind config + chip components; nav/footer extraction deferred — see entry for why)
-- [ ] **Stage 6** — Polish & extras (404 page, scroll-to-top, OG image)
+- [x] **Stage 6** — Polish & extras (404 page, scroll-to-top, OG image)
 
 Each stage lands as its own commit (or small commit series) so any one of them can be reverted in isolation.
 
@@ -394,5 +394,44 @@ What did get shared in this stage is the duplication that was genuinely uniform 
 - Net: 121 lines removed, 63 added across 5 files. New 56-line `js/tailwind-config.js`, ~40-line chip section in `css/style.css`. Visual result identical.
 
 **Commit:** `c9ab20b`
+
+### 2026-05-29 — Stage 6: polish & extras
+
+**Files touched:** `404.html` (new), `js/scroll-to-top.js` (new), `scripts/build_og_card.py` (new), `assets/og-card.png` (new), `css/style.css`, `index.html`, `cv.html`, `blog1.html`, `blog2.html`.
+
+**1. 404 page (`404.html`)**
+- GitHub Pages auto-serves `/404.html` from the repo root for missing paths — no config needed.
+- Themed in the deep-blue palette to feel like part of the site without trying to fake the rich navbar/footer (mismatched chrome would feel worse than no chrome).
+- Layout: small "EI · " brand mark top-left (calls back to the navbar's logo-canvas mark), centered "404 + headline + apology + two CTAs (Take me home / Report a broken link)", small URL footer.
+- `<meta name="robots" content="noindex">` so search engines don't index error pages.
+- Loads `js/tailwind-config.js` for palette consistency and `css/style.css` for focus rings + reduced-motion.
+
+**2. Scroll-to-top button (`js/scroll-to-top.js` + CSS in `style.css`)**
+- Floating bottom-right circular button, deepBlue with a mutedBlue border and warmLight chevron-up icon. Appears after ~400 px of scroll; smooth-scrolls back to top.
+- Created in JS rather than baked into each HTML file — keeps the markup in one place and means future pages can opt in with one `<script>` tag.
+- Hidden state uses `opacity: 0 + transform: translateY(8px) + pointer-events: none`, so the invisible button can't trap clicks underneath. Also `tabIndex = -1` and `aria-hidden="true"` until visible — keyboard and screen-reader users only see it when it's actually on screen.
+- Honors `prefers-reduced-motion` — the click handler passes `behavior: 'auto'` (instant jump) instead of `'smooth'` when the user has reduced-motion set.
+- Wired into `index.html`, `blog1.html`, `blog2.html`. Skipped on `cv.html` (print-oriented; short enough that the button would be visual clutter without value).
+
+**3. Open Graph / Twitter social card (`scripts/build_og_card.py` + `assets/og-card.png`)**
+- New Pillow script renders `assets/og-card.png` at exactly 1200×630 — the OG/Twitter standard. Same script-driven asset pattern as `scripts/optimize_images.py` from Stage 4; re-runnable and reviewable in diff.
+- Design: deepBlue background, "EI ·" brand mark top-left, "Ekomobong Iwatt" headline (warmLight) with the same accentBlue underline bar that lives on the index hero, "Software Engineer · Computer Engineering · University of Lagos" subhead, URL at the bottom, faint concentric accentBlue arcs bleeding off the bottom-right corner so the card doesn't feel empty.
+- 40 KB output. Deterministic — re-running produces the same bytes.
+- Font fallback chain: Inter (if user has it installed system-wide) → Segoe UI (default on Windows 11) → DejaVu (Pillow's bundled fallback). All three render the same design recognizably; Inter looks best.
+- Meta swap on all 4 pages: `og:image`, `twitter:image`, and the JSON-LD `image` field (where present) now point at `assets/og-card.png` instead of the `profile_img.jpg` stopgap from Stages 2 and 4. 11 references swapped via `replace_all` on the URL prefix `Portfolio-Website/assets/profile_img.jpg` — left the two inline `url(assets/profile_img.jpg)` background-image references alone (those are the actual author portrait on the blog pages, correctly the real photo).
+- `cv.html` `twitter:card`: `summary` → `summary_large_image`. Stage 2 set it to `summary` because there was no real social card; now that there is one, the large-image preview is correct for the resume page too.
+
+**Decisions**
+- **No `og:image:width` / `og:image:height` meta.** They're recommended (lets scrapers pre-allocate layout) but not required, and 1200×630 is the well-known standard so platforms infer correctly. Skipped to keep the meta block readable; trivial to add later.
+- **404 page does not load the scroll-to-top script.** The 404 page is a single viewport — there's nothing to scroll past.
+- **No sitemap update.** Assets aren't sitemapped; the four pages already in the sitemap haven't structurally changed (only their `og:image` content did). `404.html` correctly stays out of the sitemap.
+- **Did not swap the actual `profile_img.jpg` references** on the blog pages (the small author portrait in the About-the-Author card). Those are the real photo, distinct from the social-share thumbnail. Confirmed both still resolve to `profile_img.jpg`.
+- **Inter font is not bundled with the script.** Adding the .ttf (~700 KB OFL-licensed) to the repo would let the script render identically on any machine, but the script's fallback chain produces an indistinguishable card on Segoe UI, and `assets/og-card.png` is committed anyway — the rendering only matters when someone re-runs the script. Documented in the script's docstring.
+
+**Open follow-ups (carry-over from earlier stages, still not done)**
+- Tailwind Play CDN is still the dev build (~3 MB uncached). Replacing it with a built `dist/tailwind.css` requires a Node build step that doesn't exist in this project. Flagged in Stage 4 and Stage 5 logs.
+- `prose` Tailwind plugin not configured on the blog pages — the `prose prose-lg prose-blue` classes are silent no-ops. One-liner if/when the CDN gets replaced. Flagged in Stage 5 log.
+
+**Commit:** _pending_
 
 <!-- Append new entries above this comment. -->

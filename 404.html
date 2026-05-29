@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 — Page not found · Ekomobong Iwatt</title>
+    <meta name="description" content="The page you're looking for doesn't exist on this site.">
+    <meta name="robots" content="noindex">
+
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    <link rel="alternate icon" href="assets/favicon.svg">
+    <meta name="theme-color" content="#213448">
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="js/tailwind-config.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .four-oh-four { font-family: 'Fira Code', monospace; }
+    </style>
+</head>
+
+<body class="bg-deepBlue text-warmLight min-h-screen flex flex-col items-center justify-center px-6 text-center selection:bg-accentBlue selection:text-deepBlue">
+
+    <a href="/" class="absolute top-6 left-6 inline-flex items-center gap-2 text-warmLight hover:text-accentBlue transition-colors text-sm font-mono" aria-label="Ekomobong Iwatt — home">
+        <span class="text-xl font-bold tracking-wider">EI</span>
+        <span class="w-2 h-2 rounded-full bg-accentBlue inline-block"></span>
+    </a>
+
+    <main>
+        <p class="four-oh-four text-7xl md:text-9xl font-bold text-accentBlue mb-6" aria-hidden="true">404</p>
+        <h1 class="text-2xl md:text-4xl font-bold mb-4">This page got lost in the build.</h1>
+        <p class="text-warmLight/70 max-w-md mx-auto mb-10 leading-relaxed">
+            The URL you followed doesn't match anything on the site — it might be a typo, a stale link, or something I haven't built yet.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+            <a href="/" class="bg-accentBlue text-deepBlue px-6 py-3 rounded-md font-bold hover:bg-paperWhite transition-colors">
+                Take me home
+            </a>
+            <a href="/index.html#contact" class="border-2 border-warmLight/40 text-warmLight px-6 py-3 rounded-md font-bold hover:border-warmLight hover:text-paperWhite transition-colors">
+                Report a broken link
+            </a>
+        </div>
+    </main>
+
+    <footer class="absolute bottom-6 text-xs text-warmLight/40 font-mono">
+        ekomiwatt.github.io/Portfolio-Website
+    </footer>
+
+</body>
+</html>
