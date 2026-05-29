@@ -432,6 +432,6 @@ What did get shared in this stage is the duplication that was genuinely uniform 
 - Tailwind Play CDN is still the dev build (~3 MB uncached). Replacing it with a built `dist/tailwind.css` requires a Node build step that doesn't exist in this project. Flagged in Stage 4 and Stage 5 logs.
 - `prose` Tailwind plugin not configured on the blog pages — the `prose prose-lg prose-blue` classes are silent no-ops. One-liner if/when the CDN gets replaced. Flagged in Stage 5 log.
 
-**Commit:** _pending_
+**Commit:** `b3cab89`
 
 <!-- Append new entries above this comment. -->
