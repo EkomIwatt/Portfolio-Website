@@ -307,4 +307,50 @@ All restorations are one-line operations — markup is preserved verbatim inside
 
 **Commit:** `197a723`
 
+### 2026-05-29 — blog2.html catch-up (Stages 1–4 backfill)
+
+**Files touched:** `blog2.html`, `sitemap.xml`.
+
+**Trigger:** OneDrive cloud-file provider finally hydrated `blog2.html`, unblocking the catch-up flagged at the end of every prior stage entry.
+
+**Stage 1 bug fixes** (same two defects that were on blog1)
+- Footer `<p clas>` → `<p>` (attribute typo, was a no-op).
+- Footer: collapsed `<a><div id="contactBtn" class="float-right … float-right">Get in Touch</div></a>` to a single `<a>` with the styling. Removed duplicate `id="contactBtn"` (the canonical one is on `index.html`'s EmailJS trigger button), the duplicated `float-right` class, and the nested non-button div inside an anchor.
+
+**Stage 1 additions**
+- Favicon: `<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">` + alternate icon.
+- `<meta name="theme-color" content="#213448">`.
+
+**Stage 2 — SEO & metadata**
+- `<meta name="description">`, `<meta name="author">`, canonical link.
+- Full Open Graph block (`og:type=article`, title/description/url/image, `og:locale`, `article:published_time=2026-04-17`, `article:section=Solder, Sparks, and Sockets`).
+- Twitter Card block (`summary_large_image`).
+- Sharper page title: `Pit Wall: Surviving the IES Buildathon` → `Pit Wall — Surviving the IES Buildathon` (em-dash to match blog1's pattern).
+- `BlogPosting` JSON-LD with `headline`, `datePublished` / `dateModified` (`2026-04-17`), `author`, `publisher`, `mainEntityOfPage`.
+- Wrapped "April 17, 2026" in `<time datetime="2026-04-17">`.
+
+**Stage 3 — accessibility**
+- `<link rel="stylesheet" href="css/style.css">` added so the page picks up the global focus rings, skip-link styling, and `prefers-reduced-motion` block. (Was missing — page had only its own inline `<style>`.)
+- Skip-link as the first focusable element in `<body>`.
+- `<nav aria-label="Primary">` on the top bar.
+- `<main id="main">` (skip-link target).
+- About-author profile portrait wrapper: `role="img" aria-label="Portrait of Ekomobong Iwatt"`; inner image-only div is `aria-hidden="true"`.
+- No Font Awesome icons on this page, so no `aria-hidden` icon sweep was needed.
+
+**Stage 4 — performance**
+- `<link rel="preconnect">` for `cdn.tailwindcss.com`, `fonts.googleapis.com`, `fonts.gstatic.com` (no Font Awesome on this page, so no `cdnjs.cloudflare.com` hint).
+- No image-set rewiring required: blog2 doesn't use `image1.jpg` or `project1.png`. The only image is `profile_img.jpg` (60 KB), kept as-is — out of scope for Stage 4's compression pass.
+- No EmailJS on this page, so no lazy-load work.
+
+**sitemap.xml**
+- blog2 `lastmod`: `2026-04-18` → `2026-04-17`. The Stage 2 value was a stopgap inferred from a git commit date because the file couldn't be opened; now that the actual publish date is authoritative via the BlogPosting JSON-LD, aligned to it. Matches blog1's `lastmod = publish date` convention (content unchanged today, only meta/a11y additions).
+
+**Decisions**
+- Preserved blog2's unique `pre code` / inline-`code` styling (it has code blocks; blog1 doesn't) — left the inline `<style>` block intact and just added `<link rel="stylesheet" href="css/style.css">` above it. The global stylesheet doesn't conflict.
+- Used the existing badge text "Solder, Sparks, and Sockets" as `og:article:section` to mirror blog1's pattern (which used "Blue, Cream, and Code").
+- `og:image` / `twitter:image` point at `profile_img.jpg` — same stopgap as the other pages until the proper 1200×630 social card lands in Stage 6.
+- This entry intentionally folds four stages into one commit because the prior-stage commits already exist for the other pages; isolating blog2 per-stage would mean four commits all touching the same file with no independent revert value.
+
+**Commit:** _pending_
+
 <!-- Append new entries above this comment. -->
