@@ -90,7 +90,7 @@ External dependencies (all via CDN):
 - [x] **Stage 0** — Branch + log + baseline
 - [x] **Stage 1** — Bug fixes & dead code cleanup
 - [x] **Stage 2** — SEO & metadata
-- [ ] **Stage 3** — Accessibility pass
+- [x] **Stage 3** — Accessibility pass
 - [ ] **Stage 4** — Performance & assets (image compression is the headline)
 - [ ] **Stage 5** — Maintainability refactor (extract shared head/nav/footer)
 - [ ] **Stage 6** — Polish & extras (404 page, scroll-to-top, OG image)
@@ -197,5 +197,65 @@ All restorations are one-line operations — markup is preserved verbatim inside
 - `blog2.html` still **not touched** — OneDrive cloud-file provider still erroring. The page is in `sitemap.xml` so search engines can still discover it, but it's missing all the meta tags and JSON-LD until it can be opened. Right-click → "Always keep on this device" in Explorer to fix.
 
 **Commit:** `4a5eebc`
+
+### 2026-05-29 — Stage 3: accessibility pass
+
+**Files touched:** `css/style.css`, `js/script.js`, `index.html`, `cv.html`, `blog1.html`.
+
+**css/style.css**
+- `:focus-visible` ring (`outline: 2px solid #94B4C1`) globally; switches to warm cream inside `nav`, `.bg-deepBlue`, and `footer` so it contrasts on the dark surfaces.
+- `.skip-link` styling — pinned top-left, hidden via `translate(-200%)` until focused.
+- `@media (prefers-reduced-motion: reduce)` — zeroes animation/transition durations site-wide and forces `.reveal*` into their final state.
+- `.sr-only` defensive fallback (Tailwind already ships one, but if the CDN ever fails the form labels still stay invisible-but-readable).
+
+**Stylesheet linkage**
+- `cv.html` and `blog1.html` now load `css/style.css`. Previously only `index.html` did, so accessibility CSS would have been missing from those pages otherwise.
+
+**index.html — landmarks & ARIA**
+- Skip-link as the first focusable element in `<body>`.
+- Added `<main id="main">` wrapping all content between `</nav>` and `<footer>` (skip-link target).
+- `<nav aria-label="Primary">` on the navbar.
+- Mobile-menu drawer: `role="dialog" aria-modal="true" aria-label="Site navigation"`.
+- Hamburger button: `type="button"`, `aria-label="Open menu"`, `aria-expanded="false"`, `aria-controls="mobile-menu"`. JS now flips `aria-expanded` and `aria-label` to "Close menu" when the drawer opens.
+- Close-menu button: `aria-label="Close menu"`.
+- EI logo wrapper promoted from `<span>` to `<a href="#home" aria-label="Ekomobong Iwatt — home">` — keyboard users couldn't activate it before.
+- Logo canvas got `aria-hidden="true"`.
+
+**index.html — form & buttons**
+- "Get in Touch" CTA was a `<div id="contactBtn">` — now a real `<button>`. Reachable by Tab, activates with Enter/Space.
+- Popup close button was a `<span type="button">` (which does nothing) — now a real `<button aria-label="Close contact form">`.
+- Contact form: added `<label for="…" class="sr-only">` for each input + textarea so screen readers stop relying on the disappearing-on-focus placeholder. Also gave inputs `autocomplete="name"` / `"email"`.
+- `<form aria-labelledby="contactFormTitle">` + a visually-hidden `<h2 id="contactFormTitle">Send me a message</h2>`.
+- Send button's inner `<p>` (a block element inside a button — invalid) → `<span>`.
+
+**index.html — semantic tags & icon hiding**
+- Footer social links wrapped in `<ul aria-label="Social links">` with `<li>` items (was a div with `<p>` for labels). Repeated `<p>` for "GitHub" / "LinkedIn" labels → `<span>`.
+- Every decorative `<i class="fa…">` icon and decorative `<svg>` on the page now carries `aria-hidden="true"` (~30 elements across project cards, certificates, "Why work with me", footer socials, and CTA arrows).
+- Hero portrait wrapper (CSS `background-image`): added `role="img" aria-label="Portrait of Ekomobong Iwatt"`; inner decorative divs get `aria-hidden="true"`.
+- `#background` decorative wrapper got `aria-hidden="true"`.
+
+**cv.html**
+- Skip-link added.
+- `<main id="main">` (the page already had `<main>`, just gave it an id).
+- "Download PDF" button: added `type="button"` (default for `<button>` in a form is `submit` and even outside a form it's safer to be explicit).
+- `aria-hidden="true"` on every Font Awesome icon (envelope, linkedin, github, map-marker, check-circle, external-link, download, arrow-left).
+
+**blog1.html**
+- Skip-link added.
+- `<nav aria-label="Primary">` on the top bar.
+- `<main id="main">` (gave the existing `<main>` an id).
+- About-author profile portrait wrapper: `role="img" aria-label="Portrait of Ekomobong Iwatt"`; the inner image-only div is `aria-hidden`.
+
+**js/script.js**
+- `toggleMenu()` now flips `aria-expanded` ("true"/"false") and `aria-label` ("Open menu" / "Close menu") on the hamburger button each toggle.
+- Logo-dot canvas animation skipped entirely when `window.matchMedia('(prefers-reduced-motion: reduce)').matches`.
+
+**Decisions**
+- Did **not** rewrite CSS-background images as `<img>` elements — that's a Stage 4 deliverable (where they become `<picture>` with srcset and WebP). For now they get `role="img"` + `aria-label` so screen readers describe them.
+- Kept the existing `.reveal` opacity-0 entry animation visible to motion-tolerant users — only forced final state inside the `prefers-reduced-motion` query.
+- `cv.html`'s decorative "circle" SVGs in the certificate cards already lived inside index.html, not cv.html, so cv only needed FA icon tagging.
+- Did **not** touch `blog2.html` — still OneDrive cloud-only. Skip-link + style.css link + main id + portrait aria need to be applied next session.
+
+**Commit:** _(filled in after `git commit`)_
 
 <!-- Append new entries above this comment. -->

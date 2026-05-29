@@ -28,6 +28,8 @@
     <link rel="alternate icon" href="assets/favicon.svg">
     <meta name="theme-color" content="#213448">
 
+    <link rel="stylesheet" href="css/style.css">
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code&display=swap" rel="stylesheet">
@@ -77,16 +79,18 @@
 </head>
 <body class="bg-warmLight/40 text-deepBlue font-sans antialiased min-h-full print:bg-white print:py-0 mb-16">
 
+    <a href="#main" class="skip-link">Skip to main content</a>
+
     <div class="no-print max-w-4xl mx-auto px-4 mb-6 flex justify-between items-center py-8 md:py-12">
         <a href="index.html" class="flex items-center gap-2 text-deepBlue font-semibold hover:text-mutedBlue transition-colors">
-            <i class="fas fa-arrow-left"></i> Back to Portfolio
+            <i class="fas fa-arrow-left" aria-hidden="true"></i> Back to Portfolio
         </a>
-        <button onclick="window.print()" class="bg-deepBlue text-white px-4 py-2 rounded-md font-medium hover:bg-mutedBlue transition-colors flex items-center gap-2 shadow-lg">
-            <i class="fas fa-download"></i> Download PDF
+        <button type="button" onclick="window.print()" class="bg-deepBlue text-white px-4 py-2 rounded-md font-medium hover:bg-mutedBlue transition-colors flex items-center gap-2 shadow-lg">
+            <i class="fas fa-download" aria-hidden="true"></i> Download PDF
         </button>
     </div>
 
-    <main class="print-container bg-white max-w-[210mm] mx-auto shadow-2xl p-8 rounded-lg print:rounded-none">
+    <main id="main" class="print-container bg-white max-w-[210mm] mx-auto shadow-2xl p-8 rounded-lg print:rounded-none">
         
         <header class="border-b-2 border-deepBlue/10 pb-6 mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
             <div class="w-full md:w-auto">
@@ -94,10 +98,10 @@
                 <p class="text-center text-xl text-mutedBlue mt-1 font-medium">Computer Engineering Student | Programmer</p>
             </div>
             <div class="flex flex-row flex-wrap md:flex-col justify-center gap-4 gap-y-3 text-sm text-gray-600 md:text-left">
-                <a href="mailto:ekomzwatt@gmail.com" class="hover:text-deepBlue transition-colors hover:underline "><i class="fas fa-envelope w-5"></i> ekomzwatt@gmail.com</a>
-                <a href="https://linkedin.com/in/ekomiwatt" class="hover:text-deepBlue transition-colors hover:underline "><i class="fab fa-linkedin w-5"></i> linkedin.com/in/ekomiwatt</a>
-                <a href="https://github.com/EkomIwatt" class="hover:text-deepBlue transition-colors hover:underline "><i class="fab fa-github w-5"></i> github.com/EkomIwatt</a>
-                <span class="text-gray-500"><i class="fas fa-map-marker-alt w-5"></i> Lagos, Nigeria</span>
+                <a href="mailto:ekomzwatt@gmail.com" class="hover:text-deepBlue transition-colors hover:underline "><i class="fas fa-envelope w-5" aria-hidden="true"></i> ekomzwatt@gmail.com</a>
+                <a href="https://linkedin.com/in/ekomiwatt" class="hover:text-deepBlue transition-colors hover:underline "><i class="fab fa-linkedin w-5" aria-hidden="true"></i> linkedin.com/in/ekomiwatt</a>
+                <a href="https://github.com/EkomIwatt" class="hover:text-deepBlue transition-colors hover:underline "><i class="fab fa-github w-5" aria-hidden="true"></i> github.com/EkomIwatt</a>
+                <span class="text-gray-500"><i class="fas fa-map-marker-alt w-5" aria-hidden="true"></i> Lagos, Nigeria</span>
             </div>
         </header>
 
@@ -148,7 +152,7 @@
                     <div class="mb-5">
                         <div class="flex justify-between items-baseline">
                             <h3 class="font-bold text-deepBlue">Student Record System</h3>
-                            <a href="https://github.com/EkomIwatt" class="text-xs text-mutedBlue hover:underline print:hidden">View Code <i class="fas fa-external-link-alt"></i></a>
+                            <a href="https://github.com/EkomIwatt" class="text-xs text-mutedBlue hover:underline print:hidden">View Code <i class="fas fa-external-link-alt" aria-hidden="true"></i></a>
                         </div>
                         <p class="text-sm text-gray-700 mt-1">
                             Developed a student record management system with CRUD operations using <span class="font-semibold">C++</span>. Built console applications demonstrating Object-Oriented Programming (OOP), data structures, and file handling.
@@ -205,10 +209,10 @@
                 <section>
                     <h2 class="text-lg font-bold uppercase tracking-wider text-deepBlue border-b border-gray-200 pb-2 mb-4">Soft Skills</h2>
                     <ul class="text-sm text-gray-700 space-y-2">
-                        <li><i class="fas fa-check-circle w-5 text-accentBlue"></i> Leadership</li>
-                        <li><i class="fas fa-check-circle w-5 text-accentBlue"></i> Problem-Solving</li>
-                        <li><i class="fas fa-check-circle w-5 text-accentBlue"></i> Strong Communication</li>
-                        <li><i class="fas fa-check-circle w-5 text-accentBlue"></i> Financial Planning</li>
+                        <li><i class="fas fa-check-circle w-5 text-accentBlue" aria-hidden="true"></i> Leadership</li>
+                        <li><i class="fas fa-check-circle w-5 text-accentBlue" aria-hidden="true"></i> Problem-Solving</li>
+                        <li><i class="fas fa-check-circle w-5 text-accentBlue" aria-hidden="true"></i> Strong Communication</li>
+                        <li><i class="fas fa-check-circle w-5 text-accentBlue" aria-hidden="true"></i> Financial Planning</li>
                     </ul>
                 </section>
 

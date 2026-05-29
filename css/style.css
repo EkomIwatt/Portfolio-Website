@@ -1,4 +1,66 @@
-/* Custom scrollbar to match theme */
+/* ---------- Accessibility ---------- */
+
+/* Visible keyboard focus ring (the browser default is invisible on the dark nav). */
+:focus-visible {
+    outline: 2px solid #94B4C1; /* accentBlue */
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+/* On the dark navbar, switch to a warm cream that contrasts the deepBlue background. */
+nav :focus-visible,
+.bg-deepBlue :focus-visible,
+footer :focus-visible {
+    outline-color: #EAE0CF; /* warmLight */
+}
+
+/* Skip-to-content link — invisible until focused, then pinned top-left. */
+.skip-link {
+    position: absolute;
+    top: 0.5rem;
+    left: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #213448;
+    color: #F9F7F2;
+    font-weight: 600;
+    border-radius: 4px;
+    transform: translateY(-200%);
+    transition: transform 0.2s ease-out;
+    z-index: 100;
+}
+.skip-link:focus {
+    transform: translateY(0);
+}
+
+/* Respect the user's OS-level "reduce motion" preference: kill animations,
+   transitions, and smooth scrolling everywhere. */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+    .reveal, .reveal-right {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+}
+
+/* sr-only fallback for non-Tailwind pages (Tailwind already ships this class,
+   but if Tailwind CDN ever fails to load we still want labels hidden visually). */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* ---------- Custom scrollbar to match theme ---------- */
 ::-webkit-scrollbar {
     width: 8px;
 }

@@ -15,13 +15,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // In script.js - Refined Toggle Logic
     function toggleMenu() {
         const isClosed = menu.classList.contains('translate-x-full');
-    
+
         if (isClosed) {
             menu.classList.remove('translate-x-full');
             document.body.classList.add('overflow-hidden'); // Stop background scrolling
+            if (btn) {
+                btn.setAttribute('aria-expanded', 'true');
+                btn.setAttribute('aria-label', 'Close menu');
+            }
         } else {
             menu.classList.add('translate-x-full');
             document.body.classList.remove('overflow-hidden');
+            if (btn) {
+                btn.setAttribute('aria-expanded', 'false');
+                btn.setAttribute('aria-label', 'Open menu');
+            }
         }
     }
 
@@ -168,8 +176,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Logo Dot Animation ---
+    // Skip entirely if the user has asked their OS for reduced motion.
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const logoCanvas = document.getElementById('logo-dot');
-    if (logoCanvas) {
+    if (logoCanvas && !prefersReducedMotion) {
         const logoCtx = logoCanvas.getContext('2d');
 
         const dotR = 3;

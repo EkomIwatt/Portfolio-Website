@@ -32,6 +32,8 @@
     <link rel="alternate icon" href="assets/favicon.svg">
     <meta name="theme-color" content="#213448">
 
+    <link rel="stylesheet" href="css/style.css">
+
     <!-- Structured data: BlogPosting -->
     <script type="application/ld+json">
     {
@@ -90,12 +92,14 @@
 
 <body class="bg-warmLight/40 text-deepBlue leading-relaxed selection:bg-accentBlue selection:text-paperWhite">
 
-    <nav class="w-full py-6 px-4 md:px-12 flex justify-between items-center bg-deepBlue text-warmLight">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <nav aria-label="Primary" class="w-full py-6 px-4 md:px-12 flex justify-between items-center bg-deepBlue text-warmLight">
         <div class="font-bold text-xl tracking-wider md:text-2xl ml-12">Ekom's Blog</div>
         <a href="index.html" class="hover:text-accentBlue transition-colors duration-300 text-sm md:text-lg">← Back to Home</a>
     </nav>
 
-    <main class="max-w-3xl mx-auto px-6 py-12 md:py-20">
+    <main id="main" class="max-w-3xl mx-auto px-6 py-12 md:py-20">
         
         <header class="mb-12 border-b-2 border-warmLight pb-8">
             <span class="bg-mutedBlue text-paperWhite text-xs font-mono px-2 py-1 rounded mb-4 inline-block">Blue, Cream, and Code</span>
@@ -189,8 +193,8 @@
         <hr class="border-warmLight my-12">
         
         <div class="bg-warmLight/20 p-8 rounded-xl flex flex-col md:flex-row items-center md:items-start gap-6">
-            <div class="w-20 h-20 bg-deepBlue rounded-full flex items-center justify-center text-warmLight text-2xl font-bold shrink-0 relative ring ring-mutedBlue">
-               <div class="absolute inset-[3.5px] border-r-0 rounded-l-full rounded-r-full bg-cover z-10" 
+            <div role="img" aria-label="Portrait of Ekomobong Iwatt" class="w-20 h-20 bg-deepBlue rounded-full flex items-center justify-center text-warmLight text-2xl font-bold shrink-0 relative ring ring-mutedBlue">
+               <div aria-hidden="true" class="absolute inset-[3.5px] border-r-0 rounded-l-full rounded-r-full bg-cover z-10"
                             style="background-image: url(assets/profile_img.jpg);">
                         </div>
             </div>

@@ -108,14 +108,16 @@
 
 <body class="bg-warmLight text-deepBlue font-sans antialiased overflow-x-hidden">
 
-    <nav class="fixed top-0 w-full bg-deepBlue/95 backdrop-blur-sm z-50 shadow-md border-b border-white/10">
+    <a href="#main" class="skip-link">Skip to main content</a>
+
+    <nav aria-label="Primary" class="fixed top-0 w-full bg-deepBlue/95 backdrop-blur-sm z-50 shadow-md border-b border-white/10">
         <div class="mx-auto md:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex-shrink-0 flex items-center ml-8">
-                    <span class="relative text-white text-xl font-bold tracking-tight">
-                        <canvas id="logo-dot" class="absolute pointer-events-none" style="top: -4px; left: -8px;" width="80" height="46"></canvas>
+                    <a href="#home" aria-label="Ekomobong Iwatt — home" class="relative text-white text-xl font-bold tracking-tight">
+                        <canvas id="logo-dot" aria-hidden="true" class="absolute pointer-events-none" style="top: -4px; left: -8px;" width="80" height="46"></canvas>
                         <span class="relative z-10">E I</span>
-                    </span>
+                    </a>
                 </div>
 
                 <div class="hidden md:flex space-x-8 items-center">
@@ -143,16 +145,16 @@
                 </div>
 
                 <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-btn" class="mr-8 text-white hover:text-accentBlue focus:outline-none p-2">
-                        <i class="fas fa-bars text-xl"></i>
+                    <button id="mobile-menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" class="mr-8 text-white hover:text-accentBlue p-2">
+                        <i class="fas fa-bars text-xl" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
         </div>
 
-        <div id="mobile-menu" class="fixed inset-0 bg-deepBlue z-40 transform translate-x-full md:hidden flex flex-col pt-20 transition-transform duration-300 ease-in-out">
-            <button id="close-menu-btn" class="absolute top-5 right-6 text-white text-2xl hover:text-accentBlue">
-                <i class="fas fa-times"></i>
+        <div id="mobile-menu" role="dialog" aria-modal="true" aria-label="Site navigation" class="fixed inset-0 bg-deepBlue z-40 transform translate-x-full md:hidden flex flex-col pt-20 transition-transform duration-300 ease-in-out">
+            <button id="close-menu-btn" type="button" aria-label="Close menu" class="absolute top-5 right-6 text-white text-2xl hover:text-accentBlue">
+                <i class="fas fa-times" aria-hidden="true"></i>
             </button>
             <a href="#home" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-95 hover:border-2 hover:border-white">Home</a>
             <a href="#projects" class="text-white text-2xl font-medium py-4 border-b border-gray-700 mobile-link px-6 bg-deepBlue bg-opacity-90 hover:border-2 hover:border-white">Projects</a>
@@ -163,8 +165,10 @@
         </div>
     </nav>
     
+    <main id="main">
+
     <div class="relative bg-imageWhite min-h-screen flex">
-        <div id="background" class="invisible md:visible"></div>
+        <div id="background" aria-hidden="true" class="invisible md:visible"></div>
         <section id="home" class="relative bg-transparent z-10 pt-24 md:pt-32 pb-20 px-4 sm:px-6 lg:px-24 w-full mx-auto flex flex-col md:flex-row items-center justify-center gap-12">
             
             <div class="flex-1 text-center md:text-left group animate-fade-in-up pr-16 pl-2 mb-4">
@@ -187,9 +191,9 @@
                             </div>
                     </h1>
 
-                    <div class="absolute z-0 right-1.5 md:hidden w-7/12 h-44 rounded-l-full rounded-r-full overflow-hidden shadow-lg">
-                        <div class="shimmer-bg absolute -top-[50%] -left-[50%] w-[200%] h-[200%] z-0"></div>
-                        <div class="absolute inset-[4px] border-r-0 rounded-l-full rounded-r-full bg-cover z-10" 
+                    <div role="img" aria-label="Portrait of Ekomobong Iwatt" class="absolute z-0 right-1.5 md:hidden w-7/12 h-44 rounded-l-full rounded-r-full overflow-hidden shadow-lg">
+                        <div aria-hidden="true" class="shimmer-bg absolute -top-[50%] -left-[50%] w-[200%] h-[200%] z-0"></div>
+                        <div aria-hidden="true" class="absolute inset-[4px] border-r-0 rounded-l-full rounded-r-full bg-cover z-10"
                             style="background-image: url(assets/image1.jpg);">
                         </div>
                     </div>
@@ -218,7 +222,7 @@
                 <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                     <a href="cv.html" class="border-2 border-deepBlue text-deepBlue px-8 py-3 rounded-md font-semibold hover:bg-deepBlue hover:text-white transition-colors">View Resume</a>
                     <a href="#projects" class="text-deepBlue px-8 py-3 font-semibold hover:text-mutedBlue transition-colors flex items-center justify-center gap-2">
-                        View Work <i class="fas fa-arrow-right"></i>
+                        View Work <i class="fas fa-arrow-right" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
@@ -268,7 +272,7 @@
                         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
                     </div>
                     <div class="h-48 flex items-center justify-center transition-colors relative overflow-hidden">
-                        <i class="fas fa-chart-line text-6xl text-white/20"></i>
+                        <i class="fas fa-chart-line text-6xl text-white/20" aria-hidden="true"></i>
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent bg-cover rounded-md" style="background-image: url(./assets/project1.png);"></div>
                         <div class="absolute bottom-4 left-4 text-white font-mono text-sm opacity-0 group-hover:opacity-100 transition-opacity">Hello World !</div>
                     </div>
@@ -283,7 +287,7 @@
                             <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Tailwind</span>
                         </div>
                         <a href="https://github.com/EkomIwatt/Portfolio-Website" class="inline-flex items-center text-mutedBlue font-semibold hover:text-deepBlue text-sm transition-colors">
-                            View Repository <i class="fas fa-arrow-right ml-2 text-xs"></i>
+                            View Repository <i class="fas fa-arrow-right ml-2 text-xs" aria-hidden="true"></i>
                         </a>
                     </div>
                 </div>
@@ -295,7 +299,7 @@
                         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
                     </div>
                     <div class="h-48 bg-gray-700/60 flex items-center justify-center relative rounded-md">
-                        <i class="fas fa-server text-6xl text-white/20"></i>
+                        <i class="fas fa-server text-6xl text-white/20" aria-hidden="true"></i>
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
                         <div class="flex items-center gap-2 mb-2 flex-wrap">
@@ -309,7 +313,7 @@
                             <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">AWS EC2</span>
                         </div>
                         <span class="inline-flex items-center text-gray-400 font-semibold text-sm mt-auto">
-                            Coming Soon <i class="fas fa-clock ml-2 text-xs"></i>
+                            Coming Soon <i class="fas fa-clock ml-2 text-xs" aria-hidden="true"></i>
                         </span>
                     </div>
                 </div>
@@ -321,7 +325,7 @@
                         <div class="w-2 h-2 rounded-full bg-gray-400"></div>
                     </div>
                     <div class="h-48 bg-accentBlue/40 flex items-center justify-center relative rounded-md">
-                        <i class="fas fa-mobile-alt text-6xl text-white/40"></i>
+                        <i class="fas fa-mobile-alt text-6xl text-white/40" aria-hidden="true"></i>
                     </div>
                     <div class="p-6 flex-1 flex flex-col">
                         <div class="flex items-center gap-2 mb-2 flex-wrap">
@@ -335,7 +339,7 @@
                             <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">Redux</span>
                         </div>
                         <span class="inline-flex items-center text-gray-400 font-semibold text-sm mt-auto">
-                            Coming Soon <i class="fas fa-clock ml-2 text-xs"></i>
+                            Coming Soon <i class="fas fa-clock ml-2 text-xs" aria-hidden="true"></i>
                         </span>
                     </div>
                 </div>
@@ -414,7 +418,7 @@
                 
                 <div class="p-6 flex flex-col flex-grow">
                     <div class="w-12 h-12 bg-warmLight/30 rounded-lg flex items-center justify-center text-deepBlue mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                         </svg>
                     </div>
@@ -428,7 +432,7 @@
 
                     <a href="#" class="inline-flex items-center text-sm font-bold text-accentBlue hover:text-deepBlue transition-colors mt-auto">
                         View Credential 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                     </a>
@@ -441,7 +445,7 @@
                 
                 <div class="p-6 flex flex-col flex-grow">
                     <div class="w-12 h-12 bg-warmLight/30 rounded-lg flex items-center justify-center text-deepBlue mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
@@ -455,7 +459,7 @@
 
                     <a href="https://coursera.org/share/47660064544b3149f3c07c0dd39d2df9" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-bold text-accentBlue hover:text-deepBlue transition-colors mt-auto">
                         View Credential 
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                     </a> 
@@ -468,7 +472,7 @@
                 
                 <div class="p-6 flex flex-col flex-grow">
                     <div class="w-12 h-12 bg-warmLight/30 rounded-lg flex items-center justify-center text-deepBlue mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
@@ -482,7 +486,7 @@
 
                     <a href="https://www.udemy.com/certificate/UC-385df29e-18b7-4ea4-9db9-e8fc3af13bd4/" target="_blank" rel="noopener noreferrer" class="inline-flex items-center text-sm font-bold text-accentBlue hover:text-deepBlue transition-colors mt-auto">
                         View Certificate
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                         </svg>
                     </a>
@@ -494,7 +498,7 @@
                 <div class="h-2 bg-gray-300 w-full rounded-t-xl"></div>
                 <div class="p-6 flex flex-col flex-grow">
                     <div class="w-12 h-12 bg-warmLight/20 rounded-lg flex items-center justify-center text-gray-400 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
@@ -512,7 +516,7 @@
                 <div class="h-2 bg-gray-300 w-full rounded-t-xl"></div>
                 <div class="p-6 flex flex-col flex-grow">
                     <div class="w-12 h-12 bg-warmLight/20 rounded-lg flex items-center justify-center text-gray-400 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.384-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
                         </svg>
                     </div>
@@ -530,7 +534,7 @@
                 <div class="h-2 bg-gray-300 w-full rounded-t-xl"></div>
                 <div class="p-6 flex flex-col flex-grow">
                     <div class="w-12 h-12 bg-warmLight/20 rounded-lg flex items-center justify-center text-gray-400 mb-4">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
@@ -702,17 +706,17 @@
                 <h3 class="text-2xl font-bold mb-6">Why work with me?</h3>
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                     <div>
-                        <div class="text-accentBlue text-2xl mb-2"><i class="fas fa-bolt"></i></div>
+                        <div class="text-accentBlue text-2xl mb-2"><i class="fas fa-bolt" aria-hidden="true"></i></div>
                         <h4 class="font-semibold mb-1">Fast Learner</h4>
                         <p class="text-gray-300 text-sm">I pick up new tools and frameworks quickly — and I actually enjoy the process.</p>
                     </div>
                     <div>
-                        <div class="text-accentBlue text-2xl mb-2"><i class="fas fa-code"></i></div>
+                        <div class="text-accentBlue text-2xl mb-2"><i class="fas fa-code" aria-hidden="true"></i></div>
                         <h4 class="font-semibold mb-1">Clean Code</h4>
                         <p class="text-gray-300 text-sm">I write readable, well-structured code because I know someone else will read it.</p>
                     </div>
                     <div>
-                        <div class="text-accentBlue text-2xl mb-2"><i class="fas fa-comments"></i></div>
+                        <div class="text-accentBlue text-2xl mb-2"><i class="fas fa-comments" aria-hidden="true"></i></div>
                         <h4 class="font-semibold mb-1">Great Communicator</h4>
                         <p class="text-gray-300 text-sm">I ask good questions, give clear updates, and I'm not afraid to say "I don't know yet."</p>
                     </div>
@@ -720,6 +724,8 @@
             </div>
         </div>
     </section>
+
+    </main>
 
     <footer id="contact" class="bg-deepBlue text-white pt-20 pb-4">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -729,9 +735,9 @@
                     <p class="text-gray-400 text-sm sm:text-lg">I've been building on my own, and I'm ready to build for you.</p>
                 </div>
                 <div class="mt-8 md:mt-0 flex flex-col sm:flex-row gap-3 mx-auto sm:mx-0">
-                    <div id="contactBtn" class="bg-accentBlue text-deepBlue px-4 md:px-8 py-2 md:py-3 rounded-md font-bold hover:bg-paperWhite transition-colors cursor-pointer text-center">
+                    <button id="contactBtn" type="button" class="bg-accentBlue text-deepBlue px-4 md:px-8 py-2 md:py-3 rounded-md font-bold hover:bg-paperWhite transition-colors cursor-pointer text-center">
                         Get in Touch
-                    </div>
+                    </button>
                     <a href="cv.html" class="border-2 border-gray-500 text-gray-300 px-4 md:px-8 py-2 md:py-3 rounded-md font-bold hover:border-white hover:text-white transition-colors text-center">
                         View Resume
                     </a>
@@ -739,12 +745,12 @@
             </div>
             
             <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-300">
-                <div class="flex flex-wrap space-around sm:space-x-6 justify-center active md:mb-0">                    
-                    <a href="https://github.com/EkomIwatt" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-github text-xl p-1 rounded-md m-1"></i><p class="">GitHub</p></a>
-                    <a href="https://linkedin.com/in/ekomiwatt" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-linkedin text-xl p-1 rounded-md m-1"></i><p class="">LinkedIn</p></a>
-                    <a href="https://x.com/yr_Ekom" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-twitter text-xl p-1 rounded-md m-1"></i><p class="">Twitter</p></a>
-                    <a href="https://wa.me/+2349122141156" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-whatsapp text-xl p-1 rounded-md m-1"></i><p class="">WhatsApp</p></a>
-                </div>
+                <ul aria-label="Social links" class="flex flex-wrap space-around sm:space-x-6 justify-center md:mb-0 list-none p-0 m-0">
+                    <li><a href="https://github.com/EkomIwatt" rel="noopener" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-github text-xl p-1 rounded-md m-1" aria-hidden="true"></i><span>GitHub</span></a></li>
+                    <li><a href="https://linkedin.com/in/ekomiwatt" rel="noopener" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-linkedin text-xl p-1 rounded-md m-1" aria-hidden="true"></i><span>LinkedIn</span></a></li>
+                    <li><a href="https://x.com/yr_Ekom" rel="noopener" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-twitter text-xl p-1 rounded-md m-1" aria-hidden="true"></i><span>Twitter</span></a></li>
+                    <li><a href="https://wa.me/+2349122141156" rel="noopener" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-whatsapp text-xl p-1 rounded-md m-1" aria-hidden="true"></i><span>WhatsApp</span></a></li>
+                </ul>
                 <p class="pt-4">&copy; 2025 Ekomobong Iwatt. All rights reserved.</p>
             </div>
         </div>
@@ -752,15 +758,23 @@
 
     <div id="popupOverlay" class="popup-overlay hidden fixed top-0 left-0 w-full h-full bg-black/50 flex justify-center items-center z-50">
         <div class="popup-content">
-            <form id="contactForm" class="hidden relative slide-up space-y-4 w-4/5 max-w-md mx-auto p-4 pt-8 border-2 border-paperWhite rounded-lg bg-deepBlue">
-                <span type="button" id="closePopup" class="close-btn absolute top-1 right-4 text-2xl cursor-pointer text-paperWhite">&times;</span>
+            <form id="contactForm" aria-labelledby="contactFormTitle" class="hidden relative slide-up space-y-4 w-4/5 max-w-md mx-auto p-4 pt-8 border-2 border-paperWhite rounded-lg bg-deepBlue">
+                <h2 id="contactFormTitle" class="sr-only">Send me a message</h2>
+                <button type="button" id="closePopup" aria-label="Close contact form" class="close-btn absolute top-1 right-4 text-2xl cursor-pointer text-paperWhite bg-transparent border-0">&times;</button>
                 <input type="hidden" name="time" id="timeInput">
-                <input type="text" placeholder="Your Name" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-1.5 sm:p-2 mt-20" required="" name="user_name">
-                <input type="email" placeholder="Your Email" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-1.5 sm:p-2" required="" name="user_email">
-                <textarea name="message" placeholder="Your Message" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-1.5 sm:p-2" rows="5" required=""></textarea>
-                <button id="sendBtn" class="transition-transform transition-colors duration-300 ease-out cursor-pointer items-center ml-auto flex gap-2 shadow-md rounded-full px-3 py-1 text-gray-300 hover:bg-paperWhite hover:text-deepBlue transition-colors border-2 border-gray-300">
-                    <p class="text-sm">Send</p> 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-send" aria-hidden="true">
+
+                <label for="cf-name" class="sr-only">Your name</label>
+                <input type="text" id="cf-name" placeholder="Your Name" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-1.5 sm:p-2 mt-20" required name="user_name" autocomplete="name">
+
+                <label for="cf-email" class="sr-only">Your email</label>
+                <input type="email" id="cf-email" placeholder="Your Email" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-1.5 sm:p-2" required name="user_email" autocomplete="email">
+
+                <label for="cf-message" class="sr-only">Your message</label>
+                <textarea id="cf-message" name="message" placeholder="Your Message" class="w-full border border-input bg-paperWhite text-deepBlue placeholder:text-gray-400 rounded-lg p-1.5 sm:p-2" rows="5" required></textarea>
+
+                <button id="sendBtn" type="submit" class="transition-transform transition-colors duration-300 ease-out cursor-pointer items-center ml-auto flex gap-2 shadow-md rounded-full px-3 py-1 text-gray-300 hover:bg-paperWhite hover:text-deepBlue border-2 border-gray-300">
+                    <span class="text-sm">Send</span>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
                         <path d="m21.854 2.147-10.94 10.939"></path>
                     </svg>
