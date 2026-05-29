@@ -233,3 +233,41 @@ footer :focus-visible {
 .delay-100 { transition-delay: 100ms; }
 .delay-200 { transition-delay: 200ms; }
 .delay-300 { transition-delay: 300ms; }
+
+/* ---------- Tag chips ---------- */
+/* Used by project cards (tech stack tags) and the About-section technology list.
+   Stage 5 dedup: each rule below replaces an identical 5–6-class Tailwind string
+   that was being copy-pasted. Hex values mirror the palette in
+   js/tailwind-config.js — keep them in sync if the palette changes. */
+
+/* Solid pill — used in the About-section technology list (C++, Python, Rust, …). */
+.chip-pill {
+    display: inline-block;
+    background-color: #547792; /* mutedBlue */
+    color: #fff;
+    padding: 0.25rem 0.75rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+/* Small light tag — used on active project cards (HTML, CSS, JS, Tailwind). */
+.chip-tag {
+    display: inline-block;
+    background-color: #e5e7eb; /* gray-200 */
+    color: #213448; /* deepBlue */
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+}
+
+/* WIP variant of chip-tag — muted greys for the "in progress" project cards
+   (dashed-border treatment from Stage 1b). Reads as *intent*, not *delivered*. */
+.chip-tag-muted {
+    display: inline-block;
+    background-color: #f3f4f6; /* gray-100 */
+    color: #6b7280; /* gray-500 */
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+}

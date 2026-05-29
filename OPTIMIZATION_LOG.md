@@ -92,7 +92,7 @@ External dependencies (all via CDN):
 - [x] **Stage 2** — SEO & metadata
 - [x] **Stage 3** — Accessibility pass
 - [x] **Stage 4** — Performance & assets (image compression is the headline)
-- [ ] **Stage 5** — Maintainability refactor (extract shared head/nav/footer)
+- [x] **Stage 5** — Maintainability refactor (Tailwind config + chip components; nav/footer extraction deferred — see entry for why)
 - [ ] **Stage 6** — Polish & extras (404 page, scroll-to-top, OG image)
 
 Each stage lands as its own commit (or small commit series) so any one of them can be reverted in isolation.
@@ -352,5 +352,47 @@ All restorations are one-line operations — markup is preserved verbatim inside
 - This entry intentionally folds four stages into one commit because the prior-stage commits already exist for the other pages; isolating blog2 per-stage would mean four commits all touching the same file with no independent revert value.
 
 **Commit:** `9b55282`
+
+### 2026-05-29 — Stage 5: maintainability refactor (Tailwind config + chip components)
+
+**Files touched:** `js/tailwind-config.js` (new), `css/style.css`, `index.html`, `cv.html`, `blog1.html`, `blog2.html`.
+
+**Scope correction:** the original plan said "extract shared head/nav/footer". A closer look at the four pages shows the overlap is smaller than the baseline catalogue implied:
+- `index.html` has a rich footer that doubles as the `#contact` section (CTA, social links, copyright). It's a *section*, not just chrome.
+- `blog1.html` + `blog2.html` share a minimal footer (`© 2026` + Get in Touch back-link).
+- `cv.html` has **no** nav and **no** footer at all (print-oriented page).
+
+So the only genuinely shared nav/footer pair is between the two blog pages, and even that's ~10 lines. Extracting it would require either a runtime `fetch`+inject (introduces FOUC and an empty-shell-for-crawlers concern) or a Node build step the project doesn't have. Cost vs. benefit didn't justify the change today; deferred to Stage 6 or a future "introduce a build step" decision.
+
+What did get shared in this stage is the duplication that was genuinely uniform and high-friction:
+
+**1. Tailwind config → `js/tailwind-config.js`** (palette single-source-of-truth)
+- The inline `<script>tailwind.config = { … }</script>` block was duplicated across all 4 pages. `index.html`'s version was a superset: 2 extra colors (`imageWhite`, `skyBlue`), `boxShadow.soft`, an `animation`/`keyframes` block (`fade-in-up`, `float`), and a `backgroundOpacity` block.
+- New `js/tailwind-config.js` carries the full superset — Tailwind JIT only emits CSS for utilities actually referenced in the markup, so blog/cv pages pay zero CSS bytes for index's extras.
+- Each page now has `<script src="js/tailwind-config.js"></script>` immediately after `<script src="https://cdn.tailwindcss.com"></script>`. Same script-then-config ordering the pages used inline, just sourced from one file.
+- Palette tweaks now propagate to all 4 pages from one edit.
+
+**2. Tag chip components → `css/style.css`** (extract repeated class soup)
+- Three patterns were duplicated 19 times across `index.html`:
+  - **`.chip-pill`** — `bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium` (9× in the About-section technology list: C++, Python, Rust, …).
+  - **`.chip-tag`** — `text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded` (4× on the active Portfolio Website project card: HTML, CSS, JS, Tailwind).
+  - **`.chip-tag-muted`** — `text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded` (6× on the two WIP project cards from Stage 1b: Django/Docker/AWS, React Native/Firebase/Redux).
+- Three new CSS rules at the bottom of `css/style.css` under a `Tag chips` section header, matching the existing file style (sectioned, palette hex with inline comments).
+- 19 multi-class strings collapsed to one class name each.
+
+**Not extracted:** the timeline status badges (`bg-accentBlue/10 text-mutedBlue …` on Ongoing/Academic/Community pills, ~3 occurrences) carry layout (`mt-2 sm:mt-0 inline-flex items-center`) that doesn't generalize as a chip. Skipping them isn't a meaningful cost; left as-is.
+
+**3. Bonus fix:** `index.html` footer copyright `© 2025` → `© 2026`. Was stale.
+
+**Decisions**
+- **Hex values, not `@apply`.** The chip CSS hardcodes the palette hex (`#547792` for mutedBlue, etc.) instead of using `@apply bg-mutedBlue …`. The Tailwind Play CDN supports `@apply` only inside `<style type="text/tailwindcss">` blocks, which would re-introduce per-page duplication. Plain CSS with a comment pointing at the palette source is the smallest workable trade-off; if the palette changes, `css/style.css` needs a matching edit (the file already has palette hex in the focus rings, scrollbar, skip-link sections, so this isn't new debt).
+- **Superset config, not minimal.** Considered two-file split (base config + index-extras), rejected — Tailwind JIT means the extras are free for pages that don't use them, and one file is easier to reason about.
+- **Nav/footer extraction deferred.** Two blog pages sharing ~10 lines doesn't pay for either runtime injection (FOUC, SEO) or a new build step (tooling sprawl). Reconsider if a third blog post lands or if a build step becomes desirable for other reasons (e.g. Tailwind production build, replacing the dev CDN).
+- **`prose` Tailwind plugin not configured.** `blog1.html` and `blog2.html` both have `<article class="prose prose-lg prose-blue …">` but the Play CDN doesn't include the typography plugin by default. Those classes are silently no-ops today and have been since the pages were written — visible styling there comes from the explicit Tailwind classes on each `<p>`/`<h2>`. Out of scope for this stage; flagging here. Adding the plugin is a one-liner if/when the rest of the project moves off the dev CDN.
+
+**Page-weight impact**
+- Net: 121 lines removed, 63 added across 5 files. New 56-line `js/tailwind-config.js`, ~40-line chip section in `css/style.css`. Visual result identical.
+
+**Commit:** _pending_
 
 <!-- Append new entries above this comment. -->

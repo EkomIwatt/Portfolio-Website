@@ -74,49 +74,7 @@
 
     <link rel="stylesheet" href="css/style.css">
 
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        deepBlue: '#213448',
-                        mutedBlue: '#547792',
-                        accentBlue: '#94B4C1',
-                        warmLight: '#EAE0CF',
-                        paperWhite: '#F9F7F2',
-                        imageWhite: '#EFF0EA',
-                        skyBlue: '#A3CEF1',
-                    },
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['Fira Code', 'monospace'],
-                    },
-                    boxShadow: {
-                        'soft': '0 4px 20px -2px rgba(33, 52, 72, 0.1)',
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                        'float': 'float 4s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
-                    },
-                    backgroundOpacity: {
-                        '85': '0.85',
-                        '75': '0.75',
-                        '65': '0.65',
-                    }
-                }
-            }
-        }
-    </script>
+    <script src="js/tailwind-config.js"></script>
 </head>
 
 <body class="bg-warmLight text-deepBlue font-sans antialiased overflow-x-hidden">
@@ -218,15 +176,15 @@
                 <div class="mt-8 max-w-sm md:max-w-md">
                     <p class="text-sm font-semibold uppercase tracking-wider text-gray-500 mb-3 text-center">Core Technologies</p>
                     <div class="flex flex-wrap gap-2 justify-center">
-                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">C++</span>
-                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">Python</span>
-                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">Rust</span>
-                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">JavaScript</span>
-                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">HTML/CSS</span>
-                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">React</span>
-                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">Embedded Systems</span>
-                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">AWS</span>
-                        <span class="bg-mutedBlue text-white px-3 py-1 rounded-full text-sm font-medium">MATLAB</span>
+                        <span class="chip-pill">C++</span>
+                        <span class="chip-pill">Python</span>
+                        <span class="chip-pill">Rust</span>
+                        <span class="chip-pill">JavaScript</span>
+                        <span class="chip-pill">HTML/CSS</span>
+                        <span class="chip-pill">React</span>
+                        <span class="chip-pill">Embedded Systems</span>
+                        <span class="chip-pill">AWS</span>
+                        <span class="chip-pill">MATLAB</span>
                     </div>
                 </div>
 
@@ -293,10 +251,10 @@
                         <h3 class="text-xl font-bold text-deepBlue mb-2">Portfolio Website</h3>
                         <p class="text-gray-600 text-sm mb-4 flex-1">My personal corner of the web, featuring my latest work and technical journey. </p>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">HTML</span>
-                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">CSS</span>
-                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">JS</span>
-                            <span class="text-xs bg-gray-200 text-deepBlue px-2 py-1 rounded">Tailwind</span>
+                            <span class="chip-tag">HTML</span>
+                            <span class="chip-tag">CSS</span>
+                            <span class="chip-tag">JS</span>
+                            <span class="chip-tag">Tailwind</span>
                         </div>
                         <a href="https://github.com/EkomIwatt/Portfolio-Website" class="inline-flex items-center text-mutedBlue font-semibold hover:text-deepBlue text-sm transition-colors">
                             View Repository <i class="fas fa-arrow-right ml-2 text-xs" aria-hidden="true"></i>
@@ -320,9 +278,9 @@
                         </div>
                         <p class="text-gray-500 text-sm mb-4 flex-1">Currently building. The full write-up and repo link land here once it ships.</p>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">Django</span>
-                            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">Docker</span>
-                            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">AWS EC2</span>
+                            <span class="chip-tag-muted">Django</span>
+                            <span class="chip-tag-muted">Docker</span>
+                            <span class="chip-tag-muted">AWS EC2</span>
                         </div>
                         <span class="inline-flex items-center text-gray-400 font-semibold text-sm mt-auto">
                             Coming Soon <i class="fas fa-clock ml-2 text-xs" aria-hidden="true"></i>
@@ -346,9 +304,9 @@
                         </div>
                         <p class="text-gray-500 text-sm mb-4 flex-1">Currently building. The full write-up and demo link land here once it ships.</p>
                         <div class="flex flex-wrap gap-2 mb-6">
-                            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">React Native</span>
-                            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">Firebase</span>
-                            <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded">Redux</span>
+                            <span class="chip-tag-muted">React Native</span>
+                            <span class="chip-tag-muted">Firebase</span>
+                            <span class="chip-tag-muted">Redux</span>
                         </div>
                         <span class="inline-flex items-center text-gray-400 font-semibold text-sm mt-auto">
                             Coming Soon <i class="fas fa-clock ml-2 text-xs" aria-hidden="true"></i>
@@ -763,7 +721,7 @@
                     <li><a href="https://x.com/yr_Ekom" rel="noopener" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-twitter text-xl p-1 rounded-md m-1" aria-hidden="true"></i><span>Twitter</span></a></li>
                     <li><a href="https://wa.me/+2349122141156" rel="noopener" class="hover:text-paperWhite transition-colors border-2 border-transparent hover:border-white p-1 rounded-md m-1 flex flex-col items-center"><i class="fab fa-whatsapp text-xl p-1 rounded-md m-1" aria-hidden="true"></i><span>WhatsApp</span></a></li>
                 </ul>
-                <p class="pt-4">&copy; 2025 Ekomobong Iwatt. All rights reserved.</p>
+                <p class="pt-4">&copy; 2026 Ekomobong Iwatt. All rights reserved.</p>
             </div>
         </div>
     </footer>
