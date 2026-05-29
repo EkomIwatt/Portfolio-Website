@@ -351,6 +351,6 @@ All restorations are one-line operations — markup is preserved verbatim inside
 - `og:image` / `twitter:image` point at `profile_img.jpg` — same stopgap as the other pages until the proper 1200×630 social card lands in Stage 6.
 - This entry intentionally folds four stages into one commit because the prior-stage commits already exist for the other pages; isolating blog2 per-stage would mean four commits all touching the same file with no independent revert value.
 
-**Commit:** _pending_
+**Commit:** `9b55282`
 
 <!-- Append new entries above this comment. -->
