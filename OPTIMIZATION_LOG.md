@@ -305,6 +305,6 @@ All restorations are one-line operations — markup is preserved verbatim inside
 - Did **not** address the Tailwind CDN dev build (it still ships ~3 MB uncached). Moving to a built `dist/tailwind.css` requires a Node build step that didn't exist on this project; that's a Stage 5 (maintainability) candidate or a future call.
 - `blog2.html` still untouched — OneDrive cloud-only. When it syncs, it needs preconnect tags and (if it uses image1/project1) the same class swap.
 
-**Commit:** _(filled in after `git commit`)_
+**Commit:** `197a723`
 
 <!-- Append new entries above this comment. -->
