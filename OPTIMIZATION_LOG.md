@@ -256,6 +256,6 @@ All restorations are one-line operations — markup is preserved verbatim inside
 - `cv.html`'s decorative "circle" SVGs in the certificate cards already lived inside index.html, not cv.html, so cv only needed FA icon tagging.
 - Did **not** touch `blog2.html` — still OneDrive cloud-only. Skip-link + style.css link + main id + portrait aria need to be applied next session.
 
-**Commit:** _(filled in after `git commit`)_
+**Commit:** `e20f80a`
 
 <!-- Append new entries above this comment. -->
