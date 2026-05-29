@@ -393,6 +393,6 @@ What did get shared in this stage is the duplication that was genuinely uniform 
 **Page-weight impact**
 - Net: 121 lines removed, 63 added across 5 files. New 56-line `js/tailwind-config.js`, ~40-line chip section in `css/style.css`. Visual result identical.
 
-**Commit:** _pending_
+**Commit:** `c9ab20b`
 
 <!-- Append new entries above this comment. -->
