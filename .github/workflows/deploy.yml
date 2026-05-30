@@ -1,0 +1,45 @@
+name: Deploy to GitHub Pages
+
+# Build runs on both main and the rebrand branch (proves the build is green
+# pre-cutover). Deploy is gated to `main` ONLY, so the live site is not touched
+# until Stage 5 cutover — at which point GitHub Pages "Source" must also be
+# switched from "Deploy from a branch" to "GitHub Actions" in repo Settings.
+# (The `rebrand-vibecoder` trigger can be removed once cutover is complete.)
+on:
+  push:
+    branches: [main, rebrand-vibecoder]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment; don't cancel an in-progress production deploy.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build with Astro
+        uses: withastro/action@v3
+        # withastro/action auto-detects npm, builds, and uploads the Pages
+        # artifact. `site`/`base` come from astro.config.mjs.
+
+  deploy:
+    needs: build
+    # Late cutover: only the default branch publishes to the live URL.
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

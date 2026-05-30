@@ -1,0 +1,24 @@
+---
+// Stage 0 placeholder — proves the Astro pipeline builds and serves.
+// The real homepage rebuild happens in Stage 2. The legacy static site
+// (root index.html, css/, js/) is untouched and remains live until cutover.
+import '../styles/global.css';
+const buildTime = new Date().toISOString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Portfolio — rebuild in progress</title>
+  </head>
+  <body class="grid min-h-screen place-content-center bg-neutral-950 text-neutral-100 font-sans">
+    <main class="space-y-2 text-center">
+      <h1 class="text-2xl font-bold">Astro pipeline is live.</h1>
+      <p class="text-neutral-400">Stage 0 scaffold. Built at {buildTime}.</p>
+      <p class="text-neutral-400">Base path: <code class="text-emerald-400">{import.meta.env.BASE_URL}</code></p>
+    </main>
+  </body>
+</html>

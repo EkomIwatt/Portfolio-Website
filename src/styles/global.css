@@ -1,0 +1,4 @@
+/* Tailwind v4 entry. Design tokens (crimson/navy palette, three-voice fonts,
+   spacing scale) get defined here via @theme in Stage 1 — see the plan's
+   Design System section. For now this just enables Tailwind utilities. */
+@import "tailwindcss";
