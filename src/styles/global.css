@@ -66,6 +66,109 @@
   transform: none;
 }
 
+/* ---- Buttons: sharp-edged, grey body with a radiating crimson glow -------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.65rem 1.2rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--color-ink);
+  background: var(--color-elevated);
+  border: 1px solid var(--color-line);
+  border-radius: 0; /* sharp / techy */
+  transition: box-shadow 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+  cursor: pointer;
+}
+.btn-sm { padding: 0.45rem 0.9rem; font-size: 0.8rem; }
+
+/* Animated crimson border with a shine that radiates around the edge.
+   A conic-gradient ring (masked to the 1px border) rotates; one light band
+   reads as the travelling shine. Freezes static under reduced motion. */
+@property --btn-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
+.btn-shine {
+  position: relative;
+  isolation: isolate;
+  border-color: transparent;
+}
+/* Rotating border ring = the travelling shine. Band is crimson-tinted, not white. */
+.btn-shine::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 1px; /* border thickness */
+  background: conic-gradient(
+    from var(--btn-angle),
+    var(--color-crimson) 0deg,
+    #ff8a97 40deg,
+    var(--color-crimson) 95deg,
+    color-mix(in srgb, var(--color-crimson) 32%, #000) 210deg,
+    var(--color-crimson) 360deg
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  animation: btnSpin 3.5s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+/* Soft crimson glow INSIDE the button (above the grey body, below the label)
+   that rotates on the same angle, so it follows the shine around the edge. */
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  background: conic-gradient(
+    from var(--btn-angle),
+    transparent 0deg,
+    color-mix(in srgb, var(--color-crimson) 70%, transparent) 40deg,
+    transparent 125deg,
+    transparent 360deg
+  );
+  filter: blur(7px);
+  opacity: 0.6;
+  animation: btnSpin 3.5s linear infinite;
+  pointer-events: none;
+}
+@keyframes btnSpin { to { --btn-angle: 360deg; } }
+.btn-shine:hover::before,
+.btn-shine:hover::after { animation-duration: 1.4s; }
+
+.btn-ghost { background: transparent; }
+.btn-ghost:hover { background: var(--color-card); border-color: var(--color-line-strong); }
+
+/* Slow pulsing crimson glow (atmosphere). Static under reduced motion. */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.78; transform: scale(1.07); }
+}
+.animate-pulse-glow { animation: pulseGlow 7s ease-in-out infinite; }
+
+/* Orchestrated page-load reveal — stagger via inline animation-delay. */
+@keyframes rise {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+.animate-rise {
+  animation: rise 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+}
+
+/* Faint engineering dotted-grid — blueprint atmosphere on near-black. */
+.bg-dotgrid {
+  background-image: radial-gradient(
+    color-mix(in srgb, var(--color-line) 65%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 22px 22px;
+}
+
 /* Crimson radial glow — atmosphere/depth without a colored block (replaces navy). */
 .u-glow {
   position: relative;
@@ -90,6 +193,7 @@
   *::before,
   *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;

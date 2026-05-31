@@ -1,19 +1,14 @@
 ---
-// Stage 0/1 placeholder — proves the Astro pipeline + design tokens.
-// Real homepage rebuild is Stage 2. Legacy static site stays live until cutover.
+// Homepage (Stage 2, in progress). Sections added incrementally.
+// Legacy static site stays live until the Stage 5 cutover.
 import Base from '../layouts/Base.astro';
-const buildTime = new Date().toISOString();
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
 ---
 
-<Base title="Portfolio — rebuild in progress" noindex={true}>
-  <main class="u-glow grid min-h-screen place-content-center px-6 text-center">
-    <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">[ stage 1 ] design foundation</p>
-    <h1 class="mt-4 text-4xl font-semibold tracking-tight sm:text-6xl">
-      I ship <span class="font-serif italic text-crimson">production</span> products.
-    </h1>
-    <p class="mt-4 text-muted">Astro pipeline + tokens live. Built {buildTime}.</p>
-    <p class="mt-1 font-mono text-sm">
-      <a href="#" class="text-crimson-link underline underline-offset-4">base {import.meta.env.BASE_URL}</a>
-    </p>
+<Base>
+  <Nav />
+  <main>
+    <Hero />
   </main>
 </Base>
