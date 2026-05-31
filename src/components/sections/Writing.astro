@@ -8,8 +8,8 @@ import { posts } from '../../data/sections';
     <SectionHeading num="08" label="Writing" lead="Notes from the" accent="build" />
 
     <ul class="mt-12 grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
-      {posts.map((p) => (
-        <li>
+      {posts.map((p, i) => (
+        <li class="reveal" style={`--reveal-delay: ${i * 100}ms`}>
           <a href={p.href} class="group flex h-full flex-col justify-between gap-6 bg-base p-8 transition-colors hover:bg-card/40">
             <div>
               <p class="font-mono text-xs uppercase tracking-[0.14em] text-muted">{p.date}</p>

@@ -9,10 +9,10 @@ import { metrics } from '../../data/sections';
     <SectionHeading num="03" label="By the Numbers" lead="Proof, not" accent="promises" />
 
     <dl class="mt-12 grid grid-cols-2 gap-px overflow-hidden border border-line bg-line lg:grid-cols-4">
-      {metrics.map((m) => (
-        <div class="bg-base p-8">
+      {metrics.map((m, i) => (
+        <div class="reveal bg-base p-8" style={`--reveal-delay: ${i * 100}ms`}>
           <dt class="font-mono text-xs uppercase tracking-[0.14em] text-muted">{m.label}</dt>
-          <dd class="mt-3 text-5xl font-semibold tracking-tight text-crimson sm:text-6xl">{m.value}</dd>
+          <dd class="count mt-3 text-5xl font-semibold tracking-tight text-crimson sm:text-6xl">{m.value}</dd>
         </div>
       ))}
     </dl>

@@ -1,13 +1,16 @@
 ---
 import SectionHeading from '../SectionHeading.astro';
 import CertStack from '../CertStack.tsx';
+import Weave from '../Weave.astro';
 import { certificates } from '../../data/sections';
 ---
 
-<section id="certificates" class="px-6 py-24 sm:py-32">
-  <div class="mx-auto max-w-6xl">
+<section id="certificates" class="relative isolate overflow-clip px-6 py-24 sm:py-32">
+  <Weave flip />
+
+  <div class="relative z-10 mx-auto max-w-6xl">
     <SectionHeading num="07" label="Certificates & Awards" lead="Credentials, on" accent="record" />
-    <p class="mt-4 max-w-md font-mono text-xs text-faint">/ use the arrows or ← → keys</p>
+    <p class="reveal mt-4 max-w-md font-mono text-xs text-faint" style="--reveal-delay: 80ms">/ use the arrows or ← → keys</p>
 
     <div class="mt-12">
       <CertStack certificates={certificates} client:visible />

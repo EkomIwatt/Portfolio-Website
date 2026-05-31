@@ -8,8 +8,8 @@ import { stack } from '../../data/sections';
     <SectionHeading num="04" label="Stack & Capabilities" lead="The tools I" accent="reach" tail=" for" />
 
     <div class="mt-12 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
-      {stack.map((g) => (
-        <div class="bg-base p-6">
+      {stack.map((g, i) => (
+        <div class="reveal bg-base p-6" style={`--reveal-delay: ${i * 100}ms`}>
           <h3 class="font-mono text-xs uppercase tracking-[0.14em] text-crimson">{g.label}</h3>
           <ul class="mt-4 flex flex-wrap gap-2">
             {g.items.map((i) => <li class="chip">{i}</li>)}

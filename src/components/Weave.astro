@@ -1,0 +1,39 @@
+---
+// Flowing crimson line-weave — shared section atmosphere (About, Certificates…).
+// Horizontal sine-like waves spanning the full width, generated at BUILD TIME →
+// static SVG, zero client JS. Two mirrored groups drift + breathe (transform /
+// opacity only, so the compositor handles it). Place inside a `relative isolate
+// overflow-clip` section, with the real content lifted to `relative z-10`.
+const W = 696;
+const cy = 158; // vertical centre of the 696×316 viewBox
+const buildWeave = (dir: number) =>
+  Array.from({ length: 16 }, (_, i) => {
+    const amp = 24 + i * 4; // amplitude grows across the set
+    const base = cy + (i - 8) * 6 * dir; // spread lines vertically, mirrored
+    const p = dir; // wave phase direction
+    const d = `M -60 ${base} C ${W * 0.18} ${base - amp * p}, ${W * 0.34} ${base + amp * p}, ${W * 0.5} ${base} S ${W * 0.82} ${base - amp * p}, ${W + 60} ${base}`;
+    return { d, width: 0.5 + i * 0.06, opacity: 0.05 + i * 0.012 };
+  });
+const weaveA = buildWeave(1);
+const weaveB = buildWeave(-1);
+
+// `flip` mirrors the line art left↔right. Applied to the <svg> (inside the
+// mask), so the bright-left → dim-right gradient is preserved.
+interface Props { flip?: boolean }
+const { flip = false } = Astro.props;
+---
+
+<div class:list={['weave-field', { 'weave-field--flip': flip }]} aria-hidden="true">
+  <svg viewBox="0 0 696 316" fill="none" preserveAspectRatio="xMidYMid slice">
+    <g class="weave-line weave-line--a">
+      {weaveA.map((p) => (
+        <path d={p.d} stroke="currentColor" stroke-width={p.width} stroke-opacity={p.opacity} fill="none" />
+      ))}
+    </g>
+    <g class="weave-line weave-line--b">
+      {weaveB.map((p) => (
+        <path d={p.d} stroke="currentColor" stroke-width={p.width} stroke-opacity={p.opacity} fill="none" />
+      ))}
+    </g>
+  </svg>
+</div>

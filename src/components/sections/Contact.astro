@@ -15,10 +15,10 @@ const action = `https://formspree.io/f/${site.formspreeId}`;
   <div class="relative mx-auto grid max-w-6xl gap-12 md:grid-cols-12">
     <div class="md:col-span-5">
       <SectionHeading num="09" label="Contact" lead="Let's" accent="talk" period={true} />
-      <p class="mt-6 max-w-sm text-lg leading-relaxed text-muted">
+      <p class="reveal mt-6 max-w-sm text-lg leading-relaxed text-muted" style="--reveal-delay: 100ms">
         Hiring, collaborating, or just curious about a build? Send a note — I reply fast.
       </p>
-      <div class="mt-8 flex flex-wrap gap-3">
+      <div class="reveal mt-8 flex flex-wrap gap-3" style="--reveal-delay: 200ms">
         <a href={site.resumeUrl} class="btn btn-shine">
           <span class="h-1.5 w-1.5 shrink-0 bg-crimson" aria-hidden="true"></span>
           View résumé
@@ -28,7 +28,7 @@ const action = `https://formspree.io/f/${site.formspreeId}`;
       </div>
     </div>
 
-    <form action={action} method="POST" class="md:col-span-7 md:pl-8">
+    <form action={action} method="POST" class="reveal md:col-span-7 md:pl-8" style="--reveal-delay: 120ms">
       <div class="grid gap-5 sm:grid-cols-2">
         <div class="flex flex-col gap-2">
           <label for="name" class="font-mono text-xs uppercase tracking-[0.14em] text-muted">Name</label>

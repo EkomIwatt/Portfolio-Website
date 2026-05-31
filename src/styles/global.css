@@ -51,18 +51,49 @@
     outline-offset: 3px;
     border-radius: 2px;
   }
+
+  /* Themed scrollbar — near-black track, crimson thumb.
+     NOTE: Chrome 121+ honours the standard scrollbar-* props and ignores the
+     ::-webkit-scrollbar rules entirely (so the webkit :hover never fires there);
+     the webkit block below is just a fallback for older Safari. */
+  html {
+    scrollbar-color: var(--color-crimson-dark) var(--color-base); /* Firefox/Chrome: thumb track */
+    scrollbar-width: thin;
+  }
+  ::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-base);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-crimson-dark);
+    border-radius: 8px;
+    /* inset border carves the track colour in, slimming the visible thumb */
+    border: 3px solid var(--color-base);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-crimson);
+  }
+  ::-webkit-scrollbar-corner {
+    background: var(--color-base);
+  }
 }
 
-/* ---- Reusable motion utilities (JS hook wired in Stage 3) ---------------- */
-/* Scroll-reveal: starts hidden + nudged down; add .is-visible to animate in. */
-.reveal {
+/* ---- Reusable motion utilities ------------------------------------------ */
+/* Scroll-reveal: hidden + nudged down, animates in when .is-visible is toggled
+   by the IntersectionObserver in Base.astro. GATED on `html.js` so without JS
+   the content stays fully visible (progressive enhancement, no a11y trap). */
+html.js .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition:
     opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1),
     transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition-delay: var(--reveal-delay, 0ms);
 }
-.reveal.is-visible {
+html.js .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
@@ -214,6 +245,23 @@
   background-size: 24px 24px;
 }
 
+/* Film grain — fixed, desaturated SVG noise over the whole viewport for a tactile
+   matte texture on the near-black. Static (no motion), pointer-events:none, and
+   soft-light blend so it never touches legibility or interaction. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 40; /* below the fixed nav/FABs (z-50) so chrome stays crisp */
+  pointer-events: none;
+  opacity: 0.07;
+  /* White speckles on transparent (alpha = noise) so the grain reads as light
+     flecks over near-black. NOTE: blend modes like soft-light/overlay are nearly
+     invisible on #0A0A0A — normal blend with alpha-noise is what actually shows. */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.6 0 0 0 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
 /* Crimson radial glow — atmosphere/depth without a colored block (replaces navy). */
 .u-glow {
   position: relative;
@@ -230,6 +278,63 @@
     transparent 70%
   );
   pointer-events: none;
+}
+
+/* ---- About: flowing crimson line-weave (echoes the Experience rail motif) -
+   Paths are generated at build time in About.astro → static SVG, zero client
+   JS. Motion is two drifting <g> groups (transform + opacity only, so the
+   compositor handles it — no per-path repaints). Faint + masked so it never
+   fights the bio copy. Reduced-motion → static. */
+.weave-field {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  color: var(--color-crimson);
+  /* Two multiplied mask layers:
+     1) vertical band  — feathers top/bottom into a central strip.
+     2) horizontal ramp — full at the left edge, fading to ~0.22 at the right so
+        the weave still reaches both edges but recedes under the bio copy.
+     `intersect` (source-in) multiplies the layers' alphas. */
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 26%, #000 74%, transparent 100%),
+    linear-gradient(to right, #000 0%, #000 30%, rgba(0, 0, 0, 0.22) 100%);
+          mask-image:
+    linear-gradient(to bottom, transparent 0%, #000 26%, #000 74%, transparent 100%),
+    linear-gradient(to right, #000 0%, #000 30%, rgba(0, 0, 0, 0.22) 100%);
+  -webkit-mask-composite: source-in;
+          mask-composite: intersect;
+}
+.weave-field svg {
+  width: 100%;
+  height: 100%;
+}
+/* Mirror the line art (the gradient mask on .weave-field stays put). */
+.weave-field--flip svg {
+  transform: scaleX(-1);
+}
+.weave-line {
+  /* Resting opacity = mid-point of weaveBreath, so when Chrome engages the
+     animation on scroll-in there's no jump from the default 1.0 (the cause of
+     the "bright then suddenly dim" pop). */
+  opacity: 0.5;
+  will-change: transform, opacity;
+}
+.weave-line--a {
+  animation: weaveDrift 26s ease-in-out infinite alternate,
+    weaveBreath 9s ease-in-out infinite;
+}
+.weave-line--b {
+  animation: weaveDrift 34s ease-in-out infinite alternate-reverse,
+    weaveBreath 12s ease-in-out 2s infinite;
+}
+@keyframes weaveDrift {
+  from { transform: translate3d(-1.5%, 0.6%, 0); }
+  to   { transform: translate3d(1.5%, -1%, 0); }
+}
+@keyframes weaveBreath {
+  0%, 100% { opacity: 0.38; }
+  50%      { opacity: 0.66; }
 }
 
 /* ---- Experience timeline: scroll-driven rail fill + node lighting --------
@@ -298,5 +403,10 @@
     animation: none !important;
     background: var(--color-crimson) !important;
     box-shadow: none !important;
+  }
+  .weave-line {
+    animation: none !important;
+    transform: none !important;
+    opacity: 0.48 !important;
   }
 }

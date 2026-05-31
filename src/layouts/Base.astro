@@ -34,6 +34,9 @@ const ogImage = Astro.site
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Progressive-enhancement flag: set before paint so .reveal only hides
+         when JS is present (no-JS users get fully-visible content, no FOUC). -->
+    <script is:inline>document.documentElement.classList.add('js');</script>
     <meta name="generator" content={Astro.generator} />
     <link rel="icon" href={`${import.meta.env.BASE_URL}/favicon.svg`.replace(/\/+/g, '/')} />
     <link rel="canonical" href={canonical} />
@@ -52,5 +55,67 @@ const ogImage = Astro.site
   </head>
   <body>
     <slot />
+
+    <!-- Scroll reveals: fade in on enter, fade out on scroll-away (wibify
+         rhythm). Bundled + deferred by Astro. Reduced-motion users get the
+         static fallback via CSS, so this stays a no-op for them. -->
+    <script>
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const targets = document.querySelectorAll('.reveal');
+      if (!prefersReduced && 'IntersectionObserver' in window && targets.length) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              entry.target.classList.toggle('is-visible', entry.isIntersecting);
+            }
+          },
+          { threshold: 0.15, rootMargin: '0px 0px -8% 0px' },
+        );
+        targets.forEach((el) => io.observe(el));
+      } else {
+        // Reduced motion or no IO support: show everything immediately.
+        targets.forEach((el) => el.classList.add('is-visible'));
+      }
+
+      // Metric count-up: animates 0 → final when each .count enters view (once).
+      // Final value is already in the DOM, so no-JS / reduced-motion keep it.
+      const counters = document.querySelectorAll('.count');
+      if (!prefersReduced && 'IntersectionObserver' in window && counters.length) {
+        const parse = (text) => {
+          const m = text.match(/^(\D*)(\d[\d,]*)(.*)$/);
+          if (!m) return null;
+          return { prefix: m[1], target: parseInt(m[2].replace(/,/g, ''), 10), suffix: m[3] };
+        };
+        const climb = (el, prefix, target, suffix) => {
+          const dur = 1300;
+          const start = performance.now();
+          const tick = (now) => {
+            const t = Math.min((now - start) / dur, 1);
+            const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+            el.textContent = prefix + Math.round(eased * target) + suffix;
+            if (t < 1) requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        };
+        const cio = new IntersectionObserver(
+          (entries, obs) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              const el = entry.target;
+              obs.unobserve(el);
+              const parts = parse(el.textContent.trim());
+              if (!parts) continue;
+              el.textContent = parts.prefix + '0' + parts.suffix; // reset now (still faded)
+              // Start the climb once the .reveal fade (0.7s + stagger) has settled,
+              // so the full 0→target is visible rather than playing while invisible.
+              const delay = parseFloat(getComputedStyle(el.closest('.reveal') || el).getPropertyValue('--reveal-delay')) || 0;
+              setTimeout(() => climb(el, parts.prefix, parts.target, parts.suffix), 700 + delay);
+            }
+          },
+          { threshold: 0.35 },
+        );
+        counters.forEach((el) => cio.observe(el));
+      }
+    </script>
   </body>
 </html>
