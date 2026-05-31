@@ -1,0 +1,195 @@
+---
+// THROWAWAY tuning route (Stage 1). Delete before cutover.
+// Purpose: pick the exact crimson + navy on the near-black base, judged against
+// a real portrait, with live-computed WCAG contrast ratios. Not linked anywhere,
+// noindex. Open at /Portfolio-Website/swatch.
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '@fontsource-variable/fraunces/standard.css';
+import '@fontsource-variable/fraunces/standard-italic.css';
+import { Image } from 'astro:assets';
+import portrait from '../assets/portraits/OTOG9751-Edit.jpg';
+
+// --- WCAG contrast helpers --------------------------------------------------
+const srgb = (c: number) => {
+  const s = c / 255;
+  return s <= 0.03928 ? s / 12.92 : Math.pow((s + 0.055) / 1.055, 2.4);
+};
+const lum = (hex: string) => {
+  const n = parseInt(hex.slice(1), 16);
+  const r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+  return 0.2126 * srgb(r) + 0.7152 * srgb(g) + 0.0722 * srgb(b);
+};
+const ratio = (a: string, b: string) => {
+  const [hi, lo] = [lum(a), lum(b)].sort((x, y) => y - x);
+  return (hi + 0.05) / (lo + 0.05);
+};
+const r2 = (n: number) => Math.round(n * 100) / 100;
+
+const BASE = '#0A0A0A';      // page base
+const CARD = '#141414';      // layered card surface
+const BORDER = '#262626';    // hairline
+const WHITE = '#F5F5F5';     // primary text
+
+// Candidate accents
+const crimsons = [
+  { name: 'A · Deep crimson', hex: '#D7263D', note: 'Plan default. Richest / most serious.' },
+  { name: 'B · Vivid crimson', hex: '#ED2647', note: 'Slightly brighter + pinker.' },
+  { name: 'C · Hot rose-red', hex: '#FF4D5E', note: 'Most legible / most energetic.' },
+];
+const navies = [
+  { name: 'N1 · Navy', hex: '#1B2A4A', note: 'Plan default secondary surface.' },
+  { name: 'N2 · Deep navy', hex: '#16233F', note: 'Darker, recedes more.' },
+];
+
+const badge = (r: number, threshold: number) =>
+  r >= threshold ? 'PASS' : 'FAIL';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>Swatch — accent tuning</title>
+    <style is:global>
+      :root { color-scheme: dark; }
+      body {
+        margin: 0;
+        background: #0A0A0A;
+        color: #F5F5F5;
+        font-family: 'Geist Variable', system-ui, sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      .mono { font-family: 'Geist Mono Variable', monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+      .serif-i { font-family: 'Fraunces Variable', serif; font-style: italic; }
+      .wrap { max-width: 1100px; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+      .grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+      .card { background: #141414; border: 1px solid #262626; border-radius: 14px; padding: 1.5rem; }
+      h1 { font-size: clamp(2rem, 5vw, 3.25rem); font-weight: 600; letter-spacing: -0.02em; line-height: 1.05; margin: 0 0 0.5rem; }
+      .eyebrow { font-size: 0.72rem; color: #8A8A8A; margin-bottom: 2.5rem; }
+      .ratios { font-size: 0.7rem; line-height: 1.8; color: #8A8A8A; margin-top: 1rem; border-top: 1px solid #262626; padding-top: 0.75rem; }
+      .pass { color: #4ADE80; } .fail { color: #F87171; }
+      .btn { display: inline-block; border-radius: 8px; padding: 0.6rem 1.1rem; font-weight: 600; font-size: 0.9rem; margin-right: 0.5rem; }
+      .metric { font-size: 3rem; font-weight: 600; line-height: 1; letter-spacing: -0.02em; }
+      a.link { text-decoration: underline; text-underline-offset: 3px; }
+      .portrait-row { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; align-items: center; margin: 3rem 0; }
+      @media (max-width: 640px) { .portrait-row { grid-template-columns: 1fr; } }
+      .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1rem; }
+      .chip { border: 1px solid #262626; border-radius: 999px; padding: 0.25rem 0.7rem; font-size: 0.72rem; }
+      hr { border: none; border-top: 1px solid #262626; margin: 4rem 0; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <p class="mono eyebrow">[ Stage 1 ] Accent tuning · near-black {BASE}</p>
+      <h1>I ship <span class="serif-i">production</span> products.</h1>
+      <p style="color:#8A8A8A; max-width:60ch;">
+        Pick a crimson (A/B/C) and a navy (N1/N2). Ratios are live WCAG values vs the base
+        and card surfaces. AA needs <strong>4.5:1</strong> for body text, <strong>3:1</strong>
+        for large text (≥24px) and UI/borders. The accent is used surgically, so 3:1 is usually
+        the operative bar — but small mono labels/links want 4.5:1.
+      </p>
+
+      <!-- Portrait + accent harmony -->
+      <div class="portrait-row">
+        <Image src={portrait} alt="Ekom portrait" width={440} densities={[1, 2]}
+               style="width:220px;height:auto;border-radius:14px;border:1px solid #262626;" />
+        <div>
+          {crimsons.map((c) => (
+            <span class="chip" style={`color:${c.hex}; border-color:${c.hex}`}>{c.hex}</span>
+          ))}
+          <p style="color:#8A8A8A; margin-top:1rem; max-width:48ch;">
+            Does the accent sit naturally against the plaid + skin tones, or fight them?
+            That judgment is yours — the numbers below only guarantee legibility.
+          </p>
+        </div>
+      </div>
+
+      <!-- Crimson candidates -->
+      <div class="grid">
+        {crimsons.map((c) => {
+          const onBase = ratio(c.hex, BASE);
+          const onCard = ratio(c.hex, CARD);
+          const whiteOn = ratio(WHITE, c.hex);
+          const blackOn = ratio(BASE, c.hex);
+          return (
+            <div class="card">
+              <p class="mono" style={`color:${c.hex}; font-size:0.72rem; margin:0 0 1rem;`}>[01] {c.name}</p>
+              <div style="font-size:1.6rem; font-weight:600; letter-spacing:-0.02em; line-height:1.1;">
+                Four <span class="serif-i" style={`color:${c.hex}`}>disciplines</span>. One stack.
+              </div>
+              <div style="margin:1.25rem 0;">
+                <span class="metric" style={`color:${c.hex}`}>100</span>
+                <span class="mono" style="color:#8A8A8A; font-size:0.7rem; margin-left:0.5rem;">Lighthouse</span>
+              </div>
+              <a class="link" href="#" style={`color:${c.hex}`}>View credential →</a>
+              <div class="chips">
+                <span class="btn" style={`background:${c.hex}; color:#0A0A0A;`}>Let's talk</span>
+                <span class="btn" style={`background:${c.hex}; color:#F5F5F5;`}>Let's talk</span>
+                <span class="chip" style={`border-color:${c.hex}; color:${c.hex}`}>border</span>
+              </div>
+              <p style="color:#8A8A8A; font-size:0.78rem; margin-top:1rem;">{c.note}</p>
+              <div class="ratios mono">
+                <div>{c.hex}</div>
+                <div>on base {BASE}: <strong>{r2(onBase)}:1</strong>
+                  <span class={onBase >= 4.5 ? 'pass' : 'fail'}> {badge(onBase, 4.5)} body</span> ·
+                  <span class={onBase >= 3 ? 'pass' : 'fail'}> {badge(onBase, 3)} large</span>
+                </div>
+                <div>on card {CARD}: <strong>{r2(onCard)}:1</strong>
+                  <span class={onCard >= 3 ? 'pass' : 'fail'}> {badge(onCard, 3)} large</span>
+                </div>
+                <div>white text on it: <strong>{r2(whiteOn)}:1</strong>
+                  <span class={whiteOn >= 4.5 ? 'pass' : 'fail'}> {badge(whiteOn, 4.5)}</span>
+                </div>
+                <div>black text on it: <strong>{r2(blackOn)}:1</strong>
+                  <span class={blackOn >= 4.5 ? 'pass' : 'fail'}> {badge(blackOn, 4.5)}</span>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <hr />
+
+      <!-- Navy candidates as secondary surfaces -->
+      <p class="mono eyebrow" style="margin-bottom:1.5rem;">[ 02 ] Navy secondary surface</p>
+      <div class="grid">
+        {navies.map((nv) => {
+          const whiteOn = ratio(WHITE, nv.hex);
+          return (
+            <div class="card" style={`background:${nv.hex};`}>
+              <p class="mono" style="font-size:0.72rem; color:#cdd6ea; margin:0 0 0.75rem;">{nv.name} · {nv.hex}</p>
+              <div style="font-size:1.4rem; font-weight:600;">
+                Secondary <span class="serif-i" style="color:#FF4D5E;">depth</span> band.
+              </div>
+              <p style="color:#aab4cc; font-size:0.82rem; margin-top:0.75rem;">{nv.note}</p>
+              <div class="ratios mono" style="border-color:#33415e; color:#aab4cc;">
+                white text on navy: <strong>{r2(whiteOn)}:1</strong>
+                <span class={whiteOn >= 4.5 ? 'pass' : 'fail'}> {badge(whiteOn, 4.5)}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <hr />
+
+      <!-- Type specimen -->
+      <p class="mono eyebrow" style="margin-bottom:1.5rem;">[ 03 ] Three-voice type</p>
+      <div class="card">
+        <p class="mono" style="color:#8A8A8A; font-size:0.72rem;">GEIST MONO · eyebrow / section number / label</p>
+        <div style="font-family:'Geist Variable'; font-size:2.4rem; font-weight:600; letter-spacing:-0.02em; line-height:1.1; margin:0.5rem 0;">
+          Geist carries the <span class="serif-i" style="color:#ED2647;">weight</span>.
+        </div>
+        <p style="font-family:'Geist Variable'; color:#8A8A8A; max-width:60ch; line-height:1.7;">
+          Geist body copy at a comfortable reading size. The Fraunces italic appears once per
+          heading as the single emphasized word — high-contrast, editorial, a little human against
+          the grotesque sans. Geist Mono handles all the technical chrome.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

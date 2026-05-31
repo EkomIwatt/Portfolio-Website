@@ -1,4 +1,101 @@
-/* Tailwind v4 entry. Design tokens (crimson/navy palette, three-voice fonts,
-   spacing scale) get defined here via @theme in Stage 1 — see the plan's
-   Design System section. For now this just enables Tailwind utilities. */
+/* Tailwind v4 entry + design tokens (Stage 1, locked 2026-05-31).
+   Palette: near-black monochrome + surgical crimson. NO navy (dropped — clashed
+   with the dark/crimson direction). Depth comes from layered greys + crimson glows.
+   Fonts are self-hosted via Fontsource, imported in src/layouts/Base.astro. */
 @import "tailwindcss";
+
+@theme {
+  /* --- surfaces (near-black, layered for depth) --- */
+  --color-base: #0a0a0a;      /* page background */
+  --color-surface: #0f0f10;   /* subtle raised band */
+  --color-card: #141414;      /* card surface */
+  --color-elevated: #1c1c1e;  /* elevated / hover surface */
+  --color-line: #262626;      /* hairline border */
+  --color-line-strong: #333333;
+
+  /* --- text --- */
+  --color-ink: #f5f5f5;       /* primary text */
+  --color-muted: #8a8a8a;     /* secondary text / labels */
+  --color-faint: #5a5a5a;     /* tertiary / disabled */
+
+  /* --- crimson accent (used surgically) --- */
+  --color-crimson: #d7263d;       /* core: brand, large headings, metrics, borders, fills */
+  --color-crimson-link: #f0324c;  /* small text & links — clears AA 4.5:1 on base + cards */
+  --color-crimson-deep: #1a0b0e;  /* crimson-tinted near-black for warm accent depth */
+
+  /* --- type: three voices --- */
+  --font-sans: "Geist Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Fraunces Variable", ui-serif, Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background: var(--color-base);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--color-crimson);
+    color: #0a0a0a;
+  }
+  /* Visible keyboard focus — crimson-link tint clears contrast on dark surfaces. */
+  :focus-visible {
+    outline: 2px solid var(--color-crimson-link);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+}
+
+/* ---- Reusable motion utilities (JS hook wired in Stage 3) ---------------- */
+/* Scroll-reveal: starts hidden + nudged down; add .is-visible to animate in. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.6, 0.2, 1),
+    transform 0.7s cubic-bezier(0.2, 0.6, 0.2, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Crimson radial glow — atmosphere/depth without a colored block (replaces navy). */
+.u-glow {
+  position: relative;
+  isolation: isolate;
+}
+.u-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    60% 60% at 50% 0%,
+    color-mix(in srgb, var(--color-crimson) 16%, transparent),
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+/* ---- Reduced motion: honor the OS preference everywhere ------------------ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

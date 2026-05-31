@@ -27,15 +27,21 @@ Ekom is a student. **No fabricated metrics, testimonials, logos, or social proof
 - The saved candidate components ship with fake testimonials + pravatar/Unsplash images —
   strip ALL of that; repurpose only the *mechanics* for real content.
 
-## 3. Design tokens (locked direction; exact crimson tuned in Stage 1)
-- **Color:** near-black base (`~#0A0A0A`, layered `#0D0D0D`/`#141414` cards, hairline borders
-  `~#262626`); text white `~#F5F5F5` / grey `~#8A8A8A`; **crimson** signature accent
-  (`~#D7263D`, tune in Stage 1) + **navy** secondary (`~#1B2A4A`), both drawn from Ekom's
-  studio portraits. Accent used **surgically** (logo, one italic word per heading, mono labels,
-  metrics, links, focus rings). Must clear **WCAG AA** on near-black.
-- **Type — three voices:** **Geist** (display sans) + **Fraunces italic** (the one emphasis
-  word per heading only) + **Geist Mono** (eyebrows, section numbers, labels). Self-host via
-  **Fontsource**, not a CDN. No Inter/Roboto/Arial defaults.
+## 3. Design tokens (LOCKED — Stage 1, 2026-05-31; defined in `src/styles/global.css` @theme)
+- **Color — near-black monochrome + surgical crimson. NO navy** (dropped: it clashed with the
+  dark/crimson direction). Depth = layered greys + crimson radial glows (`.u-glow`), never a
+  colored block. Tokens:
+  - surfaces: base `#0A0A0A` → surface `#0F0F10` → card `#141414` → elevated `#1C1C1E`;
+    hairline `line #262626`, `line-strong #333333`.
+  - text: ink `#F5F5F5`, muted `#8A8A8A`, faint `#5A5A5A`.
+  - **crimson `#D7263D`** = core (brand, large headings, metrics, borders, filled buttons —
+    white label on it = 4.55:1 ✓). **crimson-link `#F0324C`** = small text & inline links
+    (clears AA 4.5:1 on base AND cards). crimson-deep `#1A0B0E` = warm accent-depth tint.
+  - Accent stays **surgical**. Large/UI uses need ≥3:1, small text ≥4.5:1 — both verified.
+- **Type — three voices (self-hosted via Fontsource, variable):** **Geist Variable** (display +
+  body sans), **Fraunces Variable** italic (the one emphasis word per heading only),
+  **Geist Mono Variable** (eyebrows, section numbers, labels). Tailwind: `font-sans` /
+  `font-serif` / `font-mono`. No Inter/Roboto/Arial defaults.
 - **Motion:** scroll reveals (in + out), hover accent-swap + arrow nudge, metric counters,
   radial-glow / dotted-grid / grain atmosphere. **Everything behind `prefers-reduced-motion`**
   with a static fallback.
