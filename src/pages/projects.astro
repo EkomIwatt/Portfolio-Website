@@ -1,24 +1,50 @@
 ---
-// STUB: full project catalogue is built later (PLACEHOLDER). For now this just
-// gives the "See full catalogue" button a real, non-404 destination.
+// Full project catalogue. Intentionally EMPTY until real builds ship — honest
+// empty state, no fabricated entries (honesty rule). noindex until populated.
+// When projects exist, replace the empty-state block with the catalogue grid.
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { site } from '../data/site';
+
 const base = import.meta.env.BASE_URL;
 ---
 
-<Base title="Projects — Ekomobong Iwatt" noindex={true}>
+<Base title="Catalogue — Ekomobong Iwatt" description="The full project archive — every build, documented end to end." noindex={true}>
   <Nav />
-  <main class="u-glow grid min-h-screen place-content-center px-6 text-center">
-    <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">[ catalogue ]</p>
-    <h1 class="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
-      Full catalogue, <span class="font-serif italic text-crimson">soon</span><span class="text-crimson">.</span>
-    </h1>
-    <p class="mt-4 text-muted">The complete project archive lands here as builds ship.</p>
-    <a href={base} class="btn btn-shine mx-auto mt-8">
-      <span class="h-1.5 w-1.5 shrink-0 bg-crimson" aria-hidden="true"></span>
-      Back home
-    </a>
+  <main id="main" class="px-6 pb-24 pt-28 sm:pt-32">
+    <div class="mx-auto max-w-6xl">
+      <SectionHeading num="01" label="Catalogue" lead="The full" accent="archive" />
+
+      <p class="reveal mt-6 max-w-xl text-lg leading-relaxed text-muted" style="--reveal-delay: 100ms">
+        Every build I ship lands here — documented end to end, decisions and trade-offs in the open.
+      </p>
+
+      <!-- Empty state (honest: nothing fabricated until real projects exist) -->
+      <div class="reveal u-glow relative mt-12 overflow-hidden border border-line bg-card" style="--reveal-delay: 200ms">
+        <div class="bg-dotgrid absolute inset-0 opacity-40" aria-hidden="true"></div>
+        <div class="relative flex flex-col items-center gap-5 px-6 py-20 text-center sm:py-28">
+          <p class="font-mono text-7xl font-semibold text-crimson-link/30 sm:text-8xl" aria-hidden="true">00</p>
+          <h2 class="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
+            Nothing public <span class="font-serif italic text-crimson">yet</span><span class="text-crimson">.</span>
+          </h2>
+          <p class="max-w-md text-muted">
+            I'm shipping builds right now — case studies open here as each one lands. In the
+            meantime, the work-in-progress lives on GitHub.
+          </p>
+          <div class="mt-2 flex flex-wrap items-center justify-center gap-3">
+            <a href={site.socials.github} target="_blank" rel="noopener" class="btn btn-shine">
+              See GitHub <span aria-hidden="true">↗</span>
+            </a>
+            <a href={base} class="btn btn-ghost">
+              <span class="h-1.5 w-1.5 shrink-0 bg-crimson" aria-hidden="true"></span>
+              Back home
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
   <Footer />
 </Base>

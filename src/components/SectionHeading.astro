@@ -14,7 +14,7 @@ const { num, label, lead, accent, tail = '', period = true } = Astro.props;
 
 <div class="reveal">
   <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">
-    <span class="text-crimson">[{num}]</span> <span class="text-faint">/</span> {label}
+    <span class="text-crimson-link">[{num}]</span> <span class="text-faint">/</span> {label}
   </p>
   <h2 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
     {lead} <span class="font-serif italic text-crimson">{accent}</span>{tail}{period && <span class="text-crimson">.</span>}

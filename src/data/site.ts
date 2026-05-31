@@ -22,12 +22,13 @@ export const site = {
   },
   twitterHandle: '@yr_Ekom', // for twitter:site / twitter:creator
   // Floating contact channels (bottom-right FABs).
-  whatsapp: 'https://wa.me/2340000000000', // PLACEHOLDER: real WhatsApp number
-  phone: 'tel:+2340000000000', // PLACEHOLDER: real phone number
+  whatsapp: 'https://wa.me/2349122141156', // real (ported from the legacy site)
+  phone: 'tel:+2349122141156', // reuses the WhatsApp line — confirm if your call number differs
   // Dark-theme résumé page (Stage 4). A downloadable PDF can replace this later.
   resumeUrl: `${import.meta.env.BASE_URL}/cv`,
-  // PLACEHOLDER: Formspree form id (create at formspree.io) → endpoint below.
-  formspreeId: 'your-form-id',
+  // Formspree form id → POSTs to https://formspree.io/f/<id>. Confirm the first
+  // submission once (Formspree emails the owner) to activate delivery.
+  formspreeId: 'mlgvkpeq',
 };
 
 export interface NavLink {

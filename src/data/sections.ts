@@ -129,14 +129,28 @@ export interface Certificate {
   title: string;
   issuer: string;
   year: string;
-  href: string;
+  href?: string; // omit when there's no public credential link
+  inProgress?: boolean; // honest "currently studying" card (no credential yet)
 }
-// PLACEHOLDER: sample certs — replace with real issuer/title/year/credential links.
+// Real certificates, ported from the legacy site (Stage 5). Issuer for the
+// Python cert corrected to Coursera to match its credential link.
 export const certificates: Certificate[] = [
-  { title: 'Responsive Web Design', issuer: 'freeCodeCamp', year: '2025', href: '#' },
-  { title: 'Python for Everybody', issuer: 'Coursera', year: '2025', href: '#' },
-  { title: 'CS50x', issuer: 'HarvardX', year: '2024', href: '#' },
-  { title: 'Git & GitHub', issuer: 'Google', year: '2024', href: '#' },
+  {
+    title: 'C++ Development',
+    issuer: 'Udemy',
+    year: '2025',
+    href: 'https://www.udemy.com/certificate/UC-385df29e-18b7-4ea4-9db9-e8fc3af13bd4/',
+  },
+  {
+    title: 'Python Programming',
+    issuer: 'Coursera',
+    year: '2025',
+    href: 'https://coursera.org/share/47660064544b3149f3c07c0dd39d2df9',
+  },
+  // Real cert with no public credential link — card renders without "View credential".
+  { title: 'Embedded Systems Design', issuer: 'ECX', year: '2025' },
+  // Honest in-progress marker (matches the legacy "currently studying" pattern).
+  { title: 'Currently studying', issuer: 'In progress', year: '', inProgress: true },
 ];
 
 // [08] WRITING ---------------------------------------------------------------

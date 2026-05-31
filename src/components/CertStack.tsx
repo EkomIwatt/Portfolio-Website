@@ -4,7 +4,8 @@ interface Certificate {
   title: string;
   issuer: string;
   year: string;
-  href: string;
+  href?: string;
+  inProgress?: boolean;
 }
 
 // Notched (cut-corner) card shape — techy, echoes the stagger-testimonials look.
@@ -41,11 +42,13 @@ export default function CertStack({ certificates }: { certificates: Certificate[
       <ul className="grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2">
         {certificates.map((c) => (
           <li key={c.title} className="bg-base p-6">
-            <p className="font-mono text-xs uppercase tracking-[0.14em] text-crimson-link">{c.issuer}</p>
+            <p className="font-mono text-xs uppercase tracking-[0.14em] text-crimson-link">{c.inProgress ? 'In progress' : c.issuer}</p>
             <h3 className="mt-2 text-xl font-semibold tracking-tight text-ink">{c.title}</h3>
             <div className="mt-4 flex items-center justify-between">
-              <span className="font-mono text-xs text-muted">{c.year}</span>
-              <a href={c.href} className="font-mono text-xs text-crimson-link underline underline-offset-4">View credential →</a>
+              <span className="font-mono text-xs text-muted">{c.inProgress ? 'Credential pending' : c.year}</span>
+              {c.href && (
+                <a href={c.href} target="_blank" rel="noopener" className="font-mono text-xs text-crimson-link underline underline-offset-4">View credential →</a>
+              )}
             </div>
           </li>
         ))}
@@ -69,13 +72,15 @@ export default function CertStack({ certificates }: { certificates: Certificate[
           if (pos > half) pos -= n;
           if (pos < -half) pos += n;
           const center = pos === 0;
+          const wip = !!c.inProgress;
+          const lit = center && !wip; // crimson "achieved" highlight only for earned certs
           return (
             <article
               key={c.title}
               aria-hidden={!center}
               onClick={() => !center && setActive(i)}
               className={`absolute left-1/2 top-1/2 flex flex-col justify-between p-6 transition-all duration-500 ease-out ${
-                center ? 'bg-crimson-dark text-ink' : 'cursor-pointer bg-card text-ink hover:bg-elevated'
+                lit ? 'bg-crimson-dark text-ink' : 'cursor-pointer bg-card text-ink hover:bg-elevated'
               }`}
               style={{
                 width: cardW,
@@ -83,23 +88,27 @@ export default function CertStack({ certificates }: { certificates: Certificate[
                 clipPath: NOTCH,
                 zIndex: n - Math.abs(pos),
                 transform: `translate(-50%, -50%) translateX(${pos * (cardW / 1.7)}px) translateY(${center ? -22 : pos % 2 ? 14 : -14}px) rotate(${center ? 0 : pos % 2 ? 2.5 : -2.5}deg)`,
-                boxShadow: center ? '0 24px 70px -22px rgba(215,38,61,0.6)' : 'none',
-                border: center ? 'none' : '1px solid var(--color-line)',
+                boxShadow: lit ? '0 24px 70px -22px rgba(215,38,61,0.6)' : 'none',
+                border: lit ? 'none' : wip ? '1px dashed var(--color-line-strong)' : '1px solid var(--color-line)',
               }}
             >
-              <p className={`font-mono text-xs uppercase tracking-[0.14em] ${center ? 'text-ink/80' : 'text-crimson-link'}`}>
-                {c.issuer}
+              <p className={`font-mono text-xs uppercase tracking-[0.14em] ${lit ? 'text-ink/80' : 'text-crimson-link'}`}>
+                {wip ? 'In progress' : c.issuer}
               </p>
               <h3 className="text-2xl font-semibold leading-tight tracking-tight">{c.title}</h3>
               <div className="flex items-end justify-between">
-                <span className={`font-mono text-xs ${center ? 'text-ink/70' : 'text-muted'}`}>{c.year}</span>
-                <a
-                  href={c.href}
-                  tabIndex={center ? 0 : -1}
-                  className={`font-mono text-xs underline underline-offset-4 ${center ? 'text-ink hover:text-ink/80' : 'text-crimson-link'}`}
-                >
-                  View credential →
-                </a>
+                <span className={`font-mono text-xs ${lit ? 'text-ink/70' : 'text-muted'}`}>{wip ? 'Credential pending' : c.year}</span>
+                {c.href && (
+                  <a
+                    href={c.href}
+                    target="_blank"
+                    rel="noopener"
+                    tabIndex={center ? 0 : -1}
+                    className={`font-mono text-xs underline underline-offset-4 ${lit ? 'text-ink hover:text-ink/80' : 'text-crimson-link'}`}
+                  >
+                    View credential →
+                  </a>
+                )}
               </div>
             </article>
           );

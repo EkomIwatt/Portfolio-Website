@@ -17,9 +17,11 @@ Search the codebase for `PLACEHOLDER` to find every marker in context.
       Lighthouse scores, # projects, posts, GitHub activity
 - [ ] **[01] Selected Work** — 4 highlight project entries (real projects land here as they ship)
 - [ ] **/projects** — currently a "coming soon" stub; build the real catalogue page
-- [ ] **[07] Certificates** — replace sample certs with real issuer/title/year/credential links
-- [ ] **Contact** — Formspree form ID (create at formspree.io)
-- [ ] `src/data/site.ts` — `whatsapp`: real WhatsApp number (floating button)
-- [ ] `src/data/site.ts` — `phone`: real phone number (floating button)
+- [x] **[07] Certificates** — real certs wired from the legacy site (C++/Udemy, Python/Coursera,
+      Embedded Systems/ECX [no public link], + one honest "in progress" card)
+- [x] **Contact** — Formspree form ID wired (`mlgvkpeq`). ⚠️ Confirm the first submission
+      once (Formspree emails the owner) to activate delivery.
+- [x] `src/data/site.ts` — `whatsapp`: real number wired (ported from legacy site)
+- [x] `src/data/site.ts` — `phone`: real number wired (same line as WhatsApp, confirmed)
 
 > Add a line here whenever you introduce a new placeholder; check it off when replaced.

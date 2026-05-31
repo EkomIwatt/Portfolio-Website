@@ -10,7 +10,7 @@ import { process } from '../../data/sections';
     <ol class="mt-12 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
       {process.map((s, i) => (
         <li class="reveal bg-base p-6" style={`--reveal-delay: ${i * 100}ms`}>
-          <span class="font-mono text-sm text-crimson">{s.num}</span>
+          <span class="font-mono text-sm text-crimson-link">{s.num}</span>
           <h3 class="mt-4 text-lg font-semibold tracking-tight text-ink">{s.title}</h3>
           <p class="mt-2 text-sm leading-relaxed text-muted">{s.body}</p>
         </li>

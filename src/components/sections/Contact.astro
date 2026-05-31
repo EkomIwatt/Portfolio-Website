@@ -1,7 +1,6 @@
 ---
 import SectionHeading from '../SectionHeading.astro';
 import { site } from '../../data/site';
-// PLACEHOLDER: replace site.formspreeId with the real id before cutover.
 const action = `https://formspree.io/f/${site.formspreeId}`;
 ---
 
@@ -29,6 +28,9 @@ const action = `https://formspree.io/f/${site.formspreeId}`;
     </div>
 
     <form action={action} method="POST" class="reveal md:col-span-7 md:pl-8" style="--reveal-delay: 120ms">
+      <!-- Formspree: meaningful inbox subject + honeypot (bots fill #_gotcha → dropped). -->
+      <input type="hidden" name="_subject" value="New message from your portfolio" />
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" class="hidden" />
       <div class="grid gap-5 sm:grid-cols-2">
         <div class="flex flex-col gap-2">
           <label for="name" class="font-mono text-xs uppercase tracking-[0.14em] text-muted">Name</label>
