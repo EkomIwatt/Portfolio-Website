@@ -13,14 +13,18 @@ export interface Project {
   href: string;
   wip?: boolean; // honest "in progress" treatment
 }
-// PLACEHOLDER: real projects land here (with case studies) as Ekom ships them.
+// Card 1 is real (the original hand-built portfolio, shipped Jan 2026); the two
+// WIP cards are honest placeholders Ekom fills as he ships the next two builds.
 export const projects: Project[] = [
   {
-    name: 'This portfolio',
-    blurb: 'Astro + Tailwind, zero-JS baseline, Lighthouse-tuned. The first shipped thing.',
-    tags: ['Astro', 'Tailwind', 'TypeScript'],
+    name: 'Portfolio Website (v1)',
+    blurb:
+      'My first shipped site — a hand-built static portfolio in HTML, CSS, and vanilla JS ' +
+      'with Tailwind. Designed, built, and deployed to GitHub Pages in 13 days, documented ' +
+      'as I went.',
+    tags: ['HTML', 'CSS', 'JavaScript', 'Tailwind'],
     year: '2026',
-    href: '#',
+    href: 'https://github.com/EkomIwatt/Portfolio-Website',
   },
   {
     name: 'Project Two',
@@ -34,14 +38,6 @@ export const projects: Project[] = [
     name: 'Project Three',
     blurb: 'Embedded / firmware experiment. Coming soon.',
     tags: ['C++', 'Embedded'],
-    year: '2026',
-    href: '#',
-    wip: true,
-  },
-  {
-    name: 'Project Four',
-    blurb: 'A fourth highlight build — documented end to end. Coming soon.',
-    tags: ['Python', 'Tooling'],
     year: '2026',
     href: '#',
     wip: true,
@@ -67,12 +63,13 @@ export interface Metric {
   value: string;
   label: string;
 }
-// PLACEHOLDER: ALL DUMMY. Replace with real Lighthouse, project, post, GitHub numbers.
+// Real numbers, all verified. Lighthouse: 96 mobile / 100 desktop (Edge run,
+// 2026-06) — shown as `96+` so it's honest across both, not desktop cherry-picked.
 export const metrics: Metric[] = [
-  { value: '100', label: 'Lighthouse performance' },
-  { value: '6+', label: 'Projects shipped' },
-  { value: '12', label: 'Articles written' },
-  { value: '8', label: 'Technologies' },
+  { value: '96+', label: 'Lighthouse performance' }, // 96 mobile, 100 desktop
+  { value: '2', label: 'Projects shipped' }, // v1 site (live) + this portfolio
+  { value: '2', label: 'Articles written' }, // src/content/blog/*.md
+  { value: '12+', label: 'Technologies' }, // distinct tools/languages in the Stack section
 ];
 
 // [04] STACK / CAPABILITIES --------------------------------------------------

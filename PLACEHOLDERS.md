@@ -13,14 +13,15 @@ Search the codebase for `PLACEHOLDER` to find every marker in context.
 - [x] `src/data/site.ts` — `resumeUrl`: now points to the dark-theme `/cv` page (Stage 4; a
       downloadable PDF can replace it later)
 - [ ] **[02] How I Build** — workflow steps (invented copy; refine to Ekom's real process)
-- [ ] **[03] Proof / By the numbers** — all metrics are DUMMY numbers; replace with real
-      Lighthouse scores, # projects, posts, GitHub activity
-- [ ] **[01] Selected Work** — 4 highlight project entries (real projects land here as they ship)
+- [x] **[03] Proof / By the numbers** — all real: Lighthouse 96+ (96 mobile / 100 desktop,
+      Edge run), projects shipped (2), articles (2), technologies (12+)
+- [~] **[01] Selected Work** — card 1 is real (Portfolio Website v1, links to the GitHub repo);
+      cards 2–3 stay honest WIP placeholders until Ekom ships the next two builds
 - [ ] **/projects** — currently a "coming soon" stub; build the real catalogue page
 - [x] **[07] Certificates** — real certs wired from the legacy site (C++/Udemy, Python/Coursera,
       Embedded Systems/ECX [no public link], + one honest "in progress" card)
-- [x] **Contact** — Formspree form ID wired (`mlgvkpeq`). ⚠️ Confirm the first submission
-      once (Formspree emails the owner) to activate delivery.
+- [x] **Contact** — Formspree form ID confirmed by Ekom (`mlgvkpeq`). ⚠️ Still activate it
+      with one real submission post-deploy (Formspree emails the owner to verify delivery).
 - [x] `src/data/site.ts` — `whatsapp`: real number wired (ported from legacy site)
 - [x] `src/data/site.ts` — `phone`: real number wired (same line as WhatsApp, confirmed)
 

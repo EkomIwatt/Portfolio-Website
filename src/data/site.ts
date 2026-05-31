@@ -22,8 +22,8 @@ export const site = {
   },
   twitterHandle: '@yr_Ekom', // for twitter:site / twitter:creator
   // Floating contact channels (bottom-right FABs).
-  whatsapp: 'https://wa.me/2349122141156', // real (ported from the legacy site)
-  phone: 'tel:+2349122141156', // reuses the WhatsApp line — confirm if your call number differs
+  whatsapp: 'https://wa.me/2349122141156', // real — WhatsApp + call line (confirmed)
+  phone: 'tel:+2349122141156', // same line as WhatsApp (confirmed)
   // Dark-theme résumé page (Stage 4). A downloadable PDF can replace this later.
   resumeUrl: `${import.meta.env.BASE_URL}/cv`,
   // Formspree form id → POSTs to https://formspree.io/f/<id>. Confirm the first
