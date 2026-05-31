@@ -8,9 +8,10 @@ Search the codebase for `PLACEHOLDER` to find every marker in context.
 
 ## Open placeholders
 
-- [ ] `src/data/site.ts` — `email`: real contact email
-- [ ] `src/data/site.ts` — `socials.linkedin`: real LinkedIn URL
-- [ ] `src/data/site.ts` — `resumeUrl`: real CV page/PDF
+- [x] `src/data/site.ts` — `email`: real contact email (ekomzwatt@gmail.com, from CV — Stage 4)
+- [x] `src/data/site.ts` — `socials.linkedin`: real LinkedIn URL (linkedin.com/in/ekomiwatt — Stage 4)
+- [x] `src/data/site.ts` — `resumeUrl`: now points to the dark-theme `/cv` page (Stage 4; a
+      downloadable PDF can replace it later)
 - [ ] **[02] How I Build** — workflow steps (invented copy; refine to Ekom's real process)
 - [ ] **[03] Proof / By the numbers** — all metrics are DUMMY numbers; replace with real
       Lighthouse scores, # projects, posts, GitHub activity

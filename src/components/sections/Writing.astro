@@ -1,6 +1,16 @@
 ---
+import { getCollection } from 'astro:content';
 import SectionHeading from '../SectionHeading.astro';
-import { posts } from '../../data/sections';
+
+const base = import.meta.env.BASE_URL;
+
+// Collection-driven: latest published posts, newest first. Stays in sync as
+// posts are added — no manual data edits needed.
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 2);
+
+const fmt = (d: Date) => d.toLocaleDateString('en-US', { year: 'numeric', month: 'short' });
 ---
 
 <section id="writing" class="bg-surface px-6 py-24 sm:py-32">
@@ -10,16 +20,25 @@ import { posts } from '../../data/sections';
     <ul class="mt-12 grid gap-px overflow-hidden border border-line bg-line md:grid-cols-2">
       {posts.map((p, i) => (
         <li class="reveal" style={`--reveal-delay: ${i * 100}ms`}>
-          <a href={p.href} class="group flex h-full flex-col justify-between gap-6 bg-base p-8 transition-colors hover:bg-card/40">
+          <a href={`${base}/blog/${p.id}`} class="group flex h-full flex-col justify-between gap-6 bg-base p-8 transition-colors hover:bg-card/40">
             <div>
-              <p class="font-mono text-xs uppercase tracking-[0.14em] text-muted">{p.date}</p>
-              <h3 class="mt-3 text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-crimson">{p.title}</h3>
-              <p class="mt-2 text-sm leading-relaxed text-muted">{p.excerpt}</p>
+              <p class="font-mono text-xs uppercase tracking-[0.14em] text-muted">
+                <span class="text-crimson-link">{p.data.series}</span>
+                <span class="text-faint"> · {fmt(p.data.pubDate)}</span>
+              </p>
+              <h3 class="mt-3 text-2xl font-semibold tracking-tight text-ink transition-colors group-hover:text-crimson">{p.data.title}</h3>
+              <p class="mt-2 text-sm leading-relaxed text-muted">{p.data.description}</p>
             </div>
             <span class="font-mono text-xs text-crimson-link">Read <span class="transition-transform group-hover:translate-x-1 inline-block" aria-hidden="true">→</span></span>
           </a>
         </li>
       ))}
     </ul>
+
+    <div class="mt-12 flex justify-center">
+      <a href={`${base}/blog`} class="btn btn-shine">
+        View all posts <span aria-hidden="true">→</span>
+      </a>
+    </div>
   </div>
 </section>

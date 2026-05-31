@@ -140,24 +140,5 @@ export const certificates: Certificate[] = [
 ];
 
 // [08] WRITING ---------------------------------------------------------------
-export interface Post {
-  title: string;
-  excerpt: string;
-  date: string;
-  href: string;
-}
-// PLACEHOLDER hrefs — real posts migrate to the content collection in Stage 4.
-export const posts: Post[] = [
-  {
-    title: 'Why I rebuilt my portfolio on Astro',
-    excerpt: 'Zero-JS by default, real Lighthouse 100s, and a design system I actually own.',
-    date: '2026',
-    href: '#',
-  },
-  {
-    title: 'Vibecoding, professionally',
-    excerpt: 'How AI-accelerated building is leverage, not a shortcut — and how I keep it honest.',
-    date: '2026',
-    href: '#',
-  },
-];
+// Posts now live in the `blog` content collection (src/content/blog/*.md) and
+// are read directly by Writing.astro / the /blog pages. No placeholder data here.

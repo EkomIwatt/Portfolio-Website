@@ -13,6 +13,8 @@ interface Props {
   /** OG/social image path relative to the site root; resolved against base. */
   image?: string;
   noindex?: boolean;
+  /** og:type — "website" for pages, "article" for blog posts. */
+  ogType?: string;
 }
 
 const {
@@ -20,6 +22,7 @@ const {
   description = 'Computer Engineering @ University of Lagos. I ship production-grade products, fast.',
   image = 'og-card.png',
   noindex = false,
+  ogType = 'website',
 } = Astro.props;
 
 // Resolve absolute URLs that respect the GitHub Pages `base`.
@@ -46,12 +49,15 @@ const ogImage = Astro.site
     <meta name="description" content={description} />
 
     <!-- Open Graph / social -->
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Per-page head injection (e.g. BlogPosting structured data). -->
+    <slot name="head" />
   </head>
   <body>
     <slot />

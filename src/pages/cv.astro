@@ -1,0 +1,210 @@
+---
+// Résumé — dark on screen, clean ink-on-white when printed (Download PDF →
+// window.print()). Real content ported from the legacy cv.html. Colours use
+// .cv-* helper classes (defined below) so the print stylesheet can flip the
+// whole page to a professional light layout in one place.
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+
+const base = import.meta.env.BASE_URL;
+
+const contacts = [
+  { label: 'ekomzwatt@gmail.com', href: 'mailto:ekomzwatt@gmail.com' },
+  { label: 'linkedin.com/in/ekomiwatt', href: 'https://linkedin.com/in/ekomiwatt' },
+  { label: 'github.com/EkomIwatt', href: 'https://github.com/EkomIwatt' },
+  { label: 'Lagos, Nigeria', href: null },
+];
+
+const languages = ['C++', 'Python', 'HTML/CSS', 'JavaScript'];
+const webTools = ['React/Node.js', 'MATLAB', 'Arduino', 'AutoCAD'];
+const softSkills = ['Leadership', 'Problem-Solving', 'Strong Communication', 'Financial Planning'];
+---
+
+<Base title="Résumé — Ekomobong Iwatt" description="Résumé of Ekomobong Iwatt: Computer Engineering student at the University of Lagos. C++, embedded systems, web development; Financial Secretary of EEE Unilag.">
+  <!-- Top bar (screen only) -->
+  <div class="no-print mx-auto flex max-w-4xl items-center justify-between px-6 py-6">
+    <a href={base} class="font-mono text-xs uppercase tracking-[0.12em] text-muted hover:text-ink">
+      <span aria-hidden="true">←</span> Back to portfolio
+    </a>
+    <button type="button" id="print-cv" class="btn btn-shine btn-sm">
+      Download PDF <span aria-hidden="true">↓</span>
+    </button>
+  </div>
+
+  <main id="main" class="cv cv-ink mx-auto max-w-4xl px-6 pb-24">
+    <!-- Header -->
+    <header class="cv-line flex flex-col gap-6 border-b pb-8 sm:flex-row sm:items-end sm:justify-between">
+      <div>
+        <h1 class="text-4xl font-semibold tracking-tight">Ekomobong Iwatt<span class="text-crimson">.</span></h1>
+        <p class="cv-muted mt-2 text-lg">Computer Engineering Student · Programmer</p>
+      </div>
+      <ul class="flex flex-col gap-1.5 font-mono text-xs">
+        {contacts.map((c) => (
+          <li>
+            {c.href ? (
+              <a href={c.href} class="cv-accent hover:underline">{c.label}</a>
+            ) : (
+              <span class="cv-muted">{c.label}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </header>
+
+    <div class="mt-10 grid gap-10 md:grid-cols-3">
+      <!-- Main column -->
+      <div class="space-y-10 md:col-span-2">
+        <section>
+          <h2 class="cv-eyebrow">Profile</h2>
+          <p class="cv-muted mt-3 leading-relaxed">
+            Computer Engineering student at the University of Lagos with hands-on experience in
+            web development, C++ programming, and embedded systems. Skilled in MATLAB/Simulink and
+            Arduino. Proven leadership experience as Class Representative and Financial Secretary.
+          </p>
+        </section>
+
+        <section>
+          <h2 class="cv-eyebrow">Experience &amp; Leadership</h2>
+          <div class="mt-4 space-y-6">
+            <div>
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-semibold">Financial Secretary</h3>
+                <span class="cv-faint shrink-0 font-mono text-xs">2025 – Present</span>
+              </div>
+              <p class="cv-accent text-sm">Dept. of Electrical &amp; Electronics Engineering — UNILAG</p>
+              <ul class="cv-muted mt-2 list-disc space-y-1 pl-5 text-sm">
+                <li>Develop and manage transparent budgets and financial records.</li>
+                <li>Introduce fundraising initiatives to support student projects.</li>
+                <li>Provide regular financial reports and organize fund sourcing for department programs.</li>
+              </ul>
+            </div>
+            <div>
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-semibold">Class Representative</h3>
+                <span class="cv-faint shrink-0 font-mono text-xs">2023 – Present</span>
+              </div>
+              <p class="cv-accent text-sm">Dept. of Computer Engineering — UNILAG</p>
+              <ul class="cv-muted mt-2 list-disc space-y-1 pl-5 text-sm">
+                <li>Represent 100+ students as liaison between faculty and students.</li>
+                <li>Ensure academic and welfare concerns are met efficiently.</li>
+                <li>Coordinate class activities, schedules, and academic support sessions.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="cv-eyebrow">Technical Projects</h2>
+          <div class="mt-4 space-y-5">
+            <div>
+              <div class="flex items-baseline justify-between gap-4">
+                <h3 class="font-semibold">Student Record System</h3>
+                <a href="https://github.com/EkomIwatt" class="cv-accent shrink-0 font-mono text-xs hover:underline">View code ↗</a>
+              </div>
+              <p class="cv-muted mt-1 text-sm">
+                A student record management system with CRUD operations in <strong class="cv-ink">C++</strong>.
+                Console applications demonstrating OOP, data structures, and file handling.
+              </p>
+            </div>
+            <div>
+              <h3 class="font-semibold">Freelance Web Development</h3>
+              <p class="cv-muted mt-1 text-sm">
+                Designed and deployed responsive websites using <strong class="cv-ink">HTML, CSS, and JavaScript</strong>.
+                Collaborated with peers to build marketing sites and optimized front-end performance.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="space-y-10">
+        <section>
+          <h2 class="cv-eyebrow">Education</h2>
+          <div class="mt-3">
+            <h3 class="font-semibold">University of Lagos</h3>
+            <p class="cv-muted text-sm">B.Sc. Computer Engineering</p>
+            <p class="cv-accent mt-1 font-mono text-xs">2023 – 2028 (Expected)</p>
+            <p class="cv-faint mt-2 text-xs italic">Secondary: Air Force Comp. School (2016–2022)</p>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="cv-eyebrow">Technical Skills</h2>
+          <div class="mt-3 space-y-4">
+            <div>
+              <h3 class="cv-muted mb-2 text-sm font-semibold">Languages</h3>
+              <div class="flex flex-wrap gap-2">
+                {languages.map((s) => <span class="chip">{s}</span>)}
+              </div>
+            </div>
+            <div>
+              <h3 class="cv-muted mb-2 text-sm font-semibold">Web &amp; Tools</h3>
+              <div class="flex flex-wrap gap-2">
+                {webTools.map((s) => <span class="chip">{s}</span>)}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2 class="cv-eyebrow">Soft Skills</h2>
+          <ul class="cv-muted mt-3 space-y-1.5 text-sm">
+            {softSkills.map((s) => (
+              <li><span class="cv-accent" aria-hidden="true">›</span> {s}</li>
+            ))}
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <p class="cv-faint mt-12 hidden text-center text-xs print:block">
+      References available upon request · {new URL(site.socials.github).host}/EkomIwatt
+    </p>
+  </main>
+</Base>
+
+<script is:inline>
+  document.getElementById('print-cv')?.addEventListener('click', () => window.print());
+</script>
+
+<style>
+  /* Screen (dark) colours — flipped to light under @media print below. */
+  .cv-ink { color: var(--color-ink); }
+  .cv-muted { color: var(--color-muted); }
+  .cv-faint { color: var(--color-faint); }
+  .cv-accent { color: var(--color-crimson-link); }
+  .cv-line { border-color: var(--color-line); }
+  .cv-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--color-crimson-link);
+    border-bottom: 1px solid var(--color-line);
+    padding-bottom: 0.5rem;
+  }
+
+  @media print {
+    /* Clean ink-on-white résumé: neutralise the dark theme + atmosphere. */
+    :global(html) { scrollbar-width: auto; }
+    :global(body) { background: #fff !important; color: #111 !important; }
+    :global(body::after) { display: none !important; } /* kill film grain */
+    .no-print { display: none !important; }
+
+    .cv-ink, .cv :is(h1, h2, h3, strong) { color: #111 !important; }
+    .cv-muted { color: #3f3f3f !important; }
+    .cv-faint { color: #6b6b6b !important; }
+    .cv-accent { color: #8c1c2b !important; }
+    .cv-line, .cv-eyebrow { border-color: #d8d8d8 !important; }
+    .cv-eyebrow { color: #8c1c2b !important; }
+    .text-crimson { color: #8c1c2b !important; }
+
+    /* Chips → light bordered tags. */
+    .cv :global(.chip) {
+      color: #333 !important;
+      border-color: #cfcfcf !important;
+    }
+    main { padding-bottom: 0 !important; }
+  }
+</style>

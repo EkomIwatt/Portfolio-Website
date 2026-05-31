@@ -18,7 +18,7 @@ const base = import.meta.env.BASE_URL;
       {navLinks.map((l) => (
         <li>
           <a
-            href={l.href}
+            href={`${base}/${l.href}`}
             class="group font-mono text-xs uppercase tracking-[0.12em] text-muted transition-colors hover:text-ink"
           >
             <span class="text-crimson/60 group-hover:text-crimson">{l.num}</span>
@@ -29,7 +29,7 @@ const base = import.meta.env.BASE_URL;
     </ul>
 
     <div class="flex items-center gap-2">
-      <a href="#contact" class="btn btn-shine btn-sm hidden sm:inline-flex">
+      <a href={`${base}/#contact`} class="btn btn-shine btn-sm hidden sm:inline-flex">
         Let's talk <span aria-hidden="true">→</span>
       </a>
 
@@ -46,13 +46,13 @@ const base = import.meta.env.BASE_URL;
         <ul class="absolute right-0 mt-3 w-52 space-y-1 border border-line bg-card p-2 shadow-xl">
           {navLinks.map((l) => (
             <li>
-              <a href={l.href} class="flex items-center gap-2 px-3 py-2 font-mono text-xs uppercase tracking-[0.12em] text-muted hover:bg-elevated hover:text-ink">
+              <a href={`${base}/${l.href}`} class="flex items-center gap-2 px-3 py-2 font-mono text-xs uppercase tracking-[0.12em] text-muted hover:bg-elevated hover:text-ink">
                 <span class="text-crimson">{l.num}</span>{l.label}
               </a>
             </li>
           ))}
           <li>
-            <a href="#contact" class="btn btn-shine btn-sm mt-1 w-full justify-center">
+            <a href={`${base}/#contact`} class="btn btn-shine btn-sm mt-1 w-full justify-center">
               Let's talk →
             </a>
           </li>

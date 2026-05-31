@@ -1,0 +1,107 @@
+---
+// Per-post page. Generated statically from the blog collection. Renders the
+// Markdown body with the dark-theme prose styles, an author bio, and CTAs.
+// Preserves the legacy posts' BlogPosting structured data (an existing eng win).
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import portrait from '../../assets/portraits/ekom-author.jpg';
+import { site } from '../../data/site';
+import '../../styles/prose.css';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const base = import.meta.env.BASE_URL;
+
+const fmt = (d: Date) =>
+  d.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const postUrl = Astro.site
+  ? new URL(Astro.url.pathname, Astro.site).href
+  : Astro.url.pathname;
+const ogImage = Astro.site
+  ? new URL(`${base}/og-card.png`.replace(/\/+/g, '/'), Astro.site).href
+  : 'og-card.png';
+
+// BlogPosting structured data — ported from the legacy blog HTML.
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  image: ogImage,
+  datePublished: post.data.pubDate.toISOString().slice(0, 10),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString().slice(0, 10),
+  author: { '@type': 'Person', name: site.name, url: Astro.site?.href ?? base },
+  publisher: { '@type': 'Person', name: site.name },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+};
+---
+
+<Base title={`${post.data.title} — Ekomobong Iwatt`} description={post.data.description} ogType="article">
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
+  <Nav />
+  <main class="px-6 pb-24 pt-28 sm:pt-32">
+    <article class="mx-auto max-w-[68ch]">
+      <!-- Post header -->
+      <header class="reveal border-b border-line pb-8">
+        <span class="chip chip-wip">{post.data.series}</span>
+        <h1 class="mt-5 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
+          {post.data.title}
+        </h1>
+        <p class="mt-4 font-mono text-xs uppercase tracking-[0.14em] text-muted">
+          <time datetime={post.data.pubDate.toISOString().slice(0, 10)}>{fmt(post.data.pubDate)}</time>
+          <span class="text-faint"> · {post.data.readingTime}</span>
+        </p>
+      </header>
+
+      <!-- Body. NOTE: no `.reveal` here — the reveal observer only adds
+           `is-visible` once ≥15% of the element is on screen, which a long
+           article body can never reach, leaving it stuck at opacity 0. -->
+      <div class="prose mt-10">
+        <Content />
+      </div>
+
+      <!-- Author bio -->
+      <aside class="reveal mt-16 flex flex-col gap-6 border border-line bg-card p-8 sm:flex-row sm:items-start">
+        <Image
+          src={portrait}
+          alt="Ekomobong Iwatt"
+          width={160}
+          height={160}
+          class="h-24 w-24 shrink-0 border border-line object-cover object-[center_20%]"
+          loading="lazy"
+        />
+        <div>
+          <h2 class="text-lg font-semibold text-ink">About the author</h2>
+          <p class="mt-2 text-sm leading-relaxed text-muted">
+            I'm a Computer Engineering student at Unilag and Financial Secretary of EEE, Unilag.
+            I bridge hardware and software, working across <strong class="text-ink">C++</strong>,
+            <strong class="text-ink">embedded systems</strong>, and
+            <strong class="text-ink">web development</strong> — currently diving into Rust and
+            cloud computing.
+          </p>
+          <p class="mt-3 font-serif text-sm italic text-muted">Thanks for stopping by.</p>
+        </div>
+      </aside>
+
+      <!-- CTAs -->
+      <nav class="mt-12 flex flex-wrap items-center justify-between gap-4" aria-label="Post navigation">
+        <a href={`${base}/blog`} class="font-mono text-xs uppercase tracking-[0.12em] text-muted hover:text-ink">
+          <span aria-hidden="true">←</span> All writing
+        </a>
+        <a href={`${base}/#contact`} class="btn btn-shine btn-sm">
+          Let's talk <span aria-hidden="true">→</span>
+        </a>
+      </nav>
+    </article>
+  </main>
+  <Footer />
+</Base>

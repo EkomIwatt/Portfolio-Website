@@ -13,17 +13,17 @@ export const site = {
   logo: 'ekom', // rendered with a crimson period: ekom.
   role: 'Software Engineer',
   location: 'Lagos, Nigeria',
-  email: 'ekomiwatt@example.com', // PLACEHOLDER: real contact email
+  email: 'ekomzwatt@gmail.com', // real (from CV)
   status: 'Open to internships & new-grad roles',
   socials: {
     github: 'https://github.com/EkomIwatt',
-    linkedin: '#', // PLACEHOLDER: LinkedIn URL
+    linkedin: 'https://linkedin.com/in/ekomiwatt', // real (from CV)
   },
   // Floating contact channels (bottom-right FABs).
   whatsapp: 'https://wa.me/2340000000000', // PLACEHOLDER: real WhatsApp number
   phone: 'tel:+2340000000000', // PLACEHOLDER: real phone number
-  // PLACEHOLDER: real résumé/CV file — wire the existing cv page or a PDF at cutover.
-  resumeUrl: '#',
+  // Dark-theme résumé page (Stage 4). A downloadable PDF can replace this later.
+  resumeUrl: `${import.meta.env.BASE_URL}/cv`,
   // PLACEHOLDER: Formspree form id (create at formspree.io) → endpoint below.
   formspreeId: 'your-form-id',
 };
@@ -55,7 +55,7 @@ export const hero = {
     'I move from idea to working product fast, then document every build in the open.',
   ctas: {
     primary: { label: "Let's talk", href: '#contact' },
-    secondary: { label: 'View résumé', href: '#contact' }, // wired to real CV at cutover
+    secondary: { label: 'View résumé', href: `${import.meta.env.BASE_URL}/cv` },
   },
   // Mono "spec line" under the hero — real where possible.
   spec: [

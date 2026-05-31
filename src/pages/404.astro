@@ -1,0 +1,39 @@
+---
+// 404 — dark-theme, noindex. Astro emits dist/404.html at the output root, which
+// GitHub Pages serves for unknown URLs. All links respect `base`.
+import Base from '../layouts/Base.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<Base title="404 — Page not found · Ekomobong Iwatt" description="The page you're looking for doesn't exist on this site." noindex={true}>
+  <a
+    href={base}
+    class="absolute left-6 top-6 z-10 inline-flex items-center gap-2 text-sm font-semibold tracking-tight text-ink hover:text-crimson"
+    aria-label="Ekomobong Iwatt — home"
+  >
+    ekom<span class="text-crimson">.</span>
+  </a>
+
+  <main class="u-glow flex min-h-screen flex-col items-center justify-center px-6 text-center">
+    <p class="font-mono text-7xl font-semibold text-crimson sm:text-9xl" aria-hidden="true">404</p>
+    <h1 class="mt-6 text-2xl font-semibold tracking-tight sm:text-4xl">
+      This page got lost in the <span class="font-serif italic text-crimson">build</span>.
+    </h1>
+    <p class="mx-auto mt-4 max-w-md leading-relaxed text-muted">
+      The URL you followed doesn't match anything on the site — it might be a typo, a stale link,
+      or something I haven't built yet.
+    </p>
+
+    <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+      <a href={base} class="btn btn-shine">
+        Take me home <span aria-hidden="true">→</span>
+      </a>
+      <a href={`${base}/#contact`} class="btn btn-ghost">Report a broken link</a>
+    </div>
+  </main>
+
+  <footer class="absolute bottom-6 left-0 right-0 text-center font-mono text-xs text-faint">
+    ekomiwatt.github.io/Portfolio-Website
+  </footer>
+</Base>

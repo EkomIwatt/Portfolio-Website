@@ -1,0 +1,165 @@
+/* Article typography for rendered Markdown (blog posts). Dark-theme, hand-rolled
+   (no @tailwindcss/typography dep) so it stays "Ekom's own" and uses the locked
+   tokens. Imported only by src/pages/blog/[...slug].astro and scoped under .prose.
+   Reading measure (~68ch), 1.7 line-height, ≥16px body — per the a11y guidance. */
+
+.prose {
+  color: var(--color-ink);
+  font-size: 1.0625rem; /* 17px */
+  line-height: 1.75;
+}
+
+/* Reading measure lives on the container in markup (max-w-[68ch]); paragraphs
+   inherit it. Generous rhythm between blocks. */
+.prose > * + * {
+  margin-top: 1.5rem;
+}
+
+.prose p {
+  color: color-mix(in srgb, var(--color-ink) 90%, transparent);
+}
+
+/* First paragraph = lead/standfirst, slightly larger and brighter. */
+.prose > p:first-child {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--color-ink);
+}
+
+.prose h2 {
+  margin-top: 3rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+/* Mono crimson rule sits to the left of every h2 — echoes the numbered rhythm. */
+.prose h2::before {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 2px;
+  margin-bottom: 0.9rem;
+  background: var(--color-crimson);
+}
+
+.prose h3 {
+  margin-top: 2.25rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  color: var(--color-ink);
+}
+
+.prose a {
+  color: var(--color-crimson-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  text-decoration-color: color-mix(in srgb, var(--color-crimson-link) 50%, transparent);
+  transition: text-decoration-color 0.2s ease;
+}
+.prose a:hover {
+  text-decoration-color: var(--color-crimson-link);
+}
+
+.prose strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4rem;
+}
+.prose li + li {
+  margin-top: 0.5rem;
+}
+.prose ul li::marker {
+  color: var(--color-crimson);
+}
+.prose ol li::marker {
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+}
+
+/* Pull-quote: crimson left rule on a faintly tinted card. */
+.prose blockquote {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 1rem 1.25rem;
+  border-left: 2px solid var(--color-crimson);
+  background: var(--color-crimson-deep);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+.prose blockquote p {
+  color: inherit;
+}
+
+/* Inline code — mono chip on a faint surface. */
+.prose :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  padding: 0.12rem 0.4rem;
+  border: 1px solid var(--color-line);
+  border-radius: 2px;
+  background: var(--color-elevated);
+  color: var(--color-crimson-link);
+}
+
+/* Fenced code blocks — card surface, crimson hairline, horizontal scroll. */
+.prose pre {
+  margin-top: 1.75rem;
+  margin-bottom: 1.75rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--color-line);
+  border-left: 2px solid var(--color-crimson);
+  background: var(--color-card);
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+.prose pre code {
+  font-family: var(--font-mono);
+  color: var(--color-ink);
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+/* Tables (e.g. the palette swatch in the first post). */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.prose th,
+.prose td {
+  border: 1px solid var(--color-line);
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+}
+.prose th {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
+  font-weight: 500;
+}
+.prose td:first-child {
+  font-family: var(--font-mono);
+  color: var(--color-crimson-link);
+}
+
+.prose hr {
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  border: 0;
+  border-top: 1px solid var(--color-line);
+}
