@@ -1,0 +1,24 @@
+---
+// STUB: full project catalogue is built later (PLACEHOLDER). For now this just
+// gives the "See full catalogue" button a real, non-404 destination.
+import Base from '../layouts/Base.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+const base = import.meta.env.BASE_URL;
+---
+
+<Base title="Projects — Ekomobong Iwatt" noindex={true}>
+  <Nav />
+  <main class="u-glow grid min-h-screen place-content-center px-6 text-center">
+    <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">[ catalogue ]</p>
+    <h1 class="mt-4 text-4xl font-semibold tracking-tight sm:text-5xl">
+      Full catalogue, <span class="font-serif italic text-crimson">soon</span><span class="text-crimson">.</span>
+    </h1>
+    <p class="mt-4 text-muted">The complete project archive lands here as builds ship.</p>
+    <a href={base} class="btn btn-shine mx-auto mt-8">
+      <span class="h-1.5 w-1.5 shrink-0 bg-crimson" aria-hidden="true"></span>
+      Back home
+    </a>
+  </main>
+  <Footer />
+</Base>

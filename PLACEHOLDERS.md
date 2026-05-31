@@ -14,8 +14,11 @@ Search the codebase for `PLACEHOLDER` to find every marker in context.
 - [ ] **[02] How I Build** — workflow steps (invented copy; refine to Ekom's real process)
 - [ ] **[03] Proof / By the numbers** — all metrics are DUMMY numbers; replace with real
       Lighthouse scores, # projects, posts, GitHub activity
-- [ ] **[01] Selected Work** — project entries (real projects land here as they ship)
+- [ ] **[01] Selected Work** — 4 highlight project entries (real projects land here as they ship)
+- [ ] **/projects** — currently a "coming soon" stub; build the real catalogue page
 - [ ] **[07] Certificates** — replace sample certs with real issuer/title/year/credential links
 - [ ] **Contact** — Formspree form ID (create at formspree.io)
+- [ ] `src/data/site.ts` — `whatsapp`: real WhatsApp number (floating button)
+- [ ] `src/data/site.ts` — `phone`: real phone number (floating button)
 
 > Add a line here whenever you introduce a new placeholder; check it off when replaced.

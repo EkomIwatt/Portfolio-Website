@@ -19,8 +19,13 @@ export const site = {
     github: 'https://github.com/EkomIwatt',
     linkedin: '#', // PLACEHOLDER: LinkedIn URL
   },
+  // Floating contact channels (bottom-right FABs).
+  whatsapp: 'https://wa.me/2340000000000', // PLACEHOLDER: real WhatsApp number
+  phone: 'tel:+2340000000000', // PLACEHOLDER: real phone number
   // PLACEHOLDER: real résumé/CV file — wire the existing cv page or a PDF at cutover.
   resumeUrl: '#',
+  // PLACEHOLDER: Formspree form id (create at formspree.io) → endpoint below.
+  formspreeId: 'your-form-id',
 };
 
 export interface NavLink {

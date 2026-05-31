@@ -1,0 +1,22 @@
+---
+// Shared numbered section header: mono eyebrow [0X] / LABEL + heading with one
+// Fraunces italic crimson accent word and the signature crimson period.
+interface Props {
+  num: string;
+  label: string;
+  lead: string;
+  accent: string;
+  tail?: string;
+  period?: boolean;
+}
+const { num, label, lead, accent, tail = '', period = true } = Astro.props;
+---
+
+<div>
+  <p class="font-mono text-xs uppercase tracking-[0.18em] text-muted">
+    <span class="text-crimson">[{num}]</span> <span class="text-faint">/</span> {label}
+  </p>
+  <h2 class="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">
+    {lead} <span class="font-serif italic text-crimson">{accent}</span>{tail}{period && <span class="text-crimson">.</span>}
+  </h2>
+</div>

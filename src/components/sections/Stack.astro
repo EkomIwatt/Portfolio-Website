@@ -1,0 +1,21 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+import { stack } from '../../data/sections';
+---
+
+<section id="stack" class="bg-surface px-6 py-24 sm:py-32">
+  <div class="mx-auto max-w-6xl">
+    <SectionHeading num="04" label="Stack & Capabilities" lead="The tools I" accent="reach" tail=" for" />
+
+    <div class="mt-12 grid gap-px overflow-hidden border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+      {stack.map((g) => (
+        <div class="bg-base p-6">
+          <h3 class="font-mono text-xs uppercase tracking-[0.14em] text-crimson">{g.label}</h3>
+          <ul class="mt-4 flex flex-wrap gap-2">
+            {g.items.map((i) => <li class="chip">{i}</li>)}
+          </ul>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

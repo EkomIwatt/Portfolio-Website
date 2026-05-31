@@ -21,6 +21,7 @@
   /* --- crimson accent (used surgically) --- */
   --color-crimson: #d7263d;       /* core: brand, large headings, metrics, borders, fills */
   --color-crimson-link: #f0324c;  /* small text & links — clears AA 4.5:1 on base + cards */
+  --color-crimson-dark: #8c1c2b;  /* deep crimson fill (e.g. active certificate card) */
   --color-crimson-deep: #1a0b0e;  /* crimson-tinted near-black for warm accent depth */
 
   /* --- type: three voices --- */
@@ -97,8 +98,10 @@
   isolation: isolate;
   border-color: transparent;
 }
-/* Rotating border ring = the travelling shine. Band is crimson-tinted, not white. */
-.btn-shine::before {
+/* Rotating crimson border ring = the travelling shine (shared by buttons + FABs).
+   Band is crimson-tinted, not white. */
+.btn-shine::before,
+.fab-shine::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -118,28 +121,53 @@
   pointer-events: none;
   z-index: 1;
 }
-/* Soft crimson glow INSIDE the button (above the grey body, below the label)
-   that rotates on the same angle, so it follows the shine around the edge. */
+/* Inner reveal: a crimson dotted grid lit ONLY where the rotating glow sweeps —
+   so the shine appears to reveal the dots inside the button. The dot layer is
+   static; the conic mask (same --btn-angle as the border) rotates over it. */
 .btn-shine::after {
   content: "";
   position: absolute;
   inset: 1px;
   z-index: -1;
-  background: conic-gradient(
-    from var(--btn-angle),
-    transparent 0deg,
-    color-mix(in srgb, var(--color-crimson) 70%, transparent) 40deg,
-    transparent 125deg,
-    transparent 360deg
-  );
-  filter: blur(7px);
-  opacity: 0.6;
+  background: radial-gradient(
+      color-mix(in srgb, var(--color-crimson) 85%, transparent) 1.4px,
+      transparent 1.6px
+    ) 0 0 / 8px 8px;
+  -webkit-mask-image: conic-gradient(from var(--btn-angle), transparent 0deg, #000 45deg, transparent 135deg, transparent 360deg);
+          mask-image: conic-gradient(from var(--btn-angle), transparent 0deg, #000 45deg, transparent 135deg, transparent 360deg);
+  filter: blur(0.6px);
+  opacity: 0.9;
   animation: btnSpin 3.5s linear infinite;
   pointer-events: none;
 }
 @keyframes btnSpin { to { --btn-angle: 360deg; } }
 .btn-shine:hover::before,
-.btn-shine:hover::after { animation-duration: 1.4s; }
+.btn-shine:hover::after,
+.fab-shine:hover::before { animation-duration: 1.4s; }
+
+/* Floating action buttons: rotating crimson border (above) + a hollow crimson
+   radial glow that appears INSIDE the button on hover (transparent centre). */
+.fab-shine {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid transparent;
+}
+.fab-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    circle at 50% 50%,
+    transparent 32%,
+    color-mix(in srgb, var(--color-crimson) 60%, transparent) 54%,
+    transparent 80%
+  );
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+.fab-shine:hover::after { opacity: 1; }
 
 .btn-ghost { background: transparent; }
 .btn-ghost:hover { background: var(--color-card); border-color: var(--color-line-strong); }
@@ -160,13 +188,30 @@
   animation: rise 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) both;
 }
 
-/* Faint engineering dotted-grid — blueprint atmosphere on near-black. */
+/* Mono tag chip — sharp hairline, used for tech tags / stack items. */
+.chip {
+  display: inline-block;
+  border: 1px solid var(--color-line);
+  padding: 0.15rem 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.chip-wip {
+  border-color: color-mix(in srgb, var(--color-crimson) 45%, var(--color-line));
+  color: var(--color-crimson-link);
+}
+
+/* Engineering dotted-grid — blueprint atmosphere on near-black.
+   Dots are ink-tinted (~rgb 70) so they actually read against #0A0A0A. */
 .bg-dotgrid {
   background-image: radial-gradient(
-    color-mix(in srgb, var(--color-line) 65%, transparent) 1px,
-    transparent 1px
+    color-mix(in srgb, var(--color-ink) 26%, transparent) 1.4px,
+    transparent 1.4px
   );
-  background-size: 22px 22px;
+  background-size: 24px 24px;
 }
 
 /* Crimson radial glow — atmosphere/depth without a colored block (replaces navy). */
@@ -187,6 +232,49 @@
   pointer-events: none;
 }
 
+/* ---- Experience timeline: scroll-driven rail fill + node lighting --------
+   Zero-JS via CSS scroll-driven animations. Fallback (Safari/FF) = static
+   crimson rail + crimson nodes. Reduced-motion also falls back to static. */
+.exp-rail-fill {
+  position: absolute;
+  left: -1px;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: var(--color-crimson);
+  transform-origin: top;
+  transform: scaleY(0);
+}
+.exp-node {
+  background: var(--color-line);
+}
+@keyframes railFill { to { transform: scaleY(1); } }
+@keyframes nodeOn {
+  to {
+    background: var(--color-crimson);
+    box-shadow: 0 0 12px 2px color-mix(in srgb, var(--color-crimson) 55%, transparent);
+  }
+}
+@supports (animation-timeline: view()) {
+  .exp-list { view-timeline: --expRail block; }
+  .exp-rail-fill {
+    /* non-zero duration: scroll timeline drives progress, but 0s (the shorthand
+       default) would make it never advance. */
+    animation: railFill 1s linear both;
+    animation-timeline: --expRail;
+    animation-range: cover 10% cover 85%;
+  }
+  .exp-node {
+    animation: nodeOn 1s linear both;
+    animation-timeline: view();
+    animation-range: cover 42% cover 56%;
+  }
+}
+@supports not (animation-timeline: view()) {
+  .exp-rail-fill { transform: scaleY(1); }
+  .exp-node { background: var(--color-crimson); }
+}
+
 /* ---- Reduced motion: honor the OS preference everywhere ------------------ */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -201,5 +289,14 @@
   .reveal {
     opacity: 1 !important;
     transform: none !important;
+  }
+  .exp-rail-fill {
+    animation: none !important;
+    transform: scaleY(1) !important;
+  }
+  .exp-node {
+    animation: none !important;
+    background: var(--color-crimson) !important;
+    box-shadow: none !important;
   }
 }

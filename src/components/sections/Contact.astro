@@ -1,0 +1,49 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+import { site } from '../../data/site';
+// PLACEHOLDER: replace site.formspreeId with the real id before cutover.
+const action = `https://formspree.io/f/${site.formspreeId}`;
+---
+
+<section id="contact" class="relative overflow-hidden px-6 py-24 sm:py-32">
+  <div
+    class="animate-pulse-glow pointer-events-none absolute -bottom-32 right-0 h-[480px] w-[600px] rounded-full opacity-50 blur-3xl"
+    style="background: radial-gradient(closest-side, color-mix(in srgb, var(--color-crimson) 24%, transparent), transparent);"
+    aria-hidden="true"
+  ></div>
+
+  <div class="relative mx-auto grid max-w-6xl gap-12 md:grid-cols-12">
+    <div class="md:col-span-5">
+      <SectionHeading num="09" label="Contact" lead="Let's" accent="talk" period={true} />
+      <p class="mt-6 max-w-sm text-lg leading-relaxed text-muted">
+        Hiring, collaborating, or just curious about a build? Send a note — I reply fast.
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href={site.resumeUrl} class="btn btn-shine">
+          <span class="h-1.5 w-1.5 shrink-0 bg-crimson" aria-hidden="true"></span>
+          View résumé
+        </a>
+        <a href={site.socials.github} class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
+        <a href={site.socials.linkedin} class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+    </div>
+
+    <form action={action} method="POST" class="md:col-span-7 md:pl-8">
+      <div class="grid gap-5 sm:grid-cols-2">
+        <div class="flex flex-col gap-2">
+          <label for="name" class="font-mono text-xs uppercase tracking-[0.14em] text-muted">Name</label>
+          <input id="name" name="name" type="text" required class="border border-line bg-card px-3 py-2.5 text-ink outline-none transition-colors focus:border-crimson" />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label for="email" class="font-mono text-xs uppercase tracking-[0.14em] text-muted">Email</label>
+          <input id="email" name="email" type="email" required class="border border-line bg-card px-3 py-2.5 text-ink outline-none transition-colors focus:border-crimson" />
+        </div>
+      </div>
+      <div class="mt-5 flex flex-col gap-2">
+        <label for="message" class="font-mono text-xs uppercase tracking-[0.14em] text-muted">Message</label>
+        <textarea id="message" name="message" rows="5" required class="resize-y border border-line bg-card px-3 py-2.5 text-ink outline-none transition-colors focus:border-crimson"></textarea>
+      </div>
+      <button type="submit" class="btn btn-shine mt-6">Send message <span aria-hidden="true">→</span></button>
+    </form>
+  </div>
+</section>

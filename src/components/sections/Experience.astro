@@ -1,0 +1,23 @@
+---
+import SectionHeading from '../SectionHeading.astro';
+import { timeline } from '../../data/sections';
+---
+
+<section id="experience" class="relative overflow-hidden bg-surface px-6 py-24 sm:py-32">
+  <div class="relative mx-auto max-w-6xl">
+    <SectionHeading num="06" label="Experience" lead="The road so" accent="far" />
+
+    <ol class="exp-list relative mt-12 border-l border-line">
+      <span class="exp-rail-fill" aria-hidden="true"></span>
+      {timeline.map((e) => (
+        <li class="relative pb-10 pl-8 last:pb-0">
+          <span class="exp-node absolute -left-[5px] top-1.5 h-2.5 w-2.5" aria-hidden="true"></span>
+          <p class="font-mono text-xs uppercase tracking-[0.14em] text-muted">{e.year}</p>
+          <h3 class="mt-2 text-xl font-semibold tracking-tight text-ink">{e.title}</h3>
+          <p class="font-mono text-xs text-crimson-link">{e.org}</p>
+          <p class="mt-2 max-w-xl text-sm leading-relaxed text-muted">{e.body}</p>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

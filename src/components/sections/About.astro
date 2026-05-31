@@ -1,0 +1,31 @@
+---
+import { Image } from 'astro:assets';
+import SectionHeading from '../SectionHeading.astro';
+import { about } from '../../data/sections';
+import { site } from '../../data/site';
+import portrait from '../../assets/portraits/OTOG9742-Edit.jpg';
+---
+
+<section id="about" class="px-6 py-24 sm:py-32">
+  <div class="mx-auto grid max-w-6xl gap-12 md:grid-cols-12 md:items-center">
+    <div class="md:col-span-5">
+      <figure class="u-glow relative mx-auto max-w-sm">
+        <div class="overflow-hidden border border-line bg-card">
+          <Image src={portrait} alt={`Portrait of ${site.name}`} width={760} densities={[1, 2]} class="h-auto w-full object-cover" />
+        </div>
+      </figure>
+    </div>
+
+    <div class="md:col-span-7">
+      <SectionHeading num="05" label="About" lead={about.lead} accent={about.accent} tail={about.tail} />
+      <div class="mt-6 space-y-4 text-lg leading-relaxed text-muted">
+        {about.body.map((p) => <p>{p}</p>)}
+      </div>
+      <dl class="mt-8 flex flex-wrap gap-x-8 gap-y-3 border-t border-line pt-6 font-mono text-xs">
+        <div class="flex items-center gap-2"><dt class="uppercase tracking-[0.12em] text-faint">Role</dt><dd class="text-ink">{site.role}</dd></div>
+        <div class="flex items-center gap-2"><dt class="uppercase tracking-[0.12em] text-faint">Based</dt><dd class="text-ink">{site.location}</dd></div>
+        <div class="flex items-center gap-2"><dt class="uppercase tracking-[0.12em] text-faint">Status</dt><dd class="text-crimson-link">{site.status}</dd></div>
+      </dl>
+    </div>
+  </div>
+</section>
