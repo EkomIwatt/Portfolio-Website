@@ -14,12 +14,44 @@ import Writing from '../components/sections/Writing.astro';
 import Contact from '../components/sections/Contact.astro';
 import Footer from '../components/Footer.astro';
 import FloatingContact from '../components/FloatingContact.astro';
+import { site } from '../data/site';
+
+// Absolute URLs (respect base) for structured data.
+const siteUrl = Astro.site ? new URL(`${import.meta.env.BASE_URL}/`.replace(/\/+/g, '/'), Astro.site).href : import.meta.env.BASE_URL;
+const ogImage = Astro.site ? new URL(`${import.meta.env.BASE_URL}/og-card.png`.replace(/\/+/g, '/'), Astro.site).href : 'og-card.png';
+
+// Person + WebSite structured data (ported/updated from the legacy homepage).
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      name: site.name,
+      url: siteUrl,
+      image: ogImage,
+      jobTitle: site.role,
+      description:
+        'Computer Engineering student at the University of Lagos building across software and embedded systems — AI-accelerated, engineering-grounded.',
+      alumniOf: { '@type': 'CollegeOrUniversity', name: 'University of Lagos', url: 'https://unilag.edu.ng/' },
+      knowsAbout: ['C++', 'Python', 'TypeScript', 'Rust', 'Astro', 'React', 'Embedded Systems', 'Microcontrollers'],
+      sameAs: [site.socials.github, site.socials.linkedin, site.socials.x],
+    },
+    {
+      '@type': 'WebSite',
+      name: `${site.name} — Portfolio`,
+      url: siteUrl,
+      author: { '@type': 'Person', name: site.name },
+      inLanguage: 'en',
+    },
+  ],
+};
 ---
 
 <Base>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <Nav />
   <FloatingContact />
-  <main>
+  <main id="main">
     <Hero />
     <Work />
     <Process />

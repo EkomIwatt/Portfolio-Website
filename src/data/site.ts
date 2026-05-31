@@ -18,7 +18,9 @@ export const site = {
   socials: {
     github: 'https://github.com/EkomIwatt',
     linkedin: 'https://linkedin.com/in/ekomiwatt', // real (from CV)
+    x: 'https://x.com/yr_Ekom', // ported from legacy meta
   },
+  twitterHandle: '@yr_Ekom', // for twitter:site / twitter:creator
   // Floating contact channels (bottom-right FABs).
   whatsapp: 'https://wa.me/2340000000000', // PLACEHOLDER: real WhatsApp number
   phone: 'tel:+2340000000000', // PLACEHOLDER: real phone number

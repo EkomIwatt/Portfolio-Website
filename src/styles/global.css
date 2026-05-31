@@ -52,6 +52,26 @@
     border-radius: 2px;
   }
 
+  /* Skip-link: hidden off-canvas until focused, then a crimson-bordered chip
+     pinned top-left. First focusable element on every page → jumps to #main. */
+  .skip-link {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    z-index: 100;
+    transform: translateY(-150%);
+    padding: 0.6rem 1rem;
+    background: var(--color-elevated);
+    border: 1px solid var(--color-crimson);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    transition: transform 0.2s ease;
+  }
+  .skip-link:focus {
+    transform: translateY(0);
+  }
+
   /* Themed scrollbar — near-black track, crimson thumb.
      NOTE: Chrome 121+ honours the standard scrollbar-* props and ignores the
      ::-webkit-scrollbar rules entirely (so the webkit :hover never fires there);

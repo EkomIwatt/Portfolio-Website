@@ -12,7 +12,15 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://ekomiwatt.github.io',
   base: '/Portfolio-Website',
-  integrations: [react(), sitemap()],
+  integrations: [
+    react(),
+    // Keep noindex dev/stub routes out of the sitemap (throwaway /swatch tuning
+    // page + the "coming soon" /projects stub). Drop these filters once the real
+    // catalogue ships and /swatch is deleted at cutover.
+    sitemap({
+      filter: (page) => !page.includes('/swatch') && !page.includes('/projects'),
+    }),
+  ],
 
   vite: {
     plugins: [tailwindcss()],

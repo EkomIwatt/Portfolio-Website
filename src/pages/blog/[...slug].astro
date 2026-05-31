@@ -48,7 +48,7 @@ const jsonLd = {
 <Base title={`${post.data.title} — Ekomobong Iwatt`} description={post.data.description} ogType="article">
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <Nav />
-  <main class="px-6 pb-24 pt-28 sm:pt-32">
+  <main id="main" class="px-6 pb-24 pt-28 sm:pt-32">
     <article class="mx-auto max-w-[68ch]">
       <!-- Post header -->
       <header class="reveal border-b border-line pb-8">
