@@ -23,6 +23,11 @@ export default defineConfig({
   ],
 
   vite: {
+    // Dedupe React so Vite's dev dep-cache can't load two copies — a duplicate
+    // React nulls the hook dispatcher and crashes every island on mount in dev
+    // ("Cannot read properties of null (reading 'useRef')"). No effect on the
+    // production bundle. Fixes the aurora (CrimsonField) + cert stack in dev.
+    resolve: { dedupe: ['react', 'react-dom'] },
     plugins: [tailwindcss()],
   },
 });
