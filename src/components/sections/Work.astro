@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import SectionHeading from '../SectionHeading.astro';
 import { projects } from '../../data/sections';
 const base = import.meta.env.BASE_URL;
@@ -18,19 +19,38 @@ const total = String(projects.length).padStart(2, '0');
           style={`top: calc(6.5rem + ${i * 1.25}rem)`}
         >
           <div class="grid md:grid-cols-2">
-            <!-- Abstract themed visual (placeholder until real screenshots) -->
+            <!-- Real screenshot when present, else an abstract themed placeholder -->
             <div class="relative min-h-52 overflow-hidden border-b border-line md:min-h-[26rem] md:border-b-0 md:border-r">
-              <div class="bg-dotgrid absolute inset-0 opacity-50" aria-hidden="true"></div>
-              <div
-                class="pointer-events-none absolute inset-0"
-                style="background: radial-gradient(60% 60% at 30% 30%, color-mix(in srgb, var(--color-crimson) 22%, transparent), transparent 70%);"
-                aria-hidden="true"
-              ></div>
-              <div class="relative flex h-full items-center justify-center p-8">
-                <span class="font-mono text-7xl font-semibold text-crimson/40 sm:text-8xl">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-              </div>
+              {p.image ? (
+                <Fragment>
+                  <Image
+                    src={p.image}
+                    alt={`Screenshot of ${p.name}`}
+                    widths={[480, 800, 1200]}
+                    sizes="(min-width: 768px) 50vw, 100vw"
+                    class="absolute inset-0 h-full w-full object-cover object-top"
+                  />
+                  <div
+                    class="pointer-events-none absolute inset-0"
+                    style="background: linear-gradient(to top, color-mix(in srgb, var(--color-base) 78%, transparent), transparent 55%), radial-gradient(120% 80% at 50% 120%, color-mix(in srgb, var(--color-crimson) 16%, transparent), transparent 60%);"
+                    aria-hidden="true"
+                  ></div>
+                </Fragment>
+              ) : (
+                <Fragment>
+                  <div class="bg-dotgrid absolute inset-0 opacity-50" aria-hidden="true"></div>
+                  <div
+                    class="pointer-events-none absolute inset-0"
+                    style="background: radial-gradient(60% 60% at 30% 30%, color-mix(in srgb, var(--color-crimson) 22%, transparent), transparent 70%);"
+                    aria-hidden="true"
+                  ></div>
+                  <div class="relative flex h-full items-center justify-center p-8">
+                    <span class="font-mono text-7xl font-semibold text-crimson/40 sm:text-8xl">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                </Fragment>
+              )}
             </div>
 
             <!-- Content -->
@@ -49,7 +69,7 @@ const total = String(projects.length).padStart(2, '0');
                 </ul>
               </div>
               <a href={p.href} class="group mt-8 inline-flex items-center gap-2 font-mono text-sm text-crimson-link">
-                View project
+                {p.cta ?? 'View project'}
                 <span class="transition-transform group-hover:translate-x-1" aria-hidden="true">→</span>
               </a>
             </div>

@@ -3,6 +3,8 @@
  * depends on work Ekom ships post-rebrand. All placeholders tracked in
  * /PLACEHOLDERS.md (the cutover gate). Nothing fabricated goes live.
  */
+import type { ImageMetadata } from 'astro';
+import portfolioV1Shot from '../assets/projects/portfolio-v1.png';
 
 // [01] SELECTED WORK ---------------------------------------------------------
 export interface Project {
@@ -12,6 +14,8 @@ export interface Project {
   year: string;
   href: string;
   wip?: boolean; // honest "in progress" treatment
+  cta?: string; // link label override (defaults to "View project")
+  image?: ImageMetadata; // optional card screenshot (else the abstract placeholder)
 }
 // Card 1 is real (the original hand-built portfolio, shipped Jan 2026); the two
 // WIP cards are honest placeholders Ekom fills as he ships the next two builds.
@@ -24,7 +28,9 @@ export const projects: Project[] = [
       'as I went.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Tailwind'],
     year: '2026',
-    href: 'https://github.com/EkomIwatt/Portfolio-Website',
+    href: `${import.meta.env.BASE_URL}/v1/`, // the live archived original
+    cta: 'View site',
+    image: portfolioV1Shot,
   },
   {
     name: 'Project Two',

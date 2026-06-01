@@ -60,7 +60,7 @@ const isExternal = (href: string) => /^https?:\/\//.test(href);
                   <span class="font-mono text-sm text-faint">Coming soon</span>
                 ) : (
                   <span class="font-mono text-sm text-crimson-link">
-                    View project
+                    {p.cta ?? 'View project'}
                     <span class="ml-1 inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">
                       {ext ? '↗' : '→'}
                     </span>
