@@ -62,3 +62,7 @@ Overall, I learnt a lot in the process. From GitHub to Tailwind to EmailJS, I no
 Over the coming months (and years), I'll be documenting my journey here; from my experiments with **Arduino and embedded systems** to my deep dives into **C++ and Rust**. And beyond code and tech, I'll write about just about anything that comes to mind on my Blog, so stay tuned!
 
 If you're reading this, thanks for stopping by. The site is live, the code is shipped, and I'll keep making adjustments and additions. I'm ready for the next bug!
+
+---
+
+*Update (June 2026): I've since rebuilt this site from the ground up — new stack (Astro), new dark "vibecoder" design, the one you're reading this on. The original version this post is about is preserved exactly as it shipped — [see the original site here](/Portfolio-Website/v1/).*

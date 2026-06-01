@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://ekomiwatt.github.io/Portfolio-Website/sitemap.xml
