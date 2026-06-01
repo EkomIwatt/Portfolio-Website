@@ -1,48 +1,101 @@
 ---
-// Full project catalogue. Intentionally EMPTY until real builds ship — honest
-// empty state, no fabricated entries (honesty rule). noindex until populated.
-// When projects exist, replace the empty-state block with the catalogue grid.
+// Full project catalogue — the archive of every build, real + honest in-progress.
+// Driven by the shared `projects` data (single source of truth with the homepage
+// [01] Selected Work section), rendered here as a scannable archive list.
+// Still noindex while it mirrors the homepage's selected work (one shipped build +
+// honest WIP); flip indexable + add to the sitemap once it diverges with more builds.
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import { site } from '../data/site';
+import { projects } from '../data/sections';
 
 const base = import.meta.env.BASE_URL;
+const shipped = projects.filter((p) => !p.wip).length;
+const total = String(projects.length).padStart(2, '0');
+const isExternal = (href: string) => /^https?:\/\//.test(href);
 ---
 
-<Base title="Catalogue — Ekomobong Iwatt" description="The full project archive — every build, documented end to end." noindex={true}>
+<Base
+  title="Catalogue — Ekomobong Iwatt"
+  description="The full project archive — every build, documented end to end."
+  noindex={true}
+>
   <Nav />
   <main id="main" class="px-6 pb-24 pt-28 sm:pt-32">
     <div class="mx-auto max-w-6xl">
       <SectionHeading num="01" label="Catalogue" lead="The full" accent="archive" />
 
       <p class="reveal mt-6 max-w-xl text-lg leading-relaxed text-muted" style="--reveal-delay: 100ms">
-        Every build I ship lands here — documented end to end, decisions and trade-offs in the open.
+        Every build I ship lands here — documented end to end, decisions and trade-offs in the
+        open. <span class="text-faint">{shipped} shipped, the rest in progress.</span>
       </p>
 
-      <!-- Empty state (honest: nothing fabricated until real projects exist) -->
-      <div class="reveal u-glow relative mt-12 overflow-hidden border border-line bg-card" style="--reveal-delay: 200ms">
-        <div class="bg-dotgrid absolute inset-0 opacity-40" aria-hidden="true"></div>
-        <div class="relative flex flex-col items-center gap-5 px-6 py-20 text-center sm:py-28">
-          <p class="font-mono text-7xl font-semibold text-crimson-link/30 sm:text-8xl" aria-hidden="true">00</p>
-          <h2 class="text-2xl font-semibold tracking-tight text-ink sm:text-3xl">
-            Nothing public <span class="font-serif italic text-crimson">yet</span><span class="text-crimson">.</span>
-          </h2>
-          <p class="max-w-md text-muted">
-            I'm shipping builds right now — case studies open here as each one lands. In the
-            meantime, the work-in-progress lives on GitHub.
-          </p>
-          <div class="mt-2 flex flex-wrap items-center justify-center gap-3">
-            <a href={site.socials.github} target="_blank" rel="noopener" class="btn btn-shine">
-              See GitHub <span aria-hidden="true">↗</span>
-            </a>
-            <a href={base} class="btn btn-ghost">
-              <span class="h-1.5 w-1.5 shrink-0 bg-crimson" aria-hidden="true"></span>
-              Back home
-            </a>
-          </div>
-        </div>
+      <ol class="mt-12 grid gap-px overflow-hidden border border-line bg-line">
+        {projects.map((p, i) => {
+          const num = String(i + 1).padStart(2, '0');
+          const ext = !p.wip && isExternal(p.href);
+          // Shared row body — number, title + status, blurb, tags, year/link rail.
+          const Row = (
+            <div class="grid items-start gap-x-6 gap-y-4 p-8 sm:grid-cols-[auto_1fr_auto] sm:p-10">
+              <span class="font-mono text-sm text-crimson-link sm:pt-1" aria-hidden="true">
+                [{num} <span class="text-faint">/</span> {total}]
+              </span>
+              <div>
+                <h2 class="flex flex-wrap items-center gap-3 text-2xl font-semibold tracking-tight sm:text-3xl">
+                  <span class={p.wip ? 'text-muted' : 'transition-colors group-hover:text-crimson'}>
+                    {p.name}
+                  </span>
+                  {p.wip && <span class="chip chip-wip">In progress</span>}
+                </h2>
+                <p class="mt-3 max-w-xl text-muted">{p.blurb}</p>
+                <ul class="mt-5 flex flex-wrap gap-2">
+                  {p.tags.map((t) => <li class="chip">{t}</li>)}
+                </ul>
+              </div>
+              <div class="flex flex-col gap-3 sm:items-end sm:text-right">
+                <span class="font-mono text-xs uppercase tracking-[0.14em] text-faint">{p.year}</span>
+                {p.wip ? (
+                  <span class="font-mono text-sm text-faint">Coming soon</span>
+                ) : (
+                  <span class="font-mono text-sm text-crimson-link">
+                    View project
+                    <span class="ml-1 inline-block transition-transform group-hover:translate-x-1" aria-hidden="true">
+                      {ext ? '↗' : '→'}
+                    </span>
+                  </span>
+                )}
+              </div>
+            </div>
+          );
+
+          return (
+            <li class="reveal bg-base" style={`--reveal-delay: ${(i + 2) * 100}ms`}>
+              {p.wip ? (
+                Row
+              ) : (
+                <a
+                  href={p.href}
+                  class="group block transition-colors hover:bg-card/40"
+                  {...(ext ? { target: '_blank', rel: 'noopener' } : {})}
+                >
+                  {Row}
+                </a>
+              )}
+            </li>
+          );
+        })}
+      </ol>
+
+      <div class="mt-12 flex flex-wrap items-center gap-3">
+        <a href={site.socials.github} target="_blank" rel="noopener" class="btn btn-shine">
+          See GitHub <span aria-hidden="true">↗</span>
+        </a>
+        <a href={base} class="btn btn-ghost">
+          <span class="h-1.5 w-1.5 shrink-0 bg-crimson" aria-hidden="true"></span>
+          Back home
+        </a>
       </div>
     </div>
   </main>

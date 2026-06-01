@@ -17,11 +17,13 @@ Search the codebase for `PLACEHOLDER` to find every marker in context.
       Edge run), projects shipped (2), articles (2), technologies (12+)
 - [~] **[01] Selected Work** — card 1 is real (Portfolio Website v1, links to the GitHub repo);
       cards 2–3 stay honest WIP placeholders until Ekom ships the next two builds
-- [ ] **/projects** — currently a "coming soon" stub; build the real catalogue page
+- [x] **/projects** — real catalogue built (archive list driven by the shared `projects` data:
+      v1 shipped + honest WIP rows). Kept `noindex` + out of the sitemap while it mirrors the
+      homepage selected work; flip indexable once it diverges with more shipped builds.
 - [x] **[07] Certificates** — real certs wired from the legacy site (C++/Udemy, Python/Coursera,
       Embedded Systems/ECX [no public link], + one honest "in progress" card)
-- [x] **Contact** — Formspree form ID confirmed by Ekom (`mlgvkpeq`). ⚠️ Still activate it
-      with one real submission post-deploy (Formspree emails the owner to verify delivery).
+- [x] **Contact** — Formspree (`mlgvkpeq`) wired AND activated; Ekom confirmed the
+      activation submission landed in his inbox. Delivery is live.
 - [x] `src/data/site.ts` — `whatsapp`: real number wired (ported from legacy site)
 - [x] `src/data/site.ts` — `phone`: real number wired (same line as WhatsApp, confirmed)
 
