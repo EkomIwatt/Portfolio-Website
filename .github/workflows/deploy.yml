@@ -1,13 +1,11 @@
 name: Deploy to GitHub Pages
 
-# Build runs on both main and the rebrand branch (proves the build is green
-# pre-cutover). Deploy is gated to `main` ONLY, so the live site is not touched
-# until Stage 5 cutover — at which point GitHub Pages "Source" must also be
-# switched from "Deploy from a branch" to "GitHub Actions" in repo Settings.
-# (The `rebrand-vibecoder` trigger can be removed once cutover is complete.)
+# Post-cutover: `main` is the live branch. Pushes to main build and deploy to
+# GitHub Pages (Pages "Source" = GitHub Actions). The deploy job is still guarded
+# by the `main` ref check below as a belt-and-braces safeguard.
 on:
   push:
-    branches: [main, rebrand-vibecoder]
+    branches: [main]
   workflow_dispatch:
 
 permissions:
