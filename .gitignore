@@ -16,11 +16,7 @@ pnpm-debug.log*
 .DS_Store
 *.local
 
-# Claude Code per-user local settings (permissions etc.) — never commit
-.claude/settings.local.json
-
-# Third-party reference material — kept locally, NOT republished to this public repo
-# (wibify.agency screenshots, copyrighted checklist PDF). The authored spec/notes
-# (.claude/inspiration/wibify.md, components/) and Ekom's own pictures ARE committed.
-.claude/inspiration/assets/
-.claude/rules/
+# Claude Code working folder — local-only, never published to this public repo
+# (plans, inspiration refs, studio portraits, per-user settings). Kept on disk,
+# untracked. CLAUDE.md (the project constitution) lives at the repo root and stays tracked.
+.claude/
