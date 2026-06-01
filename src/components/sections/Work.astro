@@ -29,13 +29,16 @@ const total = String(projects.length).padStart(2, '0');
                     style="background: radial-gradient(70% 70% at 50% 30%, color-mix(in srgb, var(--color-crimson) 16%, transparent), transparent 70%);"
                     aria-hidden="true"
                   ></div>
-                  <Image
-                    src={p.image}
-                    alt={`Screenshot of ${p.name}`}
-                    widths={[480, 800, 1200]}
-                    sizes="(min-width: 768px) 50vw, 100vw"
-                    class="absolute inset-6 rounded-lg border border-line-strong object-cover object-top shadow-2xl sm:inset-10"
-                  />
+                  <!-- Inner frame: positioned/sized once, clips its corners; the screenshot fills it. -->
+                  <div class="absolute inset-6 overflow-hidden rounded-lg border border-line-strong shadow-2xl sm:inset-10">
+                    <Image
+                      src={p.image}
+                      alt={`Screenshot of ${p.name}`}
+                      widths={[480, 800, 1200]}
+                      sizes="(min-width: 768px) 50vw, 100vw"
+                      class="h-full w-full object-cover object-top"
+                    />
+                  </div>
                 </Fragment>
               ) : (
                 <Fragment>
