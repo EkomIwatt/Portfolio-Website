@@ -12,7 +12,8 @@ Search the codebase for `PLACEHOLDER` to find every marker in context.
 - [x] `src/data/site.ts` — `socials.linkedin`: real LinkedIn URL (linkedin.com/in/ekomiwatt — Stage 4)
 - [x] `src/data/site.ts` — `resumeUrl`: now points to the dark-theme `/cv` page (Stage 4; a
       downloadable PDF can replace it later)
-- [ ] **[02] How I Build** — workflow steps (invented copy; refine to Ekom's real process)
+- [x] **[02] How I Build** — workflow steps accepted as-is; Ekom confirmed the copy reflects
+      his real process. No further change needed.
 - [x] **[03] Proof / By the numbers** — all real: Lighthouse 96+ (96 mobile / 100 desktop,
       Edge run), projects shipped (2), articles (2), technologies (12+)
 - [~] **[01] Selected Work** — card 1 is real (Portfolio Website v1, links to the GitHub repo);
