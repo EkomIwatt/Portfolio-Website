@@ -8,6 +8,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import portrait from '../../assets/portraits/ekom-author.jpg';
+import AuroraBackdrop from '../../components/AuroraBackdrop.astro';
 import { site } from '../../data/site';
 import '../../styles/prose.css';
 
@@ -48,8 +49,11 @@ const jsonLd = {
 <Base title={`${post.data.title} — Ekomobong Iwatt`} description={post.data.description} ogType="article">
   <script type="application/ld+json" slot="head" set:html={JSON.stringify(jsonLd)} />
   <Nav />
-  <main id="main" class="px-6 pb-24 pt-28 sm:pt-32">
-    <article class="mx-auto max-w-[68ch]">
+
+  <AuroraBackdrop />
+
+  <main id="main" class="aurora-page px-6 pb-24 pt-28 sm:pt-32">
+    <article class="aurora-panel mx-auto max-w-[76ch]">
       <!-- Post header -->
       <header class="reveal border-b border-line pb-8">
         <span class="chip chip-wip">{post.data.series}</span>

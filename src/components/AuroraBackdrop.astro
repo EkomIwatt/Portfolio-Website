@@ -1,0 +1,130 @@
+---
+// EXPERIMENT (branch experiment/aurora-backdrop): a fixed, full-viewport crimson
+// aurora that page content scrolls over.
+//
+// Used by the /blog listing and every post. Deliberately NOT used on the
+// homepage — the hero owns the aurora there, and a second fixed field behind
+// the whole page would fight it.
+//
+// Ships the classes the host pages apply to their own markup:
+//   .aurora-page   → on <main>, lifts content above the fixed field
+//   .aurora-panel  → glass slab for a single column of prose (post pages)
+//   .aurora-tile   → glass treatment for cards in a grid (listing page)
+import CrimsonField from './CrimsonField.tsx';
+---
+
+<div class="aurora-backdrop" aria-hidden="true">
+  <!-- Static crimson field: the reduced-motion fallback, and the bed the
+       canvas sits on while WebGL warms up. -->
+  <div class="aurora-static"></div>
+  <!-- Live WebGL aurora. The canvas is `absolute inset-0` inside this fixed
+       wrapper, so it fills the viewport and stays put while content scrolls. -->
+  <div class="aurora-canvas">
+    <CrimsonField client:visible />
+  </div>
+  <!-- Scrim: keeps body copy readable and sinks the aurora behind the nav
+       pill at the top and the footer at the bottom. -->
+  <div class="aurora-scrim"></div>
+</div>
+
+<style>
+  /* Knobs live on :root, not on .aurora-backdrop — .aurora-panel and
+     .aurora-tile sit in a different subtree and would not inherit them. */
+  :global(:root) {
+    --aurora-opacity: 0.5;  /* live canvas strength */
+    --aurora-veil: 58%;     /* flat base-colour veil over the whole field */
+    --aurora-blur: 20px;    /* glass blur on panels and tiles */
+  }
+
+  .aurora-backdrop {
+    position: fixed;
+    inset: 0;
+    /* Negative z sits above the body background but behind all in-flow
+       content, so <footer> needs no stacking changes. */
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .aurora-static {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(60% 45% at 20% 15%, color-mix(in srgb, var(--color-crimson) 30%, transparent), transparent 70%),
+      radial-gradient(55% 50% at 80% 60%, color-mix(in srgb, var(--color-crimson-dark) 38%, transparent), transparent 72%),
+      var(--color-base);
+  }
+
+  .aurora-canvas {
+    position: absolute;
+    inset: 0;
+    opacity: var(--aurora-opacity);
+  }
+
+  /* Readability scrim: flat veil + a heavier fade at the very top (behind the
+     nav pill) and bottom (behind the footer). */
+  .aurora-scrim {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to bottom,
+        var(--color-base) 0%,
+        transparent 18%,
+        transparent 78%,
+        var(--color-base) 100%
+      ),
+      color-mix(in srgb, var(--color-base) var(--aurora-veil), transparent);
+  }
+
+  /* --- classes applied by the host pages ---------------------------------- */
+
+  :global(.aurora-page) {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* One long column of prose becomes a single glass slab. */
+  :global(.aurora-panel) {
+    padding: 2rem 1.5rem;
+    background: color-mix(in srgb, var(--color-base) 68%, transparent);
+    backdrop-filter: blur(var(--aurora-blur)) saturate(115%);
+    -webkit-backdrop-filter: blur(var(--aurora-blur)) saturate(115%);
+    border: 1px solid color-mix(in srgb, var(--color-line-strong) 85%, transparent);
+    box-shadow: 0 24px 80px -24px rgb(0 0 0 / 0.85);
+  }
+
+  @media (min-width: 640px) {
+    :global(.aurora-panel) {
+      padding: 3.5rem 3rem;
+    }
+  }
+
+  /* Nested cards go translucent too, or they read as opaque patches on glass. */
+  :global(.aurora-panel aside) {
+    background: color-mix(in srgb, var(--color-card) 55%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* A grid of cards keeps its own hairline structure — the tiles go glass
+     individually rather than being wrapped in one big slab. Replaces the
+     `bg-base` / `hover:bg-card/40` utilities on the listing rows. */
+  :global(.aurora-tile) {
+    background: color-mix(in srgb, var(--color-base) 62%, transparent);
+    backdrop-filter: blur(var(--aurora-blur)) saturate(115%);
+    -webkit-backdrop-filter: blur(var(--aurora-blur)) saturate(115%);
+    transition: background-color 0.2s ease;
+  }
+
+  :global(.aurora-tile:hover) {
+    background: color-mix(in srgb, var(--color-card) 72%, transparent);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    /* Drop the WebGL layer entirely; the static field carries the look. */
+    .aurora-canvas {
+      display: none;
+    }
+  }
+</style>
