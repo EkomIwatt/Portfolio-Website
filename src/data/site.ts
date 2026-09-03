@@ -10,14 +10,14 @@
 
 export const site = {
   name: 'Ekomobong Iwatt',
-  logo: 'ekom', // rendered with a crimson period: ekom.
+  logo: 'Ekom', // rendered with a crimson period: Ekom.
   role: 'Software Engineer',
   location: 'Lagos, Nigeria',
-  email: 'ekomzwatt@gmail.com', // real (from CV)
+  email: 'ekomzwatt@gmail.com',
   status: 'Open to internships & new-grad roles',
   socials: {
     github: 'https://github.com/EkomIwatt',
-    linkedin: 'https://linkedin.com/in/ekomiwatt', // real (from CV)
+    linkedin: 'https://linkedin.com/in/ekomiwatt',
     x: 'https://x.com/yr_Ekom', // ported from legacy meta
   },
   twitterHandle: '@yr_Ekom', // for twitter:site / twitter:creator
