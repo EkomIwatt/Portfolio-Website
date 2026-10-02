@@ -12,6 +12,7 @@ const FRAG = `
 precision highp float;
 uniform float iTime;
 uniform vec2 iResolution;
+uniform float uBalance; // 1.0 = mirror every other streak through the centre
 
 #define NUM_OCTAVES 3
 
@@ -37,7 +38,10 @@ void main(){
   float f = 2.0 + fbm(p + vec2(iTime*5.0, 0.0)) * 0.5;
 
   for (float i = 0.0; i < 24.0; i++){
-    v = p + cos(i*i + (iTime + p.x*0.08)*0.025 + i*vec2(13.0,11.0))*3.5
+    // Balanced mode reflects odd streaks through the centre so they spread
+    // across the whole field instead of clumping on one side.
+    float side = (uBalance > 0.5 && mod(i, 2.0) > 0.5) ? -1.0 : 1.0;
+    v = p + side*cos(i*i + (iTime + p.x*0.08)*0.025 + i*vec2(13.0,11.0))*3.5
           + vec2(sin(iTime*3.0+i)*0.003, cos(iTime*3.5-i)*0.003);
     float tailNoise = fbm(v + vec2(iTime*0.5, i)) * 0.3 * (1.0 - (i/24.0));
     // crimson palette: deep red -> lighter crimson, no blue/teal
@@ -55,7 +59,12 @@ void main(){
 }
 `;
 
-export default function CrimsonField() {
+interface Props {
+  /** Spread streaks evenly across the field (used by the full-page backdrop). */
+  balanced?: boolean;
+}
+
+export default function CrimsonField({ balanced = false }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -86,6 +95,7 @@ export default function CrimsonField() {
 
     const uTime = gl.getUniformLocation(prog, 'iTime');
     const uRes = gl.getUniformLocation(prog, 'iResolution');
+    gl.uniform1f(gl.getUniformLocation(prog, 'uBalance'), balanced ? 1 : 0);
 
     // Render at a fraction of CSS size — the aurora is soft so the upscale is
     // invisible, and it slashes per-frame fragment work (big perf win).
@@ -124,7 +134,7 @@ export default function CrimsonField() {
       gl.deleteBuffer(buf);
       gl.deleteProgram(prog);
     };
-  }, []);
+  }, [balanced]);
 
   return <canvas ref={ref} className="absolute inset-0 h-full w-full" aria-hidden="true" />;
 }

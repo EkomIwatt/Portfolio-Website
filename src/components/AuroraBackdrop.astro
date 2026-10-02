@@ -1,6 +1,5 @@
 ---
-// EXPERIMENT (branch experiment/aurora-backdrop): a fixed, full-viewport crimson
-// aurora that page content scrolls over.
+// A fixed, full-viewport crimson aurora that page content scrolls over.
 //
 // Used by the /blog listing and every post. Deliberately NOT used on the
 // homepage — the hero owns the aurora there, and a second fixed field behind
@@ -8,7 +7,7 @@
 //
 // Ships the classes the host pages apply to their own markup:
 //   .aurora-page   → on <main>, lifts content above the fixed field
-//   .aurora-panel  → glass slab for a single column of prose (post pages)
+//   .aurora-panel  → clear padded column for post prose (aurora shows through)
 //   .aurora-tile   → glass treatment for cards in a grid (listing page)
 import CrimsonField from './CrimsonField.tsx';
 ---
@@ -20,7 +19,7 @@ import CrimsonField from './CrimsonField.tsx';
   <!-- Live WebGL aurora. The canvas is `absolute inset-0` inside this fixed
        wrapper, so it fills the viewport and stays put while content scrolls. -->
   <div class="aurora-canvas">
-    <CrimsonField client:visible />
+    <CrimsonField balanced client:visible />
   </div>
   <!-- Scrim: keeps body copy readable and sinks the aurora behind the nav
        pill at the top and the footer at the bottom. -->
@@ -32,8 +31,8 @@ import CrimsonField from './CrimsonField.tsx';
      .aurora-tile sit in a different subtree and would not inherit them. */
   :global(:root) {
     --aurora-opacity: 0.5;  /* live canvas strength */
-    --aurora-veil: 58%;     /* flat base-colour veil over the whole field */
-    --aurora-blur: 20px;    /* glass blur on panels and tiles */
+    --aurora-veil: 30%;    /* flat base-colour veil over the whole field */
+    --aurora-blur: 20px;    /* glass blur on tiles and the post aside */
   }
 
   .aurora-backdrop {
@@ -50,8 +49,8 @@ import CrimsonField from './CrimsonField.tsx';
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(60% 45% at 20% 15%, color-mix(in srgb, var(--color-crimson) 30%, transparent), transparent 70%),
-      radial-gradient(55% 50% at 80% 60%, color-mix(in srgb, var(--color-crimson-dark) 38%, transparent), transparent 72%),
+      radial-gradient(60% 45% at 20% 15%, color-mix(in srgb, var(--color-crimson) 18%, transparent), transparent 70%),
+      radial-gradient(55% 50% at 80% 60%, color-mix(in srgb, var(--color-crimson-dark) 18%, transparent), transparent 72%),
       var(--color-base);
   }
 
@@ -84,14 +83,10 @@ import CrimsonField from './CrimsonField.tsx';
     z-index: 1;
   }
 
-  /* One long column of prose becomes a single glass slab. */
+  /* Post prose sits straight on the aurora — no slab, no blur — so the
+     field shows through behind the text. */
   :global(.aurora-panel) {
     padding: 2rem 1.5rem;
-    background: color-mix(in srgb, var(--color-base) 68%, transparent);
-    backdrop-filter: blur(var(--aurora-blur)) saturate(115%);
-    -webkit-backdrop-filter: blur(var(--aurora-blur)) saturate(115%);
-    border: 1px solid color-mix(in srgb, var(--color-line-strong) 85%, transparent);
-    box-shadow: 0 24px 80px -24px rgb(0 0 0 / 0.85);
   }
 
   @media (min-width: 640px) {
