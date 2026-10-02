@@ -5,6 +5,9 @@
  */
 import type { ImageMetadata } from 'astro';
 import portfolioV1Shot from '../assets/projects/portfolio-v1.png';
+import queryllShot from '../assets/projects/queryll.png';
+import swarmShot from '../assets/projects/swarm.png'; // diagram drawn for the site (Swarm has no UI)
+import ledgerliteShot from '../assets/projects/ledgerlite.png'; // demo account, sample data
 
 // [01] SELECTED WORK ---------------------------------------------------------
 export interface Project {
@@ -19,7 +22,7 @@ export interface Project {
   featured?: boolean; // shown on the homepage [01]; everything shows on /projects
 }
 // Sourced from MASTER-CV.md + SmartPump_Project_Brief.md via /update-portfolio.
-// Queryll, Swarm and TaskFlow repos are private → their links go to Contact.
+// Queryll, Swarm and TaskFlow repos are private → no code links (Contact instead).
 // SmartPump: no code link and no app screenshots (client IP, per the brief).
 const walkthrough = `${import.meta.env.BASE_URL}/#contact`;
 export const projects: Project[] = [
@@ -46,6 +49,7 @@ export const projects: Project[] = [
     year: '2026',
     href: walkthrough,
     cta: 'Code walkthrough on request',
+    image: queryllShot,
     featured: true,
   },
   {
@@ -59,6 +63,7 @@ export const projects: Project[] = [
     year: '2026',
     href: walkthrough,
     cta: 'Ask me how it works',
+    image: swarmShot,
     featured: true,
   },
   {
@@ -71,6 +76,7 @@ export const projects: Project[] = [
     year: '2026',
     href: 'https://ledger-lite-amber.vercel.app',
     cta: 'View live site',
+    image: ledgerliteShot,
     featured: true,
   },
   {
@@ -78,11 +84,11 @@ export const projects: Project[] = [
     blurb:
       'Real-time collaborative kanban: optimistic, keyboard-accessible drag-and-drop, ' +
       'fractional ordering keys, and live sync across clients over one WebSocket. 431 tests. ' +
-      'Built with Swarm; runs locally.',
+      'Built with Swarm. Free-tier hosting, so the first load can take a minute.',
     tags: ['FastAPI', 'WebSockets', 'React', 'Postgres'],
     year: '2026',
-    href: walkthrough,
-    cta: 'Code walkthrough on request',
+    href: 'https://taskflow-nu-sand-60.vercel.app',
+    cta: 'View live site',
   },
   {
     name: 'Snipp',
@@ -134,7 +140,7 @@ export const metrics: Metric[] = [
   { value: '8', label: 'Projects built' }, // the 7 in `projects` + this portfolio
   // Snipp 45 + LedgerLite 339 + TaskFlow 431 + Queryll 441 + SmartPump 605 unit / 27 device = 1,888
   { value: '1800+', label: 'Automated tests' },
-  { value: '2', label: 'Live deployments' }, // LedgerLite + Snipp, verified 2026-10-02
+  { value: '3', label: 'Live deployments' }, // LedgerLite, Snipp, TaskFlow; verified 2026-10-02
 ];
 
 // [04] STACK / CAPABILITIES --------------------------------------------------

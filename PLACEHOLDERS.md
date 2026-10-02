@@ -15,7 +15,7 @@ Search the codebase for `PLACEHOLDER` to find every marker in context.
 - [x] **[02] How I Build** — workflow steps accepted as-is; Ekom confirmed the copy reflects
       his real process. No further change needed.
 - [x] **[03] Proof / By the numbers** — all real: Lighthouse 96+ (96 mobile / 100 desktop,
-      Edge run), projects built (8), automated tests (1800+), live deployments (2)
+      Edge run), projects built (8), automated tests (1800+), live deployments (3)
 - [x] **[01] Selected Work** — all real (2026-10-02, via /update-portfolio): SmartPump, Queryll,
       Swarm, LedgerLite featured on the homepage; TaskFlow, Snipp, Portfolio v1 on /projects
 - [x] **/projects** — real catalogue of every build; now indexable and in the sitemap
