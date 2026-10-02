@@ -14,11 +14,10 @@ export default defineConfig({
   base: '/Portfolio-Website',
   integrations: [
     react(),
-    // Keep noindex dev/stub routes out of the sitemap (throwaway /swatch tuning
-    // page + the "coming soon" /projects stub). Drop these filters once the real
-    // catalogue ships and /swatch is deleted at cutover.
+    // Keep the noindex /swatch tuning page out of the sitemap. Drop this filter
+    // once /swatch is deleted.
     sitemap({
-      filter: (page) => !page.includes('/swatch') && !page.includes('/projects'),
+      filter: (page) => !page.includes('/swatch'),
     }),
   ],
 

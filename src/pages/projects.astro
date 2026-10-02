@@ -1,9 +1,8 @@
 ---
 // Full project catalogue — the archive of every build, real + honest in-progress.
 // Driven by the shared `projects` data (single source of truth with the homepage
-// [01] Selected Work section), rendered here as a scannable archive list.
-// Still noindex while it mirrors the homepage's selected work (one shipped build +
-// honest WIP); flip indexable + add to the sitemap once it diverges with more builds.
+// [01] Selected Work section, which shows only `featured` ones), rendered here as a
+// scannable archive list.
 import Base from '../layouts/Base.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
@@ -12,7 +11,7 @@ import { site } from '../data/site';
 import { projects } from '../data/sections';
 
 const base = import.meta.env.BASE_URL;
-const shipped = projects.filter((p) => !p.wip).length;
+const inProgress = projects.filter((p) => p.wip).length;
 const total = String(projects.length).padStart(2, '0');
 const isExternal = (href: string) => /^https?:\/\//.test(href);
 ---
@@ -20,7 +19,6 @@ const isExternal = (href: string) => /^https?:\/\//.test(href);
 <Base
   title="Catalogue — Ekomobong Iwatt"
   description="The full project archive — every build, documented end to end."
-  noindex={true}
 >
   <Nav />
   <main id="main" class="px-6 pb-24 pt-28 sm:pt-32">
@@ -29,7 +27,7 @@ const isExternal = (href: string) => /^https?:\/\//.test(href);
 
       <p class="reveal mt-6 max-w-xl text-lg leading-relaxed text-muted" style="--reveal-delay: 100ms">
         Every build I ship lands here — documented end to end, decisions and trade-offs in the
-        open. <span class="text-faint">{shipped} shipped, the rest in progress.</span>
+        open. <span class="text-faint">{projects.length} builds{inProgress > 0 && `, ${inProgress} in progress`}.</span>
       </p>
 
       <ol class="mt-12 grid gap-px overflow-hidden border border-line bg-line">
