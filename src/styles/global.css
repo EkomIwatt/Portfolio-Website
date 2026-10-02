@@ -282,6 +282,13 @@ body::after {
   background-repeat: repeat;
 }
 
+/* The one emphasis word per heading (hero, section headings, 404):
+   upright Fraunces in crimson against the Geist headline. */
+.accent-word {
+  font-family: var(--font-serif);
+  color: var(--color-crimson);
+}
+
 /* Crimson radial glow — atmosphere/depth without a colored block (replaces navy). */
 .u-glow {
   position: relative;
