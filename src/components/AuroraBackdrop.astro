@@ -19,7 +19,7 @@ import CrimsonField from './CrimsonField.tsx';
   <!-- Live WebGL aurora. The canvas is `absolute inset-0` inside this fixed
        wrapper, so it fills the viewport and stays put while content scrolls. -->
   <div class="aurora-canvas">
-    <CrimsonField balanced client:visible />
+    <CrimsonField balanced idlePause client:visible />
   </div>
   <!-- Scrim: keeps body copy readable and sinks the aurora behind the nav
        pill at the top and the footer at the bottom. -->

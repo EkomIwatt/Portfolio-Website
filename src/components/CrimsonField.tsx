@@ -62,9 +62,13 @@ void main(){
 interface Props {
   /** Spread streaks evenly across the field (used by the full-page backdrop). */
   balanced?: boolean;
+  /** On touch devices, freeze the field after a few seconds without scrolling. */
+  idlePause?: boolean;
 }
 
-export default function CrimsonField({ balanced = false }: Props) {
+const IDLE_MS = 20000;
+
+export default function CrimsonField({ balanced = false, idlePause = false }: Props) {
   const ref = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -112,29 +116,53 @@ export default function CrimsonField({ balanced = false }: Props) {
 
     let t = 0;
     let raf = 0;
+    let onScreen = false;
+    let lastActive = performance.now();
+    // Phones/tablets only: a fixed backdrop is always on-screen, so the
+    // off-screen pause never fires. Freeze on the last frame while the reader
+    // is still, and resume as soon as they scroll or touch.
+    // Checked live (not once at mount) so rotating, resizing or toggling a
+    // browser's device mode takes effect without a reload. Touch-first OR
+    // phone-width counts as a phone.
+    const phone = window.matchMedia('(pointer: coarse), (max-width: 767px)');
+    const pauseWhenIdle = () => idlePause && phone.matches;
+
     const loop = () => {
+      if (pauseWhenIdle() && performance.now() - lastActive > IDLE_MS) { raf = 0; return; }
       t += 0.016;
       gl.uniform1f(uTime, t);
       gl.uniform2f(uRes, canvas.width, canvas.height);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
       raf = requestAnimationFrame(loop);
     };
+    const start = () => { if (onScreen && !raf) raf = requestAnimationFrame(loop); };
+
+    const wake = () => { lastActive = performance.now(); start(); };
+    if (idlePause) {
+      window.addEventListener('scroll', wake, { passive: true });
+      window.addEventListener('touchstart', wake, { passive: true });
+      phone.addEventListener('change', start); // resume if it stops being a phone
+    }
 
     // Pause entirely when the section is off-screen.
     const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting && !raf) raf = requestAnimationFrame(loop);
-      else if (!e.isIntersecting && raf) { cancelAnimationFrame(raf); raf = 0; }
+      onScreen = e.isIntersecting;
+      if (onScreen) start();
+      else if (raf) { cancelAnimationFrame(raf); raf = 0; }
     }, { threshold: 0 });
     io.observe(canvas);
 
     return () => {
       if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', wake);
+      window.removeEventListener('touchstart', wake);
+      phone.removeEventListener('change', start);
       io.disconnect();
       ro.disconnect();
       gl.deleteBuffer(buf);
       gl.deleteProgram(prog);
     };
-  }, [balanced]);
+  }, [balanced, idlePause]);
 
   return <canvas ref={ref} className="absolute inset-0 h-full w-full" aria-hidden="true" />;
 }
