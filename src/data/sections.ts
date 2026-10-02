@@ -57,7 +57,7 @@ export interface Step {
   body: string;
 }
 // PLACEHOLDER: invented workflow — refine to Ekom's real process.
-export const process: Step[] = [
+export const processSteps: Step[] = [
   { num: '01', title: 'Frame', body: 'Pin down the real problem and the smallest thing worth shipping. Scope ruthlessly.' },
   { num: '02', title: 'Prototype', body: 'AI-accelerated: move from idea to a working slice fast, then pressure-test it by hand.' },
   { num: '03', title: 'Ship', body: 'Production-grade by default — accessible, fast, tested where it matters. Then deploy.' },
