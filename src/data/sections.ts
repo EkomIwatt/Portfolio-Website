@@ -16,10 +16,84 @@ export interface Project {
   wip?: boolean; // honest "in progress" treatment
   cta?: string; // link label override (defaults to "View project")
   image?: ImageMetadata; // optional card screenshot (else the abstract placeholder)
+  featured?: boolean; // shown on the homepage [01]; everything shows on /projects
 }
-// Card 1 is real (the original hand-built portfolio, shipped Jan 2026); the two
-// WIP cards are honest placeholders Ekom fills as he ships the next two builds.
+// Sourced from MASTER-CV.md + SmartPump_Project_Brief.md via /update-portfolio.
+// Queryll, Swarm and TaskFlow repos are private → their links go to Contact.
+// SmartPump: no code link and no app screenshots (client IP, per the brief).
+const walkthrough = `${import.meta.env.BASE_URL}/#contact`;
 export const projects: Project[] = [
+  {
+    name: 'SmartPump',
+    blurb:
+      'Android kiosk app and Arduino firmware that turn a fuel dispenser into a self-service, ' +
+      'cashless pump: Paystack QR payments, a checksummed USB-serial protocol, and fuel cut off ' +
+      'on the exact pulse paid for. Contract work for Balanceè. Pre-launch, and validated with ' +
+      'a real paid sale on production.',
+    tags: ['Kotlin', 'Jetpack Compose', 'Arduino', 'Paystack'],
+    year: '2026',
+    href: walkthrough,
+    cta: 'Code walkthrough on request',
+    featured: true,
+  },
+  {
+    name: 'Queryll',
+    blurb:
+      'Document Q&A over your own PDFs: structure-aware chunking, Voyage embeddings, pgvector ' +
+      'retrieval, and streamed Claude answers whose citations resolve to the exact source ' +
+      'passage. Three processes sharing only Postgres. 441 tests.',
+    tags: ['Python', 'FastAPI', 'pgvector', 'Claude API'],
+    year: '2026',
+    href: walkthrough,
+    cta: 'Code walkthrough on request',
+    featured: true,
+  },
+  {
+    name: 'Swarm',
+    blurb:
+      'My workflow for running several Claude Code agents as one team: interfaces frozen ' +
+      'before any code exists, one agent per git worktree, and a merge phase that proves the ' +
+      'contracts held. It shipped the four apps here and caught three integration bugs that ' +
+      '~1,250 passing tests missed.',
+    tags: ['Claude Code', 'Multi-agent', 'Git worktrees'],
+    year: '2026',
+    href: walkthrough,
+    cta: 'Ask me how it works',
+    featured: true,
+  },
+  {
+    name: 'LedgerLite',
+    blurb:
+      'Private expense tracker with monthly budgets and three charts, on argon2 and rotating ' +
+      'httpOnly refresh-cookie auth with every query scoped to the signed-in user. 339 tests. ' +
+      'Built with Swarm. Free-tier hosting, so the first load can take a minute.',
+    tags: ['FastAPI', 'React', 'Postgres', 'Auth'],
+    year: '2026',
+    href: 'https://ledger-lite-amber.vercel.app',
+    cta: 'View live site',
+    featured: true,
+  },
+  {
+    name: 'TaskFlow',
+    blurb:
+      'Real-time collaborative kanban: optimistic, keyboard-accessible drag-and-drop, ' +
+      'fractional ordering keys, and live sync across clients over one WebSocket. 431 tests. ' +
+      'Built with Swarm; runs locally.',
+    tags: ['FastAPI', 'WebSockets', 'React', 'Postgres'],
+    year: '2026',
+    href: walkthrough,
+    cta: 'Code walkthrough on request',
+  },
+  {
+    name: 'Snipp',
+    blurb:
+      'URL shortener with Base62 codes, a clean 302 redirect path and a click-analytics ' +
+      'dashboard, deployed across Vercel, Render and Neon. The first Swarm build.',
+    tags: ['FastAPI', 'React', 'Postgres'],
+    year: '2026',
+    href: 'https://snipp-kappa.vercel.app',
+    cta: 'View live site',
+  },
   {
     name: 'Portfolio Website (v1)',
     blurb:
@@ -31,22 +105,6 @@ export const projects: Project[] = [
     href: `${import.meta.env.BASE_URL}/v1/`, // the live archived original
     cta: 'View site',
     image: portfolioV1Shot,
-  },
-  {
-    name: 'Project Two',
-    blurb: 'A real build will replace this — documented end to end.',
-    tags: ['React', 'Node'],
-    year: '2026',
-    href: '#',
-    wip: true,
-  },
-  {
-    name: 'Project Three',
-    blurb: 'Embedded / firmware experiment. Coming soon.',
-    tags: ['C++', 'Embedded'],
-    year: '2026',
-    href: '#',
-    wip: true,
   },
 ];
 
@@ -73,9 +131,10 @@ export interface Metric {
 // 2026-06) — shown as `96+` so it's honest across both, not desktop cherry-picked.
 export const metrics: Metric[] = [
   { value: '96+', label: 'Lighthouse performance' }, // 96 mobile, 100 desktop
-  { value: '2', label: 'Projects shipped' }, // v1 site (live) + this portfolio
-  { value: '2', label: 'Articles written' }, // src/content/blog/*.md
-  { value: '12+', label: 'Technologies' }, // distinct tools/languages in the Stack section
+  { value: '8', label: 'Projects built' }, // the 7 in `projects` + this portfolio
+  // Snipp 45 + LedgerLite 339 + TaskFlow 431 + Queryll 441 + SmartPump 605 unit / 27 device = 1,888
+  { value: '1800+', label: 'Automated tests' },
+  { value: '2', label: 'Live deployments' }, // LedgerLite + Snipp, verified 2026-10-02
 ];
 
 // [04] STACK / CAPABILITIES --------------------------------------------------
@@ -83,11 +142,12 @@ export interface StackGroup {
   label: string;
   items: string[];
 }
+// Tier-1/2 skills from MASTER-CV.md §5 only (Rust dropped: nothing shipped in it yet).
 export const stack: StackGroup[] = [
-  { label: 'Languages', items: ['C++', 'Python', 'JavaScript', 'TypeScript', 'Rust'] },
-  { label: 'Web', items: ['Astro', 'React', 'Tailwind', 'Node'] },
-  { label: 'Embedded', items: ['Microcontrollers', 'C', 'RTOS basics'] },
-  { label: 'Tooling', items: ['Git', 'Linux', 'AI-assisted dev'] },
+  { label: 'Languages', items: ['Kotlin', 'Python', 'TypeScript', 'C++', 'C', 'SQL'] },
+  { label: 'Web & backend', items: ['FastAPI', 'React', 'Postgres', 'pgvector', 'WebSockets', 'Astro', 'Tailwind'] },
+  { label: 'Mobile & embedded', items: ['Android', 'Jetpack Compose', 'Room', 'Arduino', 'AVR', 'USB serial'] },
+  { label: 'AI & tooling', items: ['Claude API', 'Claude Code', 'RAG', 'Docker', 'Git', 'Vercel / Render'] },
 ];
 
 // [05] ABOUT -----------------------------------------------------------------
@@ -96,11 +156,12 @@ export const about = {
   accent: 'builder',
   tail: ' first',
   body: [
-    'I am a Computer Engineering student at the University of Lagos, working across software ' +
-      'and embedded systems. I lean into AI-accelerated workflows — not as a shortcut, but as ' +
-      'leverage: it lets me move from idea to working product fast, then sharpen the result by hand.',
-    'Fresh perspective, fast iteration, and a bias toward shipping. I document what I build so ' +
-      'the work speaks for itself.',
+    'I am a Computer Engineering student at the University of Lagos, working where software ' +
+      'meets hardware. Under contract, I built the Android app and Arduino firmware for a ' +
+      'cashless fuel pump. On my own time, I shipped four full-stack apps in four months.',
+    'I build AI-accelerated, on purpose. I design the system and freeze the interfaces, let ' +
+      'agents do the typing, then verify every boundary myself. That is where the bugs that ' +
+      'pass every test tend to hide.',
   ],
 };
 
@@ -111,19 +172,35 @@ export interface TimelineEntry {
   org: string;
   body: string;
 }
-// Education is real; PLACEHOLDER entries marked for real milestones.
+// All real (MASTER-CV.md §7 + the Balanceè engagement letter). Newest first.
 export const timeline: TimelineEntry[] = [
   {
-    year: '2023—now',
-    title: 'B.Sc. Computer Engineering',
-    org: 'University of Lagos',
-    body: 'Software + embedded systems coursework; building projects alongside the curriculum.',
+    year: '2026—now',
+    title: 'Android Developer (Contract)',
+    org: 'Balanceè Tech Solutions',
+    body:
+      'Sole developer of SmartPump, an Android + Arduino system that makes fuel pumps ' +
+      'self-service and cashless. 600+ automated tests, crash- and power-cut-safe by design.',
   },
   {
-    year: '2026',
-    title: 'Portfolio rebrand shipped', // PLACEHOLDER: swap for real milestones
-    org: 'Self-directed',
-    body: 'Designed and built this site end to end on a modern static stack.',
+    year: '2025—now',
+    title: 'Financial Secretary (elected)',
+    org: 'SEES, University of Lagos',
+    body:
+      'Run the finances of the electrical & electronics engineering students’ society across six ' +
+      'annual programmes, and lead corporate sponsorship outreach.',
+  },
+  {
+    year: '2023—now',
+    title: 'Class Representative',
+    org: 'Computer Engineering, University of Lagos',
+    body: 'Liaison between faculty and a 100+ student cohort since first year.',
+  },
+  {
+    year: '2023—2028',
+    title: 'B.Sc. Computer Engineering',
+    org: 'University of Lagos',
+    body: 'Software and embedded systems coursework, with projects built alongside the curriculum.',
   },
 ];
 
@@ -135,20 +212,25 @@ export interface Certificate {
   href?: string; // omit when there's no public credential link
   inProgress?: boolean; // honest "currently studying" card (no credential yet)
 }
-// Real certificates, ported from the legacy site (Stage 5). Issuer for the
-// Python cert corrected to Coursera to match its credential link.
+// Real certificates; titles, dates and links read from the PDFs in EKOM\Certs.
 export const certificates: Certificate[] = [
   {
-    title: 'C++ Development',
+    title: 'Beginning C++ Programming',
     issuer: 'Udemy',
     year: '2025',
     href: 'https://www.udemy.com/certificate/UC-385df29e-18b7-4ea4-9db9-e8fc3af13bd4/',
   },
   {
-    title: 'Python Programming',
-    issuer: 'Coursera',
+    title: 'Crash Course on Python',
+    issuer: 'Google · Coursera',
     year: '2025',
-    href: 'https://coursera.org/share/47660064544b3149f3c07c0dd39d2df9',
+    href: 'https://coursera.org/verify/KJHRH6B5ZTL4',
+  },
+  {
+    title: 'The Complete C Programming Course',
+    issuer: 'Udemy',
+    year: '2025',
+    href: 'https://www.udemy.com/certificate/UC-bd383c1f-92de-482d-962d-65ce405f5495/',
   },
   // Real cert with no public credential link — card renders without "View credential".
   { title: 'Embedded Systems Design', issuer: 'ECX', year: '2025' },

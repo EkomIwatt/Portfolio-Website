@@ -54,8 +54,8 @@ export const hero = {
     tail: '',
   },
   sub:
-    'Software engineer in the making — AI-accelerated, engineering-grounded. ' +
-    'I move from idea to working product fast, then document every build in the open.',
+    'Android, embedded and full-stack. AI-accelerated and engineering-grounded. I take ideas ' +
+    'from a microcontroller serial frame to a live cloud deploy, and test everything in between.',
   ctas: {
     primary: { label: "Let's talk", href: '#contact' },
     secondary: { label: 'View résumé', href: `${import.meta.env.BASE_URL}/cv` },
