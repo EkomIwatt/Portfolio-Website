@@ -39,7 +39,7 @@ Ekom is a student. **No fabricated metrics, testimonials, logos, or social proof
     (clears AA 4.5:1 on base AND cards). crimson-deep `#1A0B0E` = warm accent-depth tint.
   - Accent stays **surgical**. Large/UI uses need ≥3:1, small text ≥4.5:1 — both verified.
 - **Type — three voices (self-hosted via Fontsource, variable):** **Geist Variable** (display +
-  body sans), **Fraunces Variable** italic (the one emphasis word per heading only),
+  body sans), **Fraunces Variable** upright, crimson (the one emphasis word per heading only, via `.accent-word`),
   **Geist Mono Variable** (eyebrows, section numbers, labels). Tailwind: `font-sans` /
   `font-serif` / `font-mono`. No Inter/Roboto/Arial defaults.
 - **Motion:** scroll reveals (in + out), hover accent-swap + arrow nudge, metric counters,
