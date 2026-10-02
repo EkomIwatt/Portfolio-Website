@@ -6,6 +6,7 @@ import Base from '../../layouts/Base.astro';
 import Nav from '../../components/Nav.astro';
 import Footer from '../../components/Footer.astro';
 import SectionHeading from '../../components/SectionHeading.astro';
+import AuroraBackdrop from '../../components/AuroraBackdrop.astro';
 
 const base = import.meta.env.BASE_URL;
 
@@ -22,7 +23,9 @@ const fmt = (d: Date) =>
   description="Notes from the build: shipping projects in the open, from web to embedded systems."
 >
   <Nav />
-  <main id="main" class="px-6 pb-24 pt-28 sm:pt-32">
+  <AuroraBackdrop />
+
+  <main id="main" class="aurora-page px-6 pb-24 pt-28 sm:pt-32">
     <div class="mx-auto max-w-6xl">
       <SectionHeading num="08" label="Writing" lead="Notes from the" accent="build" />
 
@@ -31,7 +34,7 @@ const fmt = (d: Date) =>
           <li class="reveal" style={`--reveal-delay: ${i * 100}ms`}>
             <a
               href={`${base}/blog/${p.id}`}
-              class="group flex h-full flex-col justify-between gap-6 bg-base p-8 transition-colors hover:bg-card/40"
+              class="aurora-tile group flex h-full flex-col justify-between gap-6 p-8"
             >
               <div>
                 <p class="font-mono text-xs uppercase tracking-[0.14em] text-muted">

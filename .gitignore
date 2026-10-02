@@ -20,3 +20,6 @@ pnpm-debug.log*
 # (plans, inspiration refs, studio portraits, per-user settings). Kept on disk,
 # untracked. CLAUDE.md (the project constitution) lives at the repo root and stays tracked.
 .claude/
+
+# Local site guide (personal documentation, never pushed)
+SITE-GUIDE.md
