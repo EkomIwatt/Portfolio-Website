@@ -49,8 +49,8 @@ export const hero = {
   eyebrow: 'Computer Engineering · University of Lagos',
   // Headline renders as: lead + <italic crimson accent> + tail + crimson period
   headline: {
-    lead: 'I build software that',
-    accent: 'ships',
+    lead: 'I solve problems you can see and fix the ones you',
+    accent: "can't",
     tail: '',
   },
   sub:
